@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Tree -->
+    <record id="view_hos_voucher_tree" model="ir.ui.view">
+        <field name="name">hos.voucher.tree</field>
+        <field name="model">hos.voucher</field>
+        <field name="arch" type="xml">
+            <tree string="Customer Payment">
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form -->
+    <record id="view_hos_voucher_form" model="ir.ui.view">
+        <field name="name">hos.voucher.form</field>
+        <field name="model">hos.voucher</field>
+        <field name="arch" type="xml">
+            <form string="Customer Payment">
+                <sheet>
+                    <div id="s_header">
+                        <h1>Customer Payment</h1>
+                    </div>
+                    <group col="4">
+                        <field name="name"/>
+                        <field name="person_id"/>
+                        <field name="payment_type"/>
+                        <field name="payment"/>
+                        <field name="balance"/>
+                        <field name="account_id"/>
+                    </group>
+                    <field name="credit_ids">
+                        <tree>
+                            <field name="name"/>
+                            <field name="description"/>
+                            <field name="total_amount"/>
+                            <field name="opening_amount"/>
+                            <field name="reconcile_amount"/>
+                            <field name="credit_id"/>
+                            <field name="debit_id"/>
+                        </tree>
+                    </field>
+                    <field name="debit_ids">
+                        <tree>
+                            <field name="name"/>
+                            <field name="description"/>
+                            <field name="total_amount"/>
+                            <field name="opening_amount"/>
+                            <field name="reconcile_amount"/>
+                            <field name="credit_id"/>
+                            <field name="debit_id"/>
+                        </tree>
+                    </field>
+                    <button name="trigger_one" string="Step 1" type="object"/>
+                    <button name="trigger_reconciliation" string="Step 2" type="object"/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_hos_voucher" model="ir.actions.act_window">
+        <field name="name">Customer Payment</field>
+        <field name="res_model">hos.voucher</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+</odoo>
