@@ -1,0 +1,125 @@
+1. Contact
+    Doctor
+    Patient
+    Nurse
+    Staff
+    Driver
+    Customer
+    Supplier
+    Service
+    Others
+
+    -----------------------------------------------------------------completed
+
+2. Doctor
+    Doctor
+        Doctor Availability
+        Timings
+
+    Appointment
+        OPT
+        OT
+        Meetings
+        Others
+
+    Notes
+        Notes
+        Reminder
+        Notification
+        ToDos
+
+
+3. Employee
+    Time Management
+        Week Schedule
+        Time Sheet
+        Time Application
+        Attendance
+
+    Leave Management
+        Leave Request
+        Comp-Off
+        Permission
+        Leave Available
+        Leave Report
+
+    Stores
+        Store Request
+        Store Return
+
+    Notes
+        Notes
+        Reminder
+        Notification
+        ToDos
+
+
+4. Hospital
+      Hospitality
+        Admission
+        Discharge
+        Bed Status
+
+      Operation
+        Operation
+        OT Booking
+        OT Procedure
+
+5. Inventory
+    Product
+        Group
+        Sub-Group
+        UOM
+        Tax
+        Category
+        Location
+        warehouse
+        Product
+
+    Stores
+        Store Request
+        Store Issue
+        Store Return
+        Store Intake
+        Stock Adjustment
+
+6. Purchase
+    Purchase
+        Purchase Indent
+        Quotation
+        Purchase Order
+        Material Receipt
+        Direct material Receipt
+        Invoice
+        Vendor Payment
+
+7. Human Resources
+    Employee
+    Time Management
+        Shift
+        Week Schedule
+        Daily Attendance
+        Monthly Attendance
+
+    Leave Management
+        Leave Request
+        Comp-Off
+        Permission
+        Leave Configuration
+        Leave Level
+        Leave Type
+        Leave Report
+
+    Recruitment
+        Resume Bank
+        Interview Schedule
+        Appointment Order
+
+9. Payroll
+    Payroll
+        Payslip
+        Payroll Generation
+        Employee Pay Structure
+        Salary Structure
+        Salary Rule
+

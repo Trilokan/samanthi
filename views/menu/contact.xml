@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!--Contact-->
+    <menuitem id="sub_menu_contact" name="Contact" parent="menu_contact" sequence="10"/>
+    <menuitem id="contact_hos_person_doctor" name="Doctor" action="action_hos_person_doctor" parent="sub_menu_contact" sequence="10"/>
+    <menuitem id="contact_hos_person_patient" name="Patient" action="action_hos_person_patient" parent="sub_menu_contact" sequence="20"/>
+    <menuitem id="contact_hos_person_nurse" name="Nurse" action="action_hos_person_nurse" parent="sub_menu_contact" sequence="30"/>
+    <menuitem id="contact_hos_person_staff" name="Staff" action="action_hos_person_staff" parent="sub_menu_contact" sequence="40"/>
+    <menuitem id="contact_hos_person_supplier" name="Supplier" action="action_hos_person_supplier" parent="sub_menu_contact" sequence="50"/>
+    <menuitem id="contact_hos_person_service" name="Service" action="action_hos_person_service" parent="sub_menu_contact" sequence="60"/>
+    <menuitem id="contact_hos_person_Others" name="Others" action="action_hos_person_others" parent="sub_menu_contact" sequence="70"/>
+
+
+</odoo>

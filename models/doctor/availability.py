@@ -10,13 +10,13 @@ CURRENT_TIME_INDIA = datetime.now().strftime("%d-%m-%Y %H:%M:%S")
 PROGRESS_INFO = [("draft", "Draft"), ("confirmed", "Confirmed"), ("cancel", "Cancel")]
 
 
-# Hospital Availability
-class HospitalAvailability(models.Model):
-    _name = "hos.availability"
+# Doctor Availability
+class DoctorAvailability(models.Model):
+    _name = "doctor.availability"
     _inherit = "mail.thread"
     _rec_name = "employee_id"
 
-    employee_id = fields.Many2one(comodel_name="hos.person", string="Employee", required=True)
+    person_id = fields.Many2one(comodel_name="hos.person", string="Doctor", required=True)
     from_time = fields.Datetime(string="From Time", default=CURRENT_TIME, required=True)
     till_time = fields.Datetime(string="Till Time", default=CURRENT_TIME, required=True)
     progress = fields.Selection(selection=PROGRESS_INFO, string="Progress", default="draft")

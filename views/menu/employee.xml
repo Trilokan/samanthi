@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!--Employee Leave Management-->
+    <menuitem id="employee_leave_management" name="Leave Management" parent="menu_employee" sequence="10"/>
+    <menuitem id="leave_leave_application" name="Leave Request" action="action_leave_application" parent="employee_leave_management" sequence="10"/>
+    <menuitem id="leave_compoff_application" name="Comp-Off" action="action_compoff_application" parent="employee_leave_management" sequence="10"/>
+    <menuitem id="leave_permission_application" name="Permission" action="action_permission_application" parent="employee_leave_management" sequence="10"/>
+
+    <!--Employee Notes-->
+    <menuitem id="employee_notes" name="Notes" parent="menu_employee" sequence="20"/>
+    <menuitem id="notes_hos_notes" name="Notes" action="action_hos_notes" parent="employee_notes" sequence="10"/>
+    <menuitem id="notes_hos_notification" name="Notification" action="action_hos_notification" parent="employee_notes" sequence="20"/>
+    <menuitem id="notes_hos_reminder" name="Reminder" action="action_hos_reminder" parent="employee_notes" sequence="30"/>
+
+
+</odoo>

@@ -6,5 +6,3 @@ from . import journal_items
 from . import voucher
 from . import voucher_line
 from . import reconciliation
-
-from . import person

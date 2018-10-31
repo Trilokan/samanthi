@@ -7,8 +7,8 @@
         <field name="model">hos.appointment</field>
         <field name="arch" type="xml">
             <tree string="Meetings">
-                <field name="employee_id"/>
-                <field name="person_id"/>
+                <field name="employee_id" string="Doctor/ Staff"/>
+                <field name="person_id" sttring="Meetings with"/>
                 <field name="appointment_time"/>
                 <field name="appointment_type"/>
                 <field name="reason"/>
@@ -31,11 +31,13 @@
                     <div id="p_header">
                         <field name="progress" widget="statusbar" style="float: right;padding: 20px;"/>
                     </div>
-                    <group>
+                    <group col="4">
                         <field name="appointment_time"/>
                         <field name="appointment_type"/>
-                        <field name="employee_id"/>
-                        <field name="person_id"/>
+                        <field name="employee_id" string="Doctor/ Staff"/>
+                        <field name="person_id" sttring="Meetings with"/>
+                    </group>
+                    <group>
                         <field name="reason"/>
                         <field name="comment"/>
                     </group>
@@ -50,8 +52,8 @@
         <field name="res_model">hos.appointment</field>
         <field name="view_type">form</field>
         <field name="view_mode">tree,form</field>
-        <field name="domain">[('schedule_type', '=', 'meetings')]</field>
-        <field name="context">{'default_schedule_type': 'meetings'}</field>
+        <field name="domain">[('appointment_type', '=', 'meetings')]</field>
+        <field name="context">{'default_appointment_type': 'meetings'}</field>
         <field name="view_id" ref="view_hos_appointment_meetings_tree"/>
     </record>
 

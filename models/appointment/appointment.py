@@ -4,10 +4,7 @@ from odoo import models, fields, api, exceptions, _
 from datetime import datetime
 
 PROGRESS_INFO = [("draft", "Draft"), ("confirmed", "Confirmed"), ("cancel", "Cancel")]
-SCHEDULE_TYPE = [("opt", "Out Patient Treatment"),
-                 ("ot", "Operation Theater"),
-                 ("meetings", "Meetings"),
-                 ("others", "Others")]
+SCHEDULE_TYPE = [("opt", "Out Patient Treatment"), ("ot", "Operation Theater"), ("meetings", "Meetings")]
 CURRENT_DATE = datetime.now().strftime("%Y-%m-%d")
 CURRENT_TIME = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 CURRENT_TIME_INDIA = datetime.now().strftime("%d-%m-%Y %H:%M:%S")
