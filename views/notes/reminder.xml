@@ -26,7 +26,6 @@
                     <group>
                         <field name="date"/>
                         <field name="message"/>
-                        <field name="attachment_ids" widget="many2many_binary"/>
                         <field name="person_id" invisible="1"/>
                     </group>
                 </sheet>

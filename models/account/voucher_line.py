@@ -13,4 +13,4 @@ class VoucherLine(models.Model):
     reconcile_amount = fields.Float(string="Reconcile")
     credit_id = fields.Many2one(comodel_name="hos.voucher", string="Credit")
     debit_id = fields.Many2one(comodel_name="hos.voucher", string="Debit")
-
+    reconcile = fields.Boolean(string="Reconcile")
