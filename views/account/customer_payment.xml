@@ -53,6 +53,15 @@
                             <field name="debit_id" invisible="1"/>
                         </tree>
                     </field>
+                    <field name="dummy_ids">
+                        <tree>
+                            <field name="amount"/>
+                            <field name="item_id"/>
+                            <field name="reconcile"/>
+                            <field name="voucher_id"/>
+                        </tree>
+                    </field>
+
                     <button name="trigger_one" string="Step 1" type="object"/>
                     <button name="trigger_reconcile" string="Step 2" type="object"/>
                 </sheet>

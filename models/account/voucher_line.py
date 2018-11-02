@@ -8,8 +8,8 @@ class VoucherLine(models.Model):
 
     name = fields.Char(string="Name")
     description = fields.Text(string="Description")
-    total_amount = fields.Float(string="Total Amount")
-    opening_amount = fields.Float(string="Opening")
+    total_amount = fields.Float(string="Total Amount", default=0)
+    opening_amount = fields.Float(string="Opening", default=0)
     reconcile_amount = fields.Float(string="Reconcile")
     credit_id = fields.Many2one(comodel_name="hos.voucher", string="Credit")
     debit_id = fields.Many2one(comodel_name="hos.voucher", string="Debit")
