@@ -36,6 +36,7 @@
                             <field name="total_amount"/>
                             <field name="opening_amount"/>
                             <field name="reconcile_amount"/>
+                            <field name="reconcile_part_id"/>
                             <field name="credit_id" invisible="1"/>
                             <field name="debit_id" invisible="1"/>
                         </tree>
@@ -47,6 +48,7 @@
                             <field name="total_amount"/>
                             <field name="opening_amount"/>
                             <field name="reconcile_amount"/>
+                            <field name="reconcile_part_id"/>
                             <field name="credit_id" invisible="1"/>
                             <field name="debit_id" invisible="1"/>
                         </tree>

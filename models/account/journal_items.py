@@ -15,7 +15,3 @@ class JournalItems(models.Model):
     account_id = fields.Many2one(comodel_name="hos.account", string="Account")
     reference = fields.Char(string="Reference")
 
-    @api.model
-    def create(self, vals):
-        print vals
-        # return super(JournalItems, self).create(vals)

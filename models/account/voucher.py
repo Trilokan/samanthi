@@ -17,8 +17,7 @@ class Voucher(models.Model):
     debit_ids = fields.One2many(comodel_name="voucher.line", inverse_name="debit_id", string="Debit")
     account_id = fields.Many2one(comodel_name="hos.account", string="Account")
 
-    def reconciliation(self, rec, payment):
-        items = []
+    def reconciliation(self, rec, payment, entry_id):
         opening_balance = rec.total_amount - rec.opening_amount
         balance = opening_balance - rec.reconcile_amount
 
@@ -26,17 +25,52 @@ class Voucher(models.Model):
             if payment > balance:
                 rec.reconcile_amount = rec.reconcile_amount + balance
                 payment = payment - balance
-                items.append({"debit": balance})
 
             else:
                 rec.reconcile_amount = rec.reconcile_amount + payment
                 rec.reconcile = True
-                items.append({"debit": payment})
                 payment = 0
 
-        print items
-
         return payment
+
+    def sample(self, credits, payment, entry_id):
+        items = []
+        for rec in credits:
+            opening_balance = rec.total_amount - rec.opening_amount
+            balance = opening_balance - rec.reconcile_amount
+
+            if balance and payment:
+                if payment > balance:
+                    rec.reconcile_amount = rec.reconcile_amount + balance
+                    payment = payment - balance
+
+                    if not rec.reconcile_part_id:
+                        rec.reconcile_part_id = self.env["hos.reconciliation"].create({})
+
+                    data = {"credit": balance,
+                            "reconcile_part_id": rec.reconcile_part_id.id,
+                            "account_id": rec.account_id.id,
+                            "reference": self.name}
+
+                    items.append((0, 0, data))
+
+                else:
+                    rec.reconcile_amount = rec.reconcile_amount + payment
+                    rec.reconcile = True
+
+                    if not rec.reconcile_part_id:
+                        rec.reconcile_part_id = self.env["hos.reconciliation"].create({})
+
+                    data = {"debit": payment,
+                            "reconcile_id": rec.reconcile_part_id.id,
+                            "account_id": rec.account_id.id,
+                            "reference": self.name}
+
+                    items.append((0, 0, data))
+
+                    payment = 0
+
+            return payment, items
 
     def trigger_reconcile(self):
         self.credit_ids.unlink()
@@ -71,11 +105,14 @@ class Voucher(models.Model):
                     if payment > balance:
                         rec.reconcile_amount = rec.reconcile_amount + balance
                         payment = payment - balance
+
+                        if not rec.reconcile_part_id:
+                            rec.reconcile_part_id = self.env["hos.reconciliation"].create({})
+
                         data = {"credit": balance,
                                 "reconcile_part_id": rec.reconcile_part_id.id,
                                 "account_id": rec.account_id.id,
-                                "reference": self.name,
-                                "reconcile": False}
+                                "reference": self.name}
 
                         items.append((0, 0, data))
                         debit.reconcile_amount = debit.reconcile_amount + balance
@@ -84,10 +121,13 @@ class Voucher(models.Model):
                         rec.reconcile_amount = rec.reconcile_amount + payment
                         rec.reconcile = True
 
+                        if not rec.reconcile_part_id:
+                            rec.reconcile_part_id = self.env["hos.reconciliation"].create({})
+
                         data = {"debit": payment,
+                                "reconcile_id": rec.reconcile_part_id.id,
                                 "account_id": rec.account_id.id,
-                                "reference": self.name,
-                                "reconcile": True}
+                                "reference": self.name}
 
                         items.append((0, 0, data))
                         debit.reconcile_amount = debit.reconcile_amount + payment
@@ -105,11 +145,14 @@ class Voucher(models.Model):
                 if payment > balance:
                     rec.reconcile_amount = rec.reconcile_amount + balance
                     payment = payment - balance
+
+                    if not rec.reconcile_part_id:
+                        rec.reconcile_part_id = self.env["hos.reconciliation"].create({})
+
                     data = {"credit": balance,
                             "reconcile_part_id": rec.reconcile_part_id.id,
                             "account_id": rec.account_id.id,
-                            "reference": self.name,
-                            "reconcile": False}
+                            "reference": self.name}
 
                     items.append((0, 0, data))
 
@@ -117,10 +160,13 @@ class Voucher(models.Model):
                     rec.reconcile_amount = rec.reconcile_amount + payment
                     rec.reconcile = True
 
+                    if not rec.reconcile_part_id:
+                        rec.reconcile_part_id = self.env["hos.reconciliation"].create({})
+
                     data = {"debit": payment,
+                            "reconcile_id": rec.reconcile_part_id.id,
                             "account_id": rec.account_id.id,
-                            "reference": self.name,
-                            "reconcile": True}
+                            "reference": self.name}
 
                     items.append((0, 0, data))
 
@@ -148,8 +194,10 @@ class Voucher(models.Model):
                     "item_id": rec.id}
 
             if rec.reconcile_part_id:
-                items = self.env["journal.items"].search([("reconcile_part_id", "=", rec.reconcile_part_id.id)])
-                data["opening_amount"] = rec.credit - sum(items.mapped('debit'))
+                items = self.env["journal.items"].search(["|",
+                                                          ("reconcile_part_id", "=", rec.reconcile_part_id.id),
+                                                          ("reconcile_id", "=", rec.reconcile_part_id.id)])
+                data["opening_amount"] = sum(items.mapped('debit'))
 
             credit.append((0, 0, data))
 
@@ -161,6 +209,7 @@ class Voucher(models.Model):
                                                  ("reconcile_id", "=", False),
                                                  ("debit", ">", 0)])
 
+        print recs
         for rec in recs:
             data = {"name": rec.name,
                     "total_amount": rec.debit,
@@ -170,8 +219,10 @@ class Voucher(models.Model):
                     "item_id": rec.id}
 
             if rec.reconcile_part_id:
-                items = self.env["journal.items"].search([("reconcile_part_id", "=", rec.reconcile_part_id.id)])
-                data["opening_amount"] = rec.debit - sum(items.mapped('credit'))
+                items = self.env["journal.items"].search(["|",
+                                                          ("reconcile_part_id", "=", rec.reconcile_part_id.id),
+                                                          ("reconcile_id", "=", rec.reconcile_part_id.id)])
+                data["opening_amount"] = sum(items.mapped('credit'))
 
             debit.append((0, 0, data))
 
