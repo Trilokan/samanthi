@@ -15,7 +15,6 @@ class Voucher(models.Model):
     balance = fields.Float(strng="Balance")
     credit_ids = fields.One2many(comodel_name="voucher.line", inverse_name="credit_id", string="Credit")
     debit_ids = fields.One2many(comodel_name="voucher.line", inverse_name="debit_id", string="Debit")
-
     account_id = fields.Many2one(comodel_name="hos.account", string="Account")
 
     def reconciliation(self, rec, payment):
@@ -72,13 +71,25 @@ class Voucher(models.Model):
                     if payment > balance:
                         rec.reconcile_amount = rec.reconcile_amount + balance
                         payment = payment - balance
-                        items.append({"debit": balance, "id": False})
+                        data = {"credit": balance,
+                                "reconcile_part_id": rec.reconcile_part_id.id,
+                                "account_id": rec.account_id.id,
+                                "reference": self.name,
+                                "reconcile": False}
+
+                        items.append((0, 0, data))
                         debit.reconcile_amount = debit.reconcile_amount + balance
 
                     else:
                         rec.reconcile_amount = rec.reconcile_amount + payment
                         rec.reconcile = True
-                        items.append({"debit": payment, "id": False})
+
+                        data = {"debit": payment,
+                                "account_id": rec.account_id.id,
+                                "reference": self.name,
+                                "reconcile": True}
+
+                        items.append((0, 0, data))
                         debit.reconcile_amount = debit.reconcile_amount + payment
                         payment = 0
 
@@ -94,22 +105,32 @@ class Voucher(models.Model):
                 if payment > balance:
                     rec.reconcile_amount = rec.reconcile_amount + balance
                     payment = payment - balance
-                    items.append({"debit": balance, "id": False})
+                    data = {"credit": balance,
+                            "reconcile_part_id": rec.reconcile_part_id.id,
+                            "account_id": rec.account_id.id,
+                            "reference": self.name,
+                            "reconcile": False}
+
+                    items.append((0, 0, data))
 
                 else:
                     rec.reconcile_amount = rec.reconcile_amount + payment
                     rec.reconcile = True
-                    items.append({"debit": payment, "id": False})
+
+                    data = {"debit": payment,
+                            "account_id": rec.account_id.id,
+                            "reference": self.name,
+                            "reconcile": True}
+
+                    items.append((0, 0, data))
+
                     payment = 0
 
-        journal_entry = self.env["journal.entries"].create({})
-        journal_items = []
+        # journal_entry = self.env["journal.entries"].create({})
+        # journal_items = []
 
         for item in items:
-            pass
-
-    def trik(self):
-        pass
+            print item
 
     def get_customer_credit_lines(self, account_id):
         credit = []
@@ -121,7 +142,10 @@ class Voucher(models.Model):
         for rec in recs:
             data = {"name": rec.name,
                     "total_amount": rec.credit,
-                    "opening_amount": 0}
+                    "opening_amount": 0,
+                    "account_id": rec.account_id.id,
+                    "reconcile_part_id": rec.reconcile_part_id.id,
+                    "item_id": rec.id}
 
             if rec.reconcile_part_id:
                 items = self.env["journal.items"].search([("reconcile_part_id", "=", rec.reconcile_part_id.id)])
@@ -140,7 +164,10 @@ class Voucher(models.Model):
         for rec in recs:
             data = {"name": rec.name,
                     "total_amount": rec.debit,
-                    "opening_amount": 0}
+                    "opening_amount": 0,
+                    "account_id": rec.account_id.id,
+                    "reconcile_part_id": rec.reconcile_part_id.id,
+                    "item_id": rec.id}
 
             if rec.reconcile_part_id:
                 items = self.env["journal.items"].search([("reconcile_part_id", "=", rec.reconcile_part_id.id)])
