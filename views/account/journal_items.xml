@@ -23,12 +23,16 @@
                         <h1>Journal Items</h1>
                     </div>
                     <group>
+                        <field name="entry_id"/>
+                        <field name="date"/>
                         <field name="name"/>
+                        <field name="description"/>
+                        <field name="account_id"/>
+                        <field name="person_id"/>
                         <field name="credit"/>
                         <field name="debit"/>
                         <field name="reconcile_id"/>
                         <field name="reconcile_part_id"/>
-                        <field name="entry_id"/>
                     </group>
                 </sheet>
             </form>

@@ -4,7 +4,7 @@ from odoo import models, fields, api
 
 
 class Reconciliation(models.Model):
-    _name = "hos.reconciliation"
+    _name = "hos.reconcile"
 
     name = fields.Char(string="Name")
 

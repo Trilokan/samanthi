@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Tree -->
+    <record id="view_store_return_tree" model="ir.ui.view">
+        <field name="name">store.return.tree</field>
+        <field name="model">store.return</field>
+        <field name="arch" type="xml">
+            <tree string="Store Return">
+                <field name="date"/>
+                <field name="name"/>
+                <field name="department_id"/>
+                <field name="progress"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form -->
+    <record id="view_store_return_form" model="ir.ui.view">
+        <field name="name">store.return.form</field>
+        <field name="model">store.return</field>
+        <field name="arch" type="xml">
+            <form string="Store Return">
+                <sheet>
+                    <div id="s_header">
+                        <h1>Store Return</h1>
+                    </div>
+                    <div id="p_header">
+                        <field name="progress" widget="statusbar" style="float: right;padding: 20px;"/>
+                    </div>
+                    <h2><field name="name"/></h2>
+                    <group col="4">
+                        <field name="date"/>
+                        <field name="department_id"/>
+                        <field name="return_by"/>
+                        <field name="approve_by"/>
+                    </group>
+                    <field name="return_detail">
+                        <tree editable="bottom">
+                            <field name="product_id"/>
+                            <field name="uom_id"/>
+                            <field name="returned_quantity"/>
+                            <field name="quantity"/>
+                        </tree>
+                    </field>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_store_return" model="ir.actions.act_window">
+        <field name="name">Store Return</field>
+        <field name="res_model">store.return</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+</odoo>
