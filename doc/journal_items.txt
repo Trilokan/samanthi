@@ -1,0 +1,13 @@
+Journal Items
+
+{"date": 0,
+ "name": 0,
+ "description": 0,
+ "account_id": 0,
+ "person_id": 0,
+ "credit": 0,
+ "debit": 0,
+ "reconcile_id": 0,
+ "reconcile_part_id": 0,
+ "entry_id": 0,
+ "active": 0}
