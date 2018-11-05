@@ -28,6 +28,7 @@
                         <field name="payment_type"/>
                         <field name="payment"/>
                         <field name="account_id"/>
+                        <field name="payment_account_id"/>
                     </group>
                     <field name="credit_ids">
                         <tree>
@@ -62,8 +63,8 @@
                         </tree>
                     </field>
 
-                    <button name="trigger_one" string="Step 1" type="object"/>
-                    <button name="trigger_reconcile" string="Step 2" type="object"/>
+                    <button name="trigger_reconcile" string="Reconcile" type="object"/>
+                    <button name="trigger_confirmed" string="Confirmed" type="object"/>
                 </sheet>
             </form>
         </field>

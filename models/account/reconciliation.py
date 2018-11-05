@@ -18,7 +18,7 @@ class Reconciliation(models.Model):
 
     def swap_reconciliation_id(self, rec):
         rec.reconcile_id = rec.reconcile_part_id.id
-        rec.reconcile_id = False
+        rec.reconcile_part_id = False
 
     def check_reconciliation(self, rec_id):
         partial_ids = self.env["journal.items"].search([("reconcile_part_id", "=", rec_id)])
@@ -28,3 +28,8 @@ class Reconciliation(models.Model):
 
         if credit == debit:
             map(self.swap_reconciliation_id, partial_ids)
+
+    @api.model
+    def create(self, vals):
+        vals["name"] = self.env["ir.sequence"].next_by_code(self._name)
+        return super(Reconciliation, self).create(vals)

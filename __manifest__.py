@@ -25,11 +25,14 @@
 
         "views/menu/menu.xml",
 
+        "sequence/account.xml",
+
         # Account
         "views/account/account.xml",
         "views/account/journal_entries.xml",
         "views/account/journal_items.xml",
         "views/account/customer_payment.xml",
+        "views/account/reconciliation.xml",
 
         # Contact
         "views/contact/doctor.xml",
