@@ -60,7 +60,7 @@ class Voucher(models.Model):
         payment = self.payment
 
         reconcile = self.gtyu(credits, payment)
-        if reconcile != payment:
+        if reconcile:
             data = {"amount": reconcile,
                     "account_id": self.account_id.id,
                     "voucher_id": self.id}
