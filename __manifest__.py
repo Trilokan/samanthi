@@ -29,6 +29,7 @@
         "sequence/product.xml",
 
         "views/base/company.xml",
+        "views/base/users.xml",
         "views/base/person.xml",
         "views/base/patient.xml",
 

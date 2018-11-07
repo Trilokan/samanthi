@@ -25,7 +25,7 @@ class WeekSchedule(models.Model):
         date_list = []
         from_obj = datetime.strptime(d1, "%Y-%m-%d")
         till_obj = datetime.strptime(d2, "%Y-%m-%d")
-        days_range = (till_obj - from_obj).days + 1
+        days_range = (till_obj - from_obj).days
 
         for days in range(0, days_range):
             from_date = from_obj + timedelta(days=days)

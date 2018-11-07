@@ -16,21 +16,15 @@ class TimeAttendance(models.Model):
 
     date = fields.Date(string="Date", readonly=True)
     month_id = fields.Many2one(comodel_name="month.attendance", string="Month", readonly=True)
-    attendance_detail = fields.One2many(comodel_name="time.attendance.detail",
-                                        inverse_name="attendance_id",
-                                        string="Attendance Detail")
+    attendance_detail = fields.One2many(comodel_name="time.attendance.detail", inverse_name="attendance_id")
     progress = fields.Selection(PROGRESS_INFO, string='Progress', default="draft")
-
     present = fields.Integer(string="Present", readonly=True)
     half_day_present = fields.Integer(string="Half Day Present", readonly=True)
     absent = fields.Integer(string="Absent", readonly=True)
     employee_count = fields.Integer(string="Employee Count", readonly=True)
     week_off_count = fields.Integer(string="Week-Off Count", readonly=True)
     working_count = fields.Integer(string="Working Count", readonly=True)
-    company_id = fields.Many2one(comodel_name="res.company",
-                                 string="Company",
-                                 default=lambda self: self.env.user.company_id.id,
-                                 readonly=True)
+    company_id = fields.Many2one(comodel_name="res.company", string="Company", default=lambda self: self.env.user.company_id.id, readonly=True)
 
     @api.multi
     def trigger_progress(self):
@@ -81,10 +75,7 @@ class TimeAttendanceDetail(models.Model):
     day_progress = fields.Selection(DAY_PROGRESS, string='Day Status', readonly=True)
     availability_progress = fields.Selection(AVAIL_PROGRESS, string='Availability Status')
     progress = fields.Selection(PROGRESS_INFO, string='Progress', related='attendance_id.progress')
-    company_id = fields.Many2one(comodel_name="res.company",
-                                 string="Company",
-                                 default=lambda self: self.env.user.company_id.id,
-                                 readonly=True)
+    company_id = fields.Many2one(comodel_name="res.company", string="Company", default=lambda self: self.env.user.company_id.id, readonly=True)
 
     @api.multi
     def update_hours(self):
@@ -100,11 +91,12 @@ class TimeAttendanceDetail(models.Model):
 
     @api.multi
     def trigger_get_availability_progress(self):
-        full_day = self.env["time.configuration"].search([('name', '=', 'Full Day')])
-        half_day = self.env["time.configuration"].search([('name', '=', 'Half Day')])
-        if self.actual_hours >= full_day.value:
+        config = self.env["time.configuration"].search([("company_id", "=", self.env.user.company_id.id)])
+        full_day = config.full_day
+        half_day = config.half_day
+        if self.actual_hours >= full_day:
             self.availability_progress = "full_day"
-        elif self.actual_hours >= half_day.value:
+        elif self.actual_hours >= half_day:
             self.availability_progress = "half_day"
         else:
             self.availability_progress = "absent"

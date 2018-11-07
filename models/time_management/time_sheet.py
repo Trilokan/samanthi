@@ -28,8 +28,9 @@ class TimeSheet(models.Model):
         current_time = datetime.strptime(vals['date'], "%Y-%m-%d %H:%M:%S")
         time = current_time.strftime("%Y-%m-%d %H:%M:%S")
 
-        accepted_in_time = self.env["time.configuration"].search([("name", "=", "IN Grace Time")])
-        accepted_out_time = self.env["time.configuration"].search([("name", "=", "OUT Grace Time")])
+        config = self.env["time.configuration"].search([("company_id", "=", self.env.user.company_id.id)])
+        accepted_in_time = config.in_time
+        accepted_out_time = config.out_time
 
         recs = self.env["time.attendance.detail"].search([("person_id", "=", vals["person_id"])])
 
@@ -37,8 +38,8 @@ class TimeSheet(models.Model):
             expected_from_time = datetime.strptime(rec.expected_from_time, "%Y-%m-%d %H:%M:%S")
             expected_till_time = datetime.strptime(rec.expected_till_time, "%Y-%m-%d %H:%M:%S")
 
-            expected_from_time_grace = expected_from_time - timedelta(minutes=accepted_in_time.value)
-            expected_till_time_grace = expected_till_time + timedelta(minutes=accepted_out_time.value)
+            expected_from_time_grace = expected_from_time - timedelta(minutes=accepted_in_time)
+            expected_till_time_grace = expected_till_time + timedelta(minutes=accepted_out_time)
 
             if 'in' in vals['progress']:
                 if expected_from_time_grace <= current_time <= expected_till_time_grace:
