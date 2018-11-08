@@ -7,3 +7,5 @@ from . import hr
 from . import appointment
 from . import notes
 from . import leave_management
+from . import product
+from . import stock

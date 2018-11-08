@@ -10,9 +10,8 @@ class ProductCategory(models.Model):
     code = fields.Char(string="Code", required=True)
     description = fields.Text(string="Description")
 
-    _sql_constraints = [
-        ("code", "unique(code)", "Product Category must be unique"),
-    ]
+    _sql_constraints = [("code", "unique(code)", "Product Category must be unique")]
+
 
 
 

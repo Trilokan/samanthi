@@ -22,10 +22,11 @@
     """,
     "depends": ["base", "mail"],
     "data": [
-
+        "views/assert_backend.xml",
         "views/menu/menu.xml",
 
         "sequence/account.xml",
+        "sequence/product.xml",
 
         # Account
         "views/account/account.xml",
@@ -33,6 +34,20 @@
         "views/account/journal_items.xml",
         "views/account/customer_payment.xml",
         "views/account/reconciliation.xml",
+
+        # Product
+        "views/product/product_group.xml",
+        "views/product/sub_group.xml",
+        "views/product/uom.xml",
+        "views/product/tax.xml",
+        "views/product/product_category.xml",
+        "views/product/product_configuration.xml",
+        "views/product/product.xml",
+
+        # Stock
+        "views/stock/stock_location.xml",
+        "views/stock/stock_warehouse.xml",
+        "views/stock/store_request.xml",
 
         # Contact
         "views/contact/doctor.xml",
@@ -78,6 +93,7 @@
         "views/menu/appointment.xml",
         "views/menu/employee.xml",
         "views/menu/account.xml",
+        "views/menu/product.xml",
     ],
     "demo": [
 

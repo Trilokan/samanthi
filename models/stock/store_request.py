@@ -15,8 +15,8 @@ class StoreRequest(models.Model):
 
     date = fields.Date(string="Date", required=True, default=CURRENT_DATE)
     name = fields.Char(string="Name", readonly=True)
-    department_id = fields.Many2one(comodel_name="hos.department", string="Department", required=True)
-    progress = fields.Selection(selection=PROGRESS_INFO, string="Progress")
+    department_id = fields.Many2one(comodel_name="hr.department", string="Department", required=True)
+    progress = fields.Selection(selection=PROGRESS_INFO, string="Progress", default="draft")
     request_detail = fields.One2many(comodel_name="store.request.detail", inverse_name="request_id", string="Request Detail")
     writter = fields.Char(string="Writter", track_visibility="always")
 
@@ -69,7 +69,13 @@ class StoreRequestDetail(models.Model):
     product_id = fields.Many2one(comodel_name="hos.product", string="Item", required=True)
     description = fields.Text(string="Item Description")
     uom_id = fields.Many2one(comodel_name="product.uom", string="UOM", related="product_id.uom_id")
-    requested_quantity = fields.Float(string="Request Quantity")
-    quantity = fields.Float(string="Quantity")
+    requested_quantity = fields.Float(string="Request Quantity", required=True)
+    quantity = fields.Float(string="Approved Quantity", required=True)
     request_id = fields.Many2one(comodel_name="store.request", string="Store Request")
+    line = fields.Selection(selection=PROGRESS_INFO, string="Progress", related="request_id.progress")
+    progress = fields.Selection(selection=PROGRESS_INFO, string="Progress")
 
+    @api.model
+    def create(self, vals):
+        vals["name"] = self.env["ir.sequence"].next_by_code(self._name)
+        return super(StoreRequestDetail, self).create(vals)

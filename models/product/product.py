@@ -9,13 +9,16 @@ class Product(models.Model):
     _name = "hos.product"
 
     name = fields.Char(string="Name", required=True)
-    code = fields.Char(string="Code", required=True)
-    product_group_id = fields.Many2one(comodel_name="product.group", string="Group")
-    product_sub_group_id = fields.Many2one(comodel_name="product.sub.group", string="Sub Group")
-    category_id = fields.Many2one(comodel_name="product.category", string="Category")
-    uom_id = fields.Many2one(comodel_name="product.uom", string="UOM")
-    hsn_code = fields.Char(string="HSN Code")
+    code = fields.Char(string="Code", readonly=True)
+    product_group_id = fields.Many2one(comodel_name="product.group", string="Group", required=True)
+    sub_group_id = fields.Many2one(comodel_name="product.sub.group", string="Sub Group", required=True)
+    category_id = fields.Many2one(comodel_name="product.category", string="Category", required=True)
+    uom_id = fields.Many2one(comodel_name="product.uom", string="UOM", required=True)
+    hsn_code = fields.Char(string="HSN Code", required=True)
     progress = fields.Selection(selection=PROGRESS_INFO, string="Progress", default="draft")
+    description = fields.Text(string="Description")
+    payable = fields.Many2one(comodel_name="hos.account", string="Accounts Payable")
+    receivable = fields.Many2one(comodel_name="hos.account", string="Accounts Receivable")
     warehouse_ids = fields.One2many(comodel_name="stock.warehouse",
                                     inverse_name="product_id",
                                     string="Warehouse",
@@ -28,8 +31,8 @@ class Product(models.Model):
 
     def _get_warehouse_ids(self):
         config = self.env["product.configuration"].search([("company_id", "=", self.env.user.company_id.id)])
-        domain = [('location_id.location_left', '>=', config.virtual_location_left),
-                  ('location_id.location_right', '<=', config.virtual_location_right)]
+        domain = [('location_id.location_left', '>=', config.virtual_left),
+                  ('location_id.location_right', '<=', config.virtual_right)]
 
         virtual_location = self.env["stock.warehouse"].search(domain)
 
@@ -37,14 +40,21 @@ class Product(models.Model):
 
     @api.multi
     def trigger_confirm(self):
-        config = self.env["product.configuration"].search([("company_id", "=", self.env.user.company_id.id)])
-        store_location_id = config.store_location_id.id
+        config = self.env["product.configuration"].search([("company_id", "=", self.company_id.id)])
+        store_location_id = config.store_id.id
 
-        if not store_location_id.id:
+        if not store_location_id:
             raise exceptions.ValidationError("Default Product Location is not set")
 
+        # Generate Warehouse of default store location
         self.env["stock.warehouse"].create({"product_id": self.id, "location_id": store_location_id})
-        self.write({"progress": "confirmed"})
+
+        # Generate Code on confirmation
+        code = "{0}/{1}/{2}".format(self.product_group_id.code,
+                                    self.sub_group_id.code,
+                                    self.env["ir.sequence"].next_by_code(self._name))
+
+        self.write({"progress": "confirmed", "code": code})
 
     @api.multi
     def name_get(self):
@@ -53,15 +63,3 @@ class Product(models.Model):
             name = "[{0}] {1}".format(record.code, record.name)
             result.append((record.id, name))
         return result
-
-    @api.model
-    def create(self, vals):
-        group_id = self.env["product.group"].search([("id", "=", vals["group_id"])])
-        sub_group_id = self.env["product.sub.group"].search([("id", "=", vals["sub_group_id"])])
-        code = "{0}/{1}/{2}".format(group_id.code,
-                                    sub_group_id.code,
-                                    self.env["ir.sequence"].next_by_code(self._name))
-
-        vals["code"] = code
-
-        return super(Product, self).create(vals)

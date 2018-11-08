@@ -16,3 +16,6 @@ class ProductConfiguration(models.Model):
     assert_id = fields.Many2one(comodel_name="stock.location", string="Assert Location")
     virtual_left = fields.Integer(string="Virtual Left")
     virtual_right = fields.Integer(string="Virtual Right")
+    company_id = fields.Many2one(comodel_name="res.company", string="Company",
+                                 default=lambda self: self.env.user.company_id.id,
+                                 readonly=True)

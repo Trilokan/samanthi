@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <!-- Account : Reconciliation -->
-    <record id="hos_reconcile_sequence" model="ir.sequence">
-        <field name="name">Account Reconcile</field>
-        <field name="code">hos.reconcile</field>
-        <field name="prefix">A/</field>
-        <field name="padding">6</field>
-        <field name="number_next">1</field>
-        <field name="number_increment">1</field>
-    </record>
+    <data noupdate="1">
+
+        <!-- Account : Reconciliation -->
+        <record id="hos_reconcile_sequence" model="ir.sequence">
+            <field name="name">Account Reconcile</field>
+            <field name="code">hos.reconcile</field>
+            <field name="prefix">A/</field>
+            <field name="padding">6</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+        </record>
+
+    </data>
 
 </odoo>

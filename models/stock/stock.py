@@ -18,11 +18,11 @@ class Stock(models.Model):
 
     def get_current_stock(self, product_id, location_id):
         source_ids = self.env["hos.move"].search([("product_id", "=", product_id),
-                                                  ("source_location_id", "=", location_id),
+                                                  ("source_id", "=", location_id),
                                                   ("progress", "=", "moved")])
 
         destination_ids = self.env["hos.move"].search([("product_id", "=", product_id),
-                                                       ("destination_location_id", "=", location_id),
+                                                       ("destination_id", "=", location_id),
                                                        ("progress", "=", "moved")])
 
         quantity_in = sum(source_ids.mapped("quantity"))

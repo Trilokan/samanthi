@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!--Product-->
+    <menuitem id="sub_menu_product" name="Product" parent="menu_product" sequence="10"/>
+    <menuitem id="product_hos_product" name="Product" action="action_hos_product" parent="sub_menu_product" sequence="10"/>
+    <menuitem id="product_product_group" name="Group" action="action_product_group" parent="sub_menu_product" sequence="20"/>
+    <menuitem id="product_product_sub_group" name="Sub-Group" action="action_product_sub_group" parent="sub_menu_product" sequence="30"/>
+    <menuitem id="product_product_uom" name="UOM" action="action_product_uom" parent="sub_menu_product" sequence="40"/>
+    <menuitem id="product_product_tax" name="Tax" action="action_product_tax" parent="sub_menu_product" sequence="50"/>
+    <menuitem id="product_product_category" name="Category" action="action_product_category" parent="sub_menu_product" sequence="60"/>
+    <menuitem id="product_product_configuration" name="Configuration" action="action_product_configuration" parent="sub_menu_product" sequence="70"/>
+
+    <!--Stock-->
+    <menuitem id="sub_menu_stock" name="Stock" parent="menu_product" sequence="20"/>
+    <menuitem id="stock_stock_location" name="Location" action="action_stock_location" parent="sub_menu_stock" sequence="10"/>
+    <menuitem id="stock_stock_warehouse" name="Warehouse" action="action_stock_warehouse" parent="sub_menu_stock" sequence="20"/>
+    <menuitem id="stock_store_request" name="Store Request" action="action_store_request" parent="sub_menu_stock" sequence="30"/>
+    <!--<menuitem id="stock_store_issue" name="Store Issue" action="action_store_issue" parent="sub_menu_stock" sequence="40"/>-->
+    <!--<menuitem id="stock_store_return" name="Store Return" action="action_store_return" parent="sub_menu_stock" sequence="50"/>-->
+    <!--<menuitem id="stock_store_accept" name="Store Accept" action="action_store_accept" parent="sub_menu_stock" sequence="60"/>-->
+    <!--<menuitem id="stock_stock_adjustment" name="Stock Adjustment" action="action_stock_adjustment" parent="sub_menu_stock" sequence="70"/>-->
+    <!--<menuitem id="stock_material_receipt_normal" name="Material Receipt" action="action_material_receipt_normal" parent="sub_menu_stock" sequence="80"/>-->
+    <!--<menuitem id="stock_material_receipt_direct" name="Direct Material Receipt" action="action_material_receipt_direct" parent="sub_menu_stock" sequence="90"/>-->
+
+    <!--Assert-->
+    <!--<menuitem id="sub_menu_asserts" name="Asserts" parent="menu_product" sequence="30"/>-->
+    <!--<menuitem id="asserts_assert_capitalisation" name="Asserts Capitalisation" action="action_assert_capitalisation" parent="sub_menu_asserts" sequence="10"/>-->
+    <!--<menuitem id="asserts_hos_asserts" name="Asserts" action="action_hos_asserts" parent="sub_menu_asserts" sequence="20"/>-->
+    <!--<menuitem id="asserts_asserts_notification" name="Asserts Notification" action="action_asserts_notification" parent="sub_menu_asserts" sequence="30"/>-->
+
+    <!--Purchase-->
+    <!--<menuitem id="sub_menu_purchase" name="Purchase" parent="menu_purchase" sequence="40"/>-->
+    <!--<menuitem id="purchase_purchase_indent" name="Purchase Indent" action="action_purchase_indent" parent="sub_menu_purchase" sequence="10"/>-->
+    <!--<menuitem id="purchase_purchase_quote" name="Purchase Indent" action="action_purchase_quote" parent="sub_menu_purchase" sequence="20"/>-->
+    <!--<menuitem id="purchase_purchase_order" name="Purchase Indent" action="action_purchase_order" parent="sub_menu_purchase" sequence="30"/>-->
+    <!--<menuitem id="purchase_purchase_invoice" name="Purchase Invoice" action="action_purchase_invoice" parent="sub_menu_purchase" sequence="40"/>-->
+
+
+
+</odoo>
