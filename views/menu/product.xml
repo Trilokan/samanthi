@@ -25,10 +25,11 @@
     <!--<menuitem id="stock_material_receipt_direct" name="Direct Material Receipt" action="action_material_receipt_direct" parent="sub_menu_stock" sequence="90"/>-->
 
     <!--Assert-->
-    <!--<menuitem id="sub_menu_asserts" name="Asserts" parent="menu_product" sequence="30"/>-->
+    <menuitem id="sub_menu_asserts" name="Asserts" parent="menu_product" sequence="30"/>
     <!--<menuitem id="asserts_assert_capitalisation" name="Asserts Capitalisation" action="action_assert_capitalisation" parent="sub_menu_asserts" sequence="10"/>-->
-    <!--<menuitem id="asserts_hos_asserts" name="Asserts" action="action_hos_asserts" parent="sub_menu_asserts" sequence="20"/>-->
-    <!--<menuitem id="asserts_asserts_notification" name="Asserts Notification" action="action_asserts_notification" parent="sub_menu_asserts" sequence="30"/>-->
+    <menuitem id="asserts_hos_asserts" name="Asserts" action="action_hos_asserts" parent="sub_menu_asserts" sequence="20"/>
+    <menuitem id="asserts_asserts_service" name="Maintenance" action="action_asserts_maintenance" parent="sub_menu_asserts" sequence="30"/>
+    <menuitem id="asserts_asserts_reminder" name="Notification" action="action_asserts_reminder" parent="sub_menu_asserts" sequence="40"/>
 
     <!--Purchase-->
     <menuitem id="sub_menu_purchase" name="Purchase" parent="menu_product" sequence="40"/>

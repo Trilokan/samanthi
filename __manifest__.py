@@ -54,6 +54,11 @@
         "views/stock/store_return.xml",
         "views/stock/store_accept.xml",
 
+        # Asserts
+        "views/asserts/hos_asserts.xml",
+        "views/asserts/asserts_notification.xml",
+        "views/asserts/asserts_maintenance.xml",
+        
         # Purchase
         "views/purchase/indent.xml",
 
