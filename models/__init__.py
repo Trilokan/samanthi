@@ -9,3 +9,4 @@ from . import notes
 from . import leave_management
 from . import product
 from . import stock
+from . import purchase

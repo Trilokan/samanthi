@@ -43,6 +43,7 @@ class StoreReturn(models.Model):
 
         if accept_detail:
             accept = {"return_id": self.id,
+                      "department_id": self.department_id.id,
                       "accept_detail": accept_detail}
 
             self.env["store.accept"].create(accept)

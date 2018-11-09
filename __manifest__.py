@@ -52,6 +52,10 @@
         "views/stock/store_request.xml",
         "views/stock/store_issue.xml",
         "views/stock/store_return.xml",
+        "views/stock/store_accept.xml",
+
+        # Purchase
+        "views/purchase/indent.xml",
 
         # Contact
         "views/contact/doctor.xml",
