@@ -2,30 +2,29 @@
 <odoo>
 
     <!-- Tree -->
-    <record id="view_store_request_tree" model="ir.ui.view">
-        <field name="name">store.request.tree</field>
-        <field name="model">store.request</field>
+    <record id="view_stock_adjustment_tree" model="ir.ui.view">
+        <field name="name">stock.adjustment.tree</field>
+        <field name="model">stock.adjustment</field>
         <field name="arch" type="xml">
-            <tree string="Store Request">
+            <tree string="Stock Adjustment">
                 <field name="date"/>
                 <field name="name"/>
-                <field name="department_id"/>
-                <field name="requested_by"/>
-                <field name="approved_by"/>
+                <field name="adjust_type"/>
+                <field name="adjusted_by"/>
                 <field name="progress"/>
             </tree>
         </field>
     </record>
 
     <!-- Form -->
-    <record id="view_store_request_form" model="ir.ui.view">
-        <field name="name">store.request.form</field>
-        <field name="model">store.request</field>
+    <record id="view_stock_adjustment_form" model="ir.ui.view">
+        <field name="name">stock.adjustment.form</field>
+        <field name="model">stock.adjustment</field>
         <field name="arch" type="xml">
-            <form string="Store Request">
+            <form string="Stock Adjustment">
                 <sheet>
                     <div id="s_header">
-                        <h1>Store Request</h1>
+                        <h1>Stock Adjustment</h1>
                     </div>
                     <div id="p_header">
                         <field name="progress" widget="statusbar" style="float: right;padding: 20px;"/>
@@ -33,11 +32,10 @@
                     <h2><field name="name"/></h2>
                     <group col="4">
                         <field name="date" attrs="{'readonly': [('progress', '!=', 'draft')]}"/>
-                        <field name="department_id" attrs="{'readonly': [('progress', '!=', 'draft')]}"/>
-                        <field name="requested_by" attrs="{'invisible': [('requested_by', '=', False)]}"/>
-                        <field name="approved_by" attrs="{'invisible': [('approved_by', '=', False)]}"/>
+                        <field name="adjust_type" attrs="{'readonly': [('progress', '!=', 'draft')]}"/>
+                        <field name="adjusted_by" attrs="{'readonly': [('progress', '!=', 'draft')]}"/>
                     </group>
-                    <field name="request_detail"
+                    <field name="adjustment_detail"
                            attrs="{'readonly': [('progress', 'in', ['approved', 'cancel'])]}">
                         <tree editable="bottom">
                             <field name="name" invisible="1"/>
@@ -48,13 +46,13 @@
                             <field name="description"
                                    attrs="{'readonly': [('progress', '!=', 'draft')]}"/>
                             <field name="uom_id" readonly="1"/>
-                            <field name="requested_quantity" attrs="{'readonly': [('progress', '!=', 'draft')]}"/>
-                            <field name="quantity" attrs="{'readonly': [('progress', '!=', 'confirmed')]}"/>
-                            <field name="request_id" invisible="1"/>
+                            <field name="quantity" attrs="{'readonly': [('progress', '!=', 'draft')]}"/>
+                            <field name="comment" attrs="{'readonly': [('progress', 'in', ['approved', 'cancel'])]}"/>
+                            <field name="adjustment_id" invisible="1"/>
                             <field name="progress" invisible="1"/>
                         </tree>
                     </field>
-                    <footer>
+                <footer>
                         <button name="trigger_confirm" string="Confirm" type="object"
                                 attrs="{'invisible': [('progress', '!=', 'draft')]}"/>
                         <button name="trigger_approve" string="Approve" type="object"
@@ -72,9 +70,9 @@
     </record>
 
     <!-- Action -->
-    <record id="action_store_request" model="ir.actions.act_window">
-        <field name="name">Store Request</field>
-        <field name="res_model">store.request</field>
+    <record id="action_stock_adjustment" model="ir.actions.act_window">
+        <field name="name">Stock Adjustment</field>
+        <field name="res_model">stock.adjustment</field>
         <field name="view_type">form</field>
         <field name="view_mode">tree,form</field>
     </record>

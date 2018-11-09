@@ -47,7 +47,10 @@
         # Stock
         "views/stock/stock_location.xml",
         "views/stock/stock_warehouse.xml",
+        "views/stock/hos_move.xml",
+        "views/stock/stock_adjustment.xml",
         "views/stock/store_request.xml",
+        "views/stock/store_return.xml",
 
         # Contact
         "views/contact/doctor.xml",

@@ -17,9 +17,10 @@
     <menuitem id="stock_stock_warehouse" name="Warehouse" action="action_stock_warehouse" parent="sub_menu_stock" sequence="20"/>
     <menuitem id="stock_store_request" name="Store Request" action="action_store_request" parent="sub_menu_stock" sequence="30"/>
     <!--<menuitem id="stock_store_issue" name="Store Issue" action="action_store_issue" parent="sub_menu_stock" sequence="40"/>-->
-    <!--<menuitem id="stock_store_return" name="Store Return" action="action_store_return" parent="sub_menu_stock" sequence="50"/>-->
+    <menuitem id="stock_store_return" name="Store Return" action="action_store_return" parent="sub_menu_stock" sequence="50"/>
     <!--<menuitem id="stock_store_accept" name="Store Accept" action="action_store_accept" parent="sub_menu_stock" sequence="60"/>-->
-    <!--<menuitem id="stock_stock_adjustment" name="Stock Adjustment" action="action_stock_adjustment" parent="sub_menu_stock" sequence="70"/>-->
+    <menuitem id="stock_stock_adjustment" name="Stock Adjustment" action="action_stock_adjustment" parent="sub_menu_stock" sequence="70"/>
+    <menuitem id="stock_hos_move" name="Stock Move" action="action_hos_move" parent="sub_menu_stock" sequence="80"/>
     <!--<menuitem id="stock_material_receipt_normal" name="Material Receipt" action="action_material_receipt_normal" parent="sub_menu_stock" sequence="80"/>-->
     <!--<menuitem id="stock_material_receipt_direct" name="Direct Material Receipt" action="action_material_receipt_direct" parent="sub_menu_stock" sequence="90"/>-->
 
