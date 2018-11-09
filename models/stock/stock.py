@@ -28,4 +28,4 @@ class Stock(models.Model):
         quantity_in = sum(source_ids.mapped("quantity"))
         quantity_out = sum(destination_ids.mapped("quantity"))
 
-        return quantity_in - quantity_out
+        return quantity_out - quantity_in

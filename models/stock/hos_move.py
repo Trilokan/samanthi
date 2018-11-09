@@ -35,7 +35,7 @@ class HosMove(models.Model):
 
         current_stock = self.env["hos.stock"].get_current_stock(self.product_id.id, self.source_id.id)
 
-        if self.quantity > (current_stock - self.quantity):
+        if self.quantity > (current_stock + self.quantity):
             raise exceptions.ValidationError("Error! Please check stock")
 
     @api.model

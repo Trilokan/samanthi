@@ -50,6 +50,7 @@
         "views/stock/hos_move.xml",
         "views/stock/stock_adjustment.xml",
         "views/stock/store_request.xml",
+        "views/stock/store_issue.xml",
         "views/stock/store_return.xml",
 
         # Contact

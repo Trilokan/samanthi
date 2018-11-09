@@ -43,6 +43,7 @@ class StoreRequest(models.Model):
 
         if issue_detail:
             issue = {"request_id": self.id,
+                     "department_id": self.department_id.id,
                      "issue_detail": issue_detail}
 
             self.env["store.issue"].create(issue)
@@ -78,7 +79,13 @@ class StoreRequestDetail(models.Model):
     request_id = fields.Many2one(comodel_name="store.request", string="Store Request")
     progress = fields.Selection(selection=PROGRESS_INFO, string="Progress", related="request_id.progress")
 
+    @api.constrains("quantity")
+    def check_requested_quantity(self):
+        if self.quantity > self.requested_quantity:
+            raise exceptions.ValidationError("Error! Approved quantity more than requested")
+
     @api.model
     def create(self, vals):
         vals["name"] = self.env["ir.sequence"].next_by_code(self._name)
         return super(StoreRequestDetail, self).create(vals)
+

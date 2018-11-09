@@ -27,6 +27,7 @@
                     <group>
                         <field name="name"/>
                         <field name="head_id"/>
+                        <field name="location_id"/>
                     </group>
                     <field name="member_ids"/>
                 </sheet>
