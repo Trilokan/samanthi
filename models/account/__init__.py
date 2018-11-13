@@ -9,4 +9,5 @@ from . import journal_items
 from . import voucher
 from . import voucher_line
 from . import voucher_dummy
+from . import journal
 
