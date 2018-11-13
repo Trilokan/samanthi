@@ -26,7 +26,6 @@ class Voucher(models.Model):
     dummy_ids = fields.One2many(comodel_name="voucher.dummy", inverse_name="voucher_id", string="Dummy")
     entry_id = fields.Many2one(comodel_name="journal.entries", string="Journal Entries")
 
-
     def reconciliation(self, credits, payment, item_id=False, is_payment=True):
         for rec in credits:
             opening_balance = rec.total_amount - rec.opening_amount

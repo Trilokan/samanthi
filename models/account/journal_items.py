@@ -24,48 +24,6 @@ class JournalItems(models.Model):
     entry_id = fields.Many2one(comodel_name="journal.entries", string="Journal Entry")
     active = fields.Boolean(string="Active", default=True)
 
-    def payable_lines(self, account_id):
-        debit = []
-        recs = self.env["journal.items"].search([("account_id", "=", account_id),
-                                                 ("reconcile_id", "=", False),
-                                                 ("reconcile_part_id", "=", False),
-                                                 ("debit", ">", 0)])
-
-        for rec in recs:
-            data = {"name": rec.name,
-                    "description": rec.description,
-                    "account_id": rec.account_id.id,
-                    "total_amount": rec.debit,
-                    "reconcile_part_id": rec.reconcile_part_id.id,
-                    "item_id": rec.id}
-
-            debit.append((0, 0, data))
-
-        return debit
-
-    def receivable_lines(self, account_id):
-        credit = []
-
-        recs = self.env["journal.items"].search([("account_id", "=", account_id),
-                                                 ("reconcile_id", "=", False),
-                                                 ("credit", ">", 0)])
-
-        for rec in recs:
-            data = {"name": rec.name,
-                    "description": rec.description,
-                    "account_id": rec.account_id.id,
-                    "total_amount": rec.credit,
-                    "item_id": rec.id}
-
-            if rec.reconcile_part_id:
-                items = self.env["journal.items"].search([("reconcile_part_id", "=", rec.reconcile_part_id.id)])
-                data["opening_amount"] = sum(items.mapped('debit'))
-                data["reconcile_part_id"] = rec.reconcile_part_id.id,
-
-            credit.append((0, 0, data))
-
-        return credit
-
     @api.model
     def create(self, vals):
         if (vals["credit"] > 0) or (vals["debit"] < 0):
