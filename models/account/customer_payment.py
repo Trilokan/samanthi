@@ -3,28 +3,31 @@
 from odoo import models, fields, api
 from datetime import datetime
 
+PROGRESS_INFO = [("draft", "Draft"), ("confirmed", "Confirmed"), ("validated", "Validated"), ("cancel", "Cancel")]
+PAY_TYPE = [("bank", "Bank"), ("cash", "Cash")]
 CURRENT_DATE = datetime.now().strftime("%Y-%m-%d")
 CURRENT_TIME = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-CURRENT_TIME_INDIA = datetime.now().strftime("%d-%m-%Y %H:%M:%S")
-
-PAYMENT_TYPE = [("customer_payment", "Customer Payment"), ("vendor_payment", "Vendor Payment")]
+CURRENT_INDIA = datetime.now().strftime("%d-%m-%Y %H:%M:%S")
 
 
-class Voucher(models.Model):
-    _name = "hos.voucher"
+class CustomerPayment(models.Model):
+    _name = "customer.payment"
+    _inherit = "mail.thread"
 
     date = fields.Date(string="Date", default=CURRENT_DATE, required=True)
     name = fields.Char(string="Name", readonly=True)
     person_id = fields.Many2one(comodel_name="hos.person", string="Person", required=True)
-    payment_type = fields.Selection(selection=PAYMENT_TYPE, string="Payment Type", required=True)
     payment = fields.Float(strng="Payment", default=0, required=True)
     balance = fields.Float(strng="Balance", default=0, required=True)
-    credit_ids = fields.One2many(comodel_name="voucher.line", inverse_name="credit_id", string="Credit")
-    debit_ids = fields.One2many(comodel_name="voucher.line", inverse_name="debit_id", string="Debit")
+    credit_ids = fields.One2many(comodel_name="customer.payment.line", inverse_name="credit_id", string="Credit")
+    debit_ids = fields.One2many(comodel_name="customer.payment.line", inverse_name="debit_id", string="Debit")
     payment_account_id = fields.Many2one(comodel_name="hos.account", string="Payment Account")
     account_id = fields.Many2one(comodel_name="hos.account", string="Account")
-    dummy_ids = fields.One2many(comodel_name="voucher.dummy", inverse_name="voucher_id", string="Dummy")
+    dummy_ids = fields.One2many(comodel_name="customer.payment.dummy", inverse_name="voucher_id", string="Dummy")
     entry_id = fields.Many2one(comodel_name="journal.entries", string="Journal Entries")
+    progress = fields.Selection(selection=PROGRESS_INFO, string="Progress", default="draft")
+    pay_type = fields.Selection(selection=PAY_TYPE, string="Pay Type", default="bank", required=True)
+    writter = fields.Text(sring="Writter", track_visibility="always")
 
     def reconciliation(self, credits, payment, item_id=False, is_payment=True):
         for rec in credits:
@@ -46,7 +49,7 @@ class Voucher(models.Model):
                             "is_payment": is_payment,
                             "voucher_id": self.id}
 
-                    self.env["voucher.dummy"].create(data)
+                    self.env["customer.payment.dummy"].create(data)
 
                 else:
                     rec.reconcile_amount = rec.reconcile_amount + payment
@@ -58,7 +61,7 @@ class Voucher(models.Model):
                             "is_payment": is_payment,
                             "voucher_id": self.id}
 
-                    self.env["voucher.dummy"].create(data)
+                    self.env["customer.payment.dummy"].create(data)
                     payment = 0
 
         return payment
@@ -78,7 +81,7 @@ class Voucher(models.Model):
         recs = self.debit_ids
 
         for rec in recs:
-            item = self.env["voucher.dummy"].search([("item_id", "=", rec.item_id.id)])
+            item = self.env["customer.payment.dummy"].search([("item_id", "=", rec.item_id.id)])
 
             if len(item) == 1:
                 item.item_id.reconcile_part_id = item.reconcile_part_id.id
@@ -98,7 +101,7 @@ class Voucher(models.Model):
                 "is_payment": True,
                 "voucher_id": self.id}
 
-        self.env["voucher.dummy"].create(data)
+        self.env["customer.payment.dummy"].create(data)
 
         reconcile = self.reconciliation(credits, payment)
         if reconcile:
@@ -107,7 +110,7 @@ class Voucher(models.Model):
                     "is_payment": True,
                     "voucher_id": self.id}
 
-            self.env["voucher.dummy"].create(data)
+            self.env["customer.payment.dummy"].create(data)
 
     def debit_amount_reconcile(self):
         debits = self.debit_ids
@@ -125,12 +128,12 @@ class Voucher(models.Model):
                         "is_payment": False,
                         "voucher_id": self.id}
 
-                self.env["voucher.dummy"].create(data)
+                self.env["customer.payment.dummy"].create(data)
 
             debit.reconcile_amount = reconcile
 
     def generate_payment_journals(self):
-        recs = self.env["voucher.dummy"].search([("is_payment", "=", True), ("voucher_id", "=", self.id)])
+        recs = self.env["customer.payment.dummy"].search([("is_payment", "=", True), ("voucher_id", "=", self.id)])
 
         item = []
         for rec in recs:
@@ -143,23 +146,47 @@ class Voucher(models.Model):
 
             item.append((0, 0, data))
 
-        self.env["journal.entries"].create({"item_ids": item})
+        entry_id = self.env["journal.entries"].create({"item_ids": item})
+        self.entry_id = entry_id.id
 
+    @api.onchange("person_id", "pay_type")
     def trigger_reconcile(self):
-        # Unlink all existing data
-        self.credit_ids.unlink()
-        self.debit_ids.unlink()
-        self.dummy_ids.unlink()
 
-        # Set credit and debit lines
-        self.credit_ids = self.get_customer_credit_lines(self.account_id.id)
-        self.debit_ids = self.get_customer_debit_lines(self.account_id.id)
+        if self.person_id and self.pay_type:
+            self.account_id = self.person_id.payable_id.id
+            self.payment_account_id = self.get_payment_account_id()
 
-        # Payment reconciliation
-        self.debit_amount_reconcile()
-        self.payment_reconcile()
+            # Unlink all existing data
+            self.credit_ids.unlink()
+            self.debit_ids.unlink()
+            self.dummy_ids.unlink()
 
+            # Set credit and debit lines
+            self.credit_ids = self.get_customer_credit_lines(self.account_id.id)
+            self.debit_ids = self.get_customer_debit_lines(self.account_id.id)
+
+            # Payment reconciliation
+            self.debit_amount_reconcile()
+            self.payment_reconcile()
+
+    def get_payment_account_id(self):
+        pay_type = None
+        if self.pay_type == "bank":
+            pay_type = self.env["hos.account"].search([("code", "=", "BANK")])
+        elif self.pay_type == "cash":
+            pay_type = self.env["hos.account"].search([("code", "=", "CASH")])
+
+        return pay_type.id
+
+    @api.multi
     def trigger_confirmed(self):
+        self.trigger_reconcile()
+
+        writter = "Payment Confirmed by {0} on {1}".format(self.env.user.name, CURRENT_INDIA)
+        self.write({"progress": "confirmed", "writter": writter})
+
+    @api.multi
+    def trigger_validate(self):
         self.trigger_reconcile()
         self.generate_payment_journals()
         self.update_payment_journal()

@@ -2,9 +2,9 @@
 <odoo>
 
     <!-- Tree -->
-    <record id="view_hos_voucher_tree" model="ir.ui.view">
-        <field name="name">hos.voucher.tree</field>
-        <field name="model">hos.voucher</field>
+    <record id="view_customer_payment_tree" model="ir.ui.view">
+        <field name="name">customer.payment.tree</field>
+        <field name="model">customer.payment</field>
         <field name="arch" type="xml">
             <tree string="Customer Payment">
                 <field name="name"/>
@@ -13,69 +13,60 @@
     </record>
 
     <!-- Form -->
-    <record id="view_hos_voucher_form" model="ir.ui.view">
-        <field name="name">hos.voucher.form</field>
-        <field name="model">hos.voucher</field>
+    <record id="view_customer_payment_form" model="ir.ui.view">
+        <field name="name">customer.payment.form</field>
+        <field name="model">customer.payment</field>
         <field name="arch" type="xml">
             <form string="Customer Payment">
                 <sheet>
                     <div id="s_header">
                         <h1>Customer Payment</h1>
                     </div>
+                    <div id="p_header">
+                        <field name="progress" widget="statusbar" style="float: right;padding: 20px;"/>
+                    </div>
+                    <h2><field name="name"/></h2>
                     <group col="4">
-                        <field name="name"/>
-                        <field name="person_id"/>
-                        <field name="payment_type"/>
-                        <field name="payment"/>
-                        <field name="account_id"/>
-                        <field name="payment_account_id"/>
-                    </group>
-                    <field name="credit_ids">
-                        <tree>
-                            <field name="name"/>
-                            <field name="description"/>
-                            <field name="total_amount"/>
-                            <field name="opening_amount"/>
-                            <field name="reconcile_amount"/>
-                            <field name="reconcile_part_id"/>
-                            <field name="credit_id" invisible="1"/>
-                            <field name="debit_id" invisible="1"/>
-                        </tree>
-                    </field>
-                    <field name="debit_ids">
-                        <tree>
-                            <field name="name"/>
-                            <field name="description"/>
-                            <field name="total_amount"/>
-                            <field name="opening_amount"/>
-                            <field name="reconcile_amount"/>
-                            <field name="reconcile_part_id"/>
-                            <field name="credit_id" invisible="1"/>
-                            <field name="debit_id" invisible="1"/>
-                        </tree>
-                    </field>
-                    <field name="dummy_ids">
-                        <tree>
-                            <field name="item_id"/>
-                            <field name="description"/>
-                            <field name="is_payment"/>
-                            <field name="credit"/>
-                            <field name="debit"/>
-                            <field name="reconcile_part_id"/>
-                        </tree>
-                    </field>
+                        <field name="person_id" attrs="{'readonly': [('progress', '!=', 'draft')]}"/>
+                        <field name="payment" attrs="{'readonly': [('progress', '!=', 'draft')]}"/>
+                        <field name="pay_type" string="Payment Type" attrs="{'readonly': [('progress', '!=', 'draft')]}"/>
+                        <field name="account_id" invisible="1"/>
+                        <field name="payment_account_id" invisible="1"/>
 
-                    <button name="trigger_reconcile" string="Reconcile" type="object"/>
-                    <button name="trigger_confirmed" string="Confirmed" type="object"/>
+                    </group>
+                    <separator string="To Pay (CREDIT)"/>
+                    <field name="credit_ids" readonly="1">
+                        <tree>
+                            <field name="name"/>
+                            <field name="description"/>
+                            <field name="total_amount"/>
+                            <field name="opening_amount"/>
+                            <field name="reconcile_amount"/>
+                        </tree>
+                    </field>
+                    <separator string="Advance Amount/ Paid (DEBIT)"/>
+                    <field name="debit_ids" readonly="1">
+                        <tree>
+                            <field name="name"/>
+                            <field name="description"/>
+                            <field name="total_amount"/>
+                            <field name="opening_amount"/>
+                            <field name="reconcile_amount"/>
+                        </tree>
+                    </field>
+                    <button name="trigger_validate" string="Validate" type="object"
+                            attrs="{'invisible': [('progress', '!=', 'draft')]}"/>
+                    <button name="trigger_confirmed" string="Payment Confirm" type="object"
+                            attrs="{'invisible': [('progress', '!=', 'confirmed')]}"/>
                 </sheet>
             </form>
         </field>
     </record>
 
     <!-- Action -->
-    <record id="action_hos_voucher" model="ir.actions.act_window">
+    <record id="action_customer_payment" model="ir.actions.act_window">
         <field name="name">Customer Payment</field>
-        <field name="res_model">hos.voucher</field>
+        <field name="res_model">customer.payment</field>
         <field name="view_type">form</field>
         <field name="view_mode">tree,form</field>
     </record>

@@ -10,7 +10,6 @@ CURRENT_TIME_INDIA = datetime.now().strftime("%d-%m-%Y %H:%M:%S")
 
 class JournalItems(models.Model):
     _name = "journal.items"
-    _inherit = "mail.thread"
 
     date = fields.Date(string="Date", default=CURRENT_DATE, required=True)
     name = fields.Char(string="Name", readonly=True)
@@ -26,6 +25,6 @@ class JournalItems(models.Model):
 
     @api.model
     def create(self, vals):
-        if (vals["credit"] > 0) or (vals["debit"] < 0):
+        if (vals["credit"] > 0) or (vals["debit"] > 0):
             vals["name"] = self.env["ir.sequence"].next_by_code(self._name)
             return super(JournalItems, self).create(vals)
