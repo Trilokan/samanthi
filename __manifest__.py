@@ -28,6 +28,8 @@
         "sequence/account.xml",
         "sequence/product.xml",
 
+        "views/base/person.xml",
+
         # Account
         "views/account/account.xml",
         "views/account/journal_entries.xml",
@@ -97,6 +99,9 @@
         "views/leave_management/leave_application.xml",
         "views/leave_management/comp_off.xml",
         "views/leave_management/permission.xml",
+        "views/leave_management/leave_configuration.xml",
+        "views/leave_management/leave_level.xml",
+        "views/leave_management/leave_type.xml",
 
         # Recruitment Management
         # Time Management

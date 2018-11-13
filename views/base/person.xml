@@ -83,7 +83,21 @@
         <field name="res_model">hos.person</field>
         <field name="view_type">form</field>
         <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_hos_person_tree"/>
     </record>
 
+    <record model="ir.actions.act_window.view" id="action_hos_person_form">
+        <field eval="2" name="sequence"/>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_hos_person_form" />
+        <field name="act_window_id" ref="action_hos_person"/>
+    </record>
+
+    <record model="ir.actions.act_window.view" id="action_hos_person_tree">
+        <field eval="1" name="sequence"/>
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="view_hos_person_tree"/>
+        <field name="act_window_id" ref="action_hos_person"/>
+    </record>
 
 </odoo>

@@ -56,10 +56,12 @@
                     </field>
                     <field name="dummy_ids">
                         <tree>
-                            <field name="amount"/>
                             <field name="item_id"/>
-                            <field name="reconcile"/>
-                            <field name="voucher_id"/>
+                            <field name="description"/>
+                            <field name="is_payment"/>
+                            <field name="credit"/>
+                            <field name="debit"/>
+                            <field name="reconcile_part_id"/>
                         </tree>
                     </field>
 

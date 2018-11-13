@@ -46,6 +46,7 @@
     Stores
         Store Request
         Store Return
+        Inspection
 
     Notes
         Notes
@@ -65,18 +66,21 @@
         OT Booking
         OT Procedure
 
+      Billing
+
+
 5. Inventory
     Product
+        Product
         Group
         Sub-Group
         UOM
         Tax
         Category
-        Location
-        warehouse
-        Product
 
     Stores
+        Stock Location
+        warehouse
         Store Request
         Store Issue
         Store Return
@@ -112,10 +116,8 @@
 
     Recruitment
         Resume Bank
-        Interview Schedule
         Appointment Order
 
-9. Payroll
     Payroll
         Payslip
         Payroll Generation
@@ -123,3 +125,29 @@
         Salary Structure
         Salary Rule
 
+8. Pharmacy
+    Pharmacy
+        Invoice
+        Today Sales
+        Overall Sales
+        Product
+
+    Report
+        Sales
+        Inventory
+
+9. Patient
+    Patient
+    OPT
+        Appointment
+        General Treatment
+        Dentistry
+        Opthamalogy
+        ..
+
+    IPT
+        Treatment
+        Reminder
+
+    Prescription
+    Billing

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!--Hospital: Hospitality-->
+    <menuitem id="sub_menu_hospitality" name="Hospitality" parent="menu_hospital" sequence="10"/>
+    <menuitem id="hospitality_admission" name="Admission" action="action_hospital_admission" parent="sub_menu_hospitality" sequence="10"/>
+    <menuitem id="hospitality_discharge" name="Discharge" action="action_hospital_discharge" parent="sub_menu_hospitality" sequence="20"/>
+    <menuitem id="hospitality_bed_status" name="Bed Status" action="action_bed_status" parent="sub_menu_hospitality" sequence="30"/>
+
+    <!--Hospital: Operation-->
+    <menuitem id="sub_menu_operation" name="Operation" parent="menu_hospital" sequence="20"/>
+    <menuitem id="operation_hos_operation" name="Operation" action="action_hos_operation" parent="sub_menu_operation" sequence="10"/>
+    <menuitem id="operation_ot_booking" name="OT Booking" action="action_hos_operation_booking" parent="sub_menu_operation" sequence="20"/>
+    <menuitem id="operation_ot_procedure" name="OT Procedure" action="action_ot_procedure" parent="sub_menu_operation" sequence="30"/>
+
+    <!--Hospital: Billing-->
+
+</odoo>

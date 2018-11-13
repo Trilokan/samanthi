@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
+    <!--Employee: Time Management-->
+    <menuitem id="employee_time_management" name="Time Management" parent="menu_employee" sequence="10"/>
+    <menuitem id="leave_leave_application" name="Week Schedule" action="action_leave_application" parent="employee_time_management" sequence="10"/>
+    <menuitem id="leave_leave_application" name="Time Application" action="action_leave_application" parent="employee_time_management" sequence="10"/>
+    <menuitem id="leave_leave_application" name="Time Sheet" action="action_leave_application" parent="employee_time_management" sequence="10"/>
+    <menuitem id="leave_leave_application" name="Attendance" action="action_leave_application" parent="employee_time_management" sequence="10"/>
+
     <!--Employee Leave Management-->
     <menuitem id="employee_leave_management" name="Leave Management" parent="menu_employee" sequence="10"/>
     <menuitem id="leave_leave_application" name="Leave Request" action="action_leave_application" parent="employee_leave_management" sequence="10"/>
@@ -13,5 +20,10 @@
     <menuitem id="notes_hos_notification" name="Notification" action="action_hos_notification" parent="employee_notes" sequence="20"/>
     <menuitem id="notes_hos_reminder" name="Reminder" action="action_hos_reminder" parent="employee_notes" sequence="30"/>
 
+    <!--Employee: Stores-->
+    <menuitem id="sub_menu_employee_stores" name="Stores" parent="menu_employee" sequence="20"/>
+    <menuitem id="employee_store_request" name="Store Request" action="action_leave_application" parent="sub_menu_employee_stores" sequence="10"/>
+    <menuitem id="employee_store_return" name="Store Return" action="action_leave_application" parent="sub_menu_employee_stores" sequence="20"/>
+    <menuitem id="employee_material_inspection" name="Material Inspection" action="action_leave_application" parent="sub_menu_employee_stores" sequence="20"/>
 
 </odoo>

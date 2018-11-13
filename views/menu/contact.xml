@@ -10,6 +10,7 @@
     <menuitem id="contact_hos_person_supplier" name="Supplier" action="action_hos_person_supplier" parent="sub_menu_contact" sequence="50"/>
     <menuitem id="contact_hos_person_service" name="Service" action="action_hos_person_service" parent="sub_menu_contact" sequence="60"/>
     <menuitem id="contact_hos_person_Others" name="Others" action="action_hos_person_others" parent="sub_menu_contact" sequence="70"/>
+    <menuitem id="contact_hos_person" name="Person" action="action_hos_person" parent="sub_menu_contact" sequence="80"/>
 
 
 </odoo>
