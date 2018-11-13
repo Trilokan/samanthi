@@ -5,7 +5,7 @@
     <record id="view_leave_configuration_tree" model="ir.ui.view">
         <field name="name">leave.configuration.tree</field>
         <field name="model">leave.configuration</field>
-        <field name="arch" configuration="xml">
+        <field name="arch" type="xml">
             <tree string="Leave Configuration">
                 <field name="lop_id"/>
             </tree>
@@ -16,7 +16,7 @@
     <record id="view_leave_configuration_form" model="ir.ui.view">
         <field name="name">leave.configuration.form</field>
         <field name="model">leave.configuration</field>
-        <field name="arch" configuration="xml">
+        <field name="arch" type="xml">
             <form string="Leave Configuration">
                 <sheet>
                     <div id="s_header">

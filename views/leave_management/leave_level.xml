@@ -5,7 +5,7 @@
     <record id="view_leave_level_tree" model="ir.ui.view">
         <field name="name">leave.level.tree</field>
         <field name="model">leave.level</field>
-        <field name="arch" level="xml">
+        <field name="arch" type="xml">
             <tree string="Leave Level">
                 <field name="name"/>
                 <field name="code"/>
@@ -17,7 +17,7 @@
     <record id="view_leave_level_form" model="ir.ui.view">
         <field name="name">leave.level.form</field>
         <field name="model">leave.level</field>
-        <field name="arch" level="xml">
+        <field name="arch" type="xml">
             <form string="Leave Level">
                 <sheet>
                     <div id="s_header">

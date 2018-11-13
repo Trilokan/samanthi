@@ -7,10 +7,13 @@
         <field name="model">resume.bank</field>
         <field name="arch" type="xml">
             <tree string="Resume Bank">
+                <field name="date"/>
                 <field name="name"/>
-                <field name="from_date"/>
-                <field name="till_date"/>
-                <field name="progress"/>
+                <field name="candidate_uid"/>
+                <field name="position_id"/>
+                <field name="email"/>
+                <field name="mobile"/>
+                <field name="resume"/>
             </tree>
         </field>
     </record>
@@ -22,57 +25,72 @@
         <field name="arch" type="xml">
             <form string="Resume Bank">
                 <sheet>
+                    <field name="id" invisible="1"/>
                     <div id="s_header">
                         <h1>Resume Bank</h1>
                     </div>
-                    <div id="p_header">
-                        <field name="progress" widget="statusbar" style="float: right;padding: 20px;"/>
-                    </div>
-                    <div>
-                        <field name="image" widget="image" class="oe_avatar oe_left"/>
-                    </div>
-                    <div style="margin-left: 100px;">
-                        <div class="oe_title">
-                            <label for="name" class="oe_edit_only"/>
-                            <h1>
-                                <field name="name" class="oe_inline" modifiers="{'required': true}"/>
-                            </h1>
-                            <h2><field name="candidate_uid"/></h2>
-                        </div>
+                    <field name="image" widget="image" class="oe_avatar" options="{'preview_image': 'image_medium'}"/>
+                    <div class="oe_title">
+                        <label for="name" class="oe_edit_only"/>
+                        <h2>
+                            <field name="name"/>
+                        </h2>
+                        <label for="candidate_uid" class="oe_edit_only" string="Candidate ID"/>
+                        <h3>
+                            <field name="candidate_uid" on_change="1"/>
+                        </h3>
                     </div>
                     <group col="4">
-                        <field name="date"/>
-                        <field name="department_id"/>
+                        <field name="aadhaar_card"/>
                         <field name="position_id"/>
+                    </group>
+                    <group>
                         <field name="resume"/>
                     </group>
-                    
-                    <group>
-                        <group string="Contact Details">
-                            <field name="email"/>
-                            <field name="mobile"/>
-                            <field name="alternate_contact"/>
-                        </group>
-                        <group string="Personnel Details">
-                            <field name="dob"/>
-                            <field name="age"/>
-                            <field name="marital_status"/>
-                            <field name="gender"/>
-                        </group>
-                    </group>
+
                     <notebook>
+                        <page string="Contact details">
+                            <group col="4">
+                                <field name="email"/>
+                                <field name="mobile"/>
+                                <field name="door_no"/>
+                                <field name="street_1"/>
+                                <field name="street_2"/>
+                                <field name="locality"/>
+                                <field name="city"/>
+                                <field name="state_id"/>
+                                <field name="country_id"/>
+                                <field name="pin_code"/>
+                                <field name="aadhaar_card"/>
+                            </group>
+                        </page>
                         <page string="Qualification">
-                            <field name="qualification_ids"/>
+                            <field name="qualification_ids">
+                                <tree string="Qualification" editable="bottom">
+                                    <field name="name"/>
+                                    <field name="institution"/>
+                                    <field name="enrollment_year"/>
+                                    <field name="completed_year"/>
+                                    <field name="result"/>
+                                    <field name="resume_id" invisible="1"/>
+                                </tree>
+                            </field>
                         </page>
                         <page string="Experience">
                             <field name="experience_ids">
-                                <tree editable="bottom">
-
+                                <tree string="Experience" editable="bottom">
+                                    <field name="name"/>
+                                    <field name="position"/>
+                                    <field name="total_years"/>
+                                    <field name="relieving_reason"/>
+                                    <field name="resume_id" invisible="1"/>
                                 </tree>
                             </field>
                         </page>
                         <page string="Attachment">
-                            <field name="attachment_ids" widget="many2many_binary"/>
+                            <field name="attachment_ids"
+                                   widget="many2many_binary"
+                                   domain="[('res_id', '=', id), ('res_model', '=', 'resume.bank')]"/>
                         </page>
                     </notebook>
                 </sheet>

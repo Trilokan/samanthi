@@ -11,6 +11,7 @@ CURRENT_INDIA = datetime.now().strftime("%d-%m-%Y %H:%M:%S")
 
 class VacancyPosition(models.Model):
     _name = "vacancy.position"
+    _inherit = "mail.thread"
 
     name = fields.Char(string="Name", readonly=True)
     date = fields.Date(string="Date", default=CURRENT_DATE, required=True)

@@ -11,3 +11,4 @@ from . import product
 from . import stock
 from . import purchase
 from . import asserts
+from . import recruitment

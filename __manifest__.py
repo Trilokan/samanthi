@@ -104,6 +104,10 @@
         "views/leave_management/leave_type.xml",
 
         # Recruitment Management
+        "views/recruitment/resume_bank.xml",
+        "views/recruitment/vacancy_position.xml",
+        "views/recruitment/appointment_order.xml",
+
         # Time Management
         # Time Management
 
@@ -112,6 +116,7 @@
         "views/menu/employee.xml",
         "views/menu/account.xml",
         "views/menu/product.xml",
+        "views/menu/hr.xml",
     ],
     "demo": [
 
