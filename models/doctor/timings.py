@@ -5,12 +5,12 @@ from datetime import datetime
 
 
 # Doctor Timings
-class DoctorTimings(models.Model):
-    _name = "doctor.timings"
+class DutyTimings(models.Model):
+    _name = "duty.timings"
     _inherit = "mail.thread"
-    _rec_name = "employee_id"
+    _rec_name = "person_id"
 
-    employee_id = fields.Many2one(comodel_name="hos.person", string="Employee", required=True)
+    person_id = fields.Many2one(comodel_name="hos.person", string="Employee", required=True)
     timing_detail = fields.One2many(comodel_name="timings.detail", inverse_name="timings_id", string="Timings")
 
     @api.model
@@ -23,7 +23,7 @@ class DoctorTimings(models.Model):
 
         vals["timing_detail"] = day_list
 
-        return super(DoctorTimings, self).create(vals)
+        return super(DutyTimings, self).create(vals)
 
 
 class TimingsDetail(models.Model):
@@ -35,3 +35,4 @@ class TimingsDetail(models.Model):
 
     an_from_time = fields.Integer(string="AN From Time")
     an_till_time = fields.Integer(string="AN Till Time")
+    timings_id = fields.Many2one(comodel_name="duty.timings", string="Duty Timings")

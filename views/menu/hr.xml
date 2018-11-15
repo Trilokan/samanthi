@@ -2,37 +2,39 @@
 <odoo>
 
     <!--HR: Employee-->
-    <menuitem id="sub_menu_hr_employee" name="Employee" parent="menu_hr" sequence="10"/>
-    <menuitem id="hr_employee_hr_employee" name="Employee" action="action_hr_employee" parent="sub_menu_hr_employee" sequence="10"/>
-    <menuitem id="hr_employee_hr_department" name="Department" action="action_hr_department" parent="sub_menu_hr_employee" sequence="20"/>
-    <menuitem id="hr_employee_hr_designation" name="Designation" action="action_hr_designation" parent="sub_menu_hr_employee" sequence="30"/>
+    <menuitem id="hr_employee" name="Employee" parent="menu_hr" sequence="10"/>
+    <menuitem id="hr_employee_hr_employee" name="Employee" action="action_hr_employee" parent="hr_employee" sequence="10"/>
+    <menuitem id="hr_employee_hr_department" name="Department" action="action_hr_department" parent="hr_employee" sequence="20"/>
+    <menuitem id="hr_employee_hr_designation" name="Designation" action="action_hr_designation" parent="hr_employee" sequence="30"/>
 
-    <!--&lt;!&ndash;HR: Time Management&ndash;&gt;-->
-    <!--<menuitem id="sub_menu_hr_time" name="Time Management" parent="menu_hr" sequence="10"/>-->
-    <!--<menuitem id="hr_time_week_schedule" name="Week Schedule" parent="sub_menu_hr_time" sequence="10"/>-->
-    <!--<menuitem id="hr_time_shift_change" name="Shift Change" parent="sub_menu_hr_time" sequence="20"/>-->
-    <!--<menuitem id="hr_time_month_attendance" name="Monthly Attendance" action="action_month_attendance" parent="sub_menu_hr_time" sequence="30"/>-->
-    <!--<menuitem id="hr_time_time_attendance" name="Daily Attendance" action="action_time_attendance" parent="sub_menu_hr_time" sequence="40"/>-->
-    <!--<menuitem id="hr_time_time_configuration" name="Time Configuration" action="action_time_configuration" parent="sub_menu_hr_time" sequence="50"/>-->
-    <!--<menuitem id="hr_time_time_application" name="Time Application" action="action_time_sheet_application" parent="sub_menu_hr_time" sequence="60"/>-->
-    <!--<menuitem id="hr_time_time_sheet" name="Time Sheet" action="action_time_sheet" parent="sub_menu_hr_time" sequence="70"/>-->
-    <!--<menuitem id="hr_time_holiday_change" name="Holiday Change" action="action_attendance_change_holiday_change" parent="sub_menu_hr_time" sequence="80"/>-->
-    <!--<menuitem id="hr_time_shift_change" name="Shift Change" action="action_attendance_change_shift_change" parent="sub_menu_hr_time" sequence="90"/>-->
-    <!--<menuitem id="hr_time_add_employee_to_shift" name="Add Employee To Shift" action="action_attendance_change_add_employee_to_shift" parent="sub_menu_hr_time" sequence="100"/>-->
-    <!--<menuitem id="hr_time_time_shift" name="Shift" action="action_time_shift" parent="sub_menu_hr_time" sequence="110"/>-->
+    <!--HR: Time Management-->
+    <menuitem id="hr_time" name="Time Management" parent="menu_hr" sequence="10"/>
+    <menuitem id="hr_time_week_schedule" name="Week Schedule" parent="hr_time" sequence="10"/>
+    <menuitem id="hr_time_shift_change" name="Shift Change" parent="hr_time" sequence="20"/>
+    <menuitem id="hr_time_month_attendance" name="Monthly Attendance" action="action_month_attendance" parent="hr_time" sequence="30"/>
+    <menuitem id="hr_time_time_attendance" name="Daily Attendance" action="action_time_attendance" parent="hr_time" sequence="40"/>
+    <menuitem id="hr_time_time_configuration" name="Time Configuration" action="action_time_configuration" parent="hr_time" sequence="50"/>
+    <menuitem id="hr_time_time_sheet_application" name="Time Application" action="action_time_sheet_application" parent="hr_time" sequence="60"/>
+    <menuitem id="hr_time_time_sheet" name="Time Sheet" action="action_time_sheet" parent="hr_time" sequence="70"/>
+    <menuitem id="hr_time_holiday_change" name="Holiday Change" action="action_attendance_change_holiday_change" parent="hr_time" sequence="80"/>
+    <menuitem id="hr_time_shift_change" name="Shift Change" action="action_attendance_change_shift_change" parent="hr_time" sequence="90"/>
+    <menuitem id="hr_time_add_employee_to_shift" name="Add Employee To Shift" action="action_attendance_change_add_employee_to_shift" parent="hr_time" sequence="100"/>
+    <menuitem id="hr_time_time_shift" name="Shift" action="action_time_shift" parent="hr_time" sequence="110"/>
 
 
     <!--HR: Leave Management-->
-    <menuitem id="sub_menu_hr_leave" name="Leave Management" parent="menu_hr" sequence="30"/>
-    <menuitem id="hr_leave_leave_request" name="Leave Request" action="action_leave_application" parent="sub_menu_hr_leave" sequence="10"/>
-    <menuitem id="hr_leave_comp_off_request" name="Comp-Off" action="action_compoff_application" parent="sub_menu_hr_leave" sequence="10"/>
-    <menuitem id="hr_leave_permission_request" name="Permission" action="action_permission_application" parent="sub_menu_hr_leave" sequence="10"/>
-    <menuitem id="hr_leave_leave_configuration" name="Leave Configuration" action="action_leave_configuration" parent="sub_menu_hr_leave" sequence="10"/>
-    <menuitem id="hr_leave_leave_level" name="Leave Level" action="action_leave_level" parent="sub_menu_hr_leave" sequence="10"/>
-    <menuitem id="hr_leave_leave_type" name="Leave Type" action="action_leave_type" parent="sub_menu_hr_leave" sequence="10"/>
-    <!--<menuitem id="hr_leave_leave_voucher" name="Leave Voucher" parent="sub_menu_hr_leave" sequence="10"/>-->
-    <!--<menuitem id="hr_leave_journal" name="Leave Journal" parent="sub_menu_hr_leave" sequence="10"/>-->
-    <!--<menuitem id="hr_leave_availability" name="Leave Availability" parent="sub_menu_hr_leave" sequence="10"/>-->
+    <menuitem id="hr_leave" name="Leave Management" parent="menu_hr" sequence="30"/>
+    <menuitem id="hr_leave_leave_request" name="Leave Request" action="action_leave_application" parent="hr_leave" sequence="10"/>
+    <menuitem id="hr_leave_comp_off_request" name="Comp-Off" action="action_compoff_application" parent="hr_leave" sequence="10"/>
+    <menuitem id="hr_leave_permission_request" name="Permission" action="action_permission_application" parent="hr_leave" sequence="10"/>
+    <menuitem id="hr_leave_leave_configuration" name="Leave Configuration" action="action_leave_configuration" parent="hr_leave" sequence="10"/>
+    <menuitem id="hr_leave_leave_level" name="Leave Level" action="action_leave_level" parent="hr_leave" sequence="10"/>
+    <menuitem id="hr_leave_leave_type" name="Leave Type" action="action_leave_type" parent="hr_leave" sequence="10"/>
+    <menuitem id="hr_leave_leave_voucher" name="Leave Voucher" action="" parent="hr_leave" sequence="10"/>
+    <menuitem id="hr_leave_journal_entry" name="Leave Journal Entry" action="action_leave_journal_entry" parent="hr_leave" sequence="10"/>
+    <menuitem id="hr_leave_journal_item" name="Leave Journal Item" action="action_leave_journal_item" parent="hr_leave" sequence="10"/>
+    <menuitem id="hr_leave_reconcile" name="Leave Reconcile" action="action_leave_reconcile" parent="hr_leave" sequence="10"/>
+    <!--<menuitem id="hr_leave_availability" name="Leave Availability" parent="hr_leave" sequence="10"/>-->
 
     <!--HR: Recruitment-->
     <menuitem id="sub_menu_hr_recruitment" name="Recruitment" parent="menu_hr" sequence="40"/>
@@ -40,13 +42,13 @@
     <menuitem id="hr_recruitment_vacancy_position" name="Vacancy Position" action="action_vacancy_position" parent="sub_menu_hr_recruitment" sequence="20"/>
     <menuitem id="hr_recruitment_appointment_order" name="Appointment Order" action="action_appointment_order" parent="sub_menu_hr_recruitment" sequence="30"/>
 
-    <!--&lt;!&ndash;HR: Payroll&ndash;&gt;-->
-    <!--<menuitem id="sub_menu_hr_payroll" name="Payroll" parent="menu_hr" sequence="10"/>-->
-    <!--<menuitem id="sub_menu_hr_payroll" name="Pay Structure" parent="sub_menu_hr_payroll" sequence="10"/>-->
-    <!--<menuitem id="sub_menu_hr_payroll" name="Payslip" parent="sub_menu_hr_payroll" sequence="10"/>-->
-    <!--<menuitem id="sub_menu_hr_payroll" name="Payroll Generation" parent="sub_menu_hr_payroll" sequence="10"/>-->
-    <!--<menuitem id="sub_menu_hr_payroll" name="Salary Structure" parent="sub_menu_hr_payroll" sequence="10"/>-->
-    <!--<menuitem id="sub_menu_hr_payroll" name="Salary Rule" parent="sub_menu_hr_payroll" sequence="10"/>-->
+    <!--HR: Payroll-->
+    <menuitem id="hr_payroll" name="Payroll" parent="menu_hr" sequence="10"/>
+    <menuitem id="hr_payroll_pay_slip" name="Payslip" action="action_pay_slip" parent="hr_payroll" sequence="10"/>
+    <menuitem id="hr_payroll_payroll_generation" name="Payroll Generation" action="action_payroll_generation" parent="hr_payroll" sequence="10"/>
+    <menuitem id="hr_payroll_salary_structure" name="Salary Structure" action="action_salary_structure" parent="hr_payroll" sequence="10"/>
+    <menuitem id="hr_payroll_salary_rule" name="Salary Rule" action="action_salary_rule" parent="hr_payroll" sequence="10"/>
+    <menuitem id="hr_payroll_salary_rule_slab" name="Salary Rule Slab" action="action_salary_rule_slab" parent="hr_payroll" sequence="10"/>
 
 
 </odoo>

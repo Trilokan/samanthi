@@ -49,6 +49,8 @@ class HospitalPerson(models.Model):
                                  default=lambda self: self.env.user.company_id.id,
                                  readonly=True)
 
+    is_employee = fields.Boolean(string="Is Employee")
+
     # Smart Button
 
     def generate_account(self, vals):

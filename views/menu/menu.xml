@@ -2,32 +2,14 @@
 <odoo>
 
     <!--Account-->
-    <menuitem id="menu_account" name="Account" sequence="10"/>
+    <menuitem id="menu_hospital" name="Management" sequence="10"/>
     <menuitem id="menu_contact" name="Contact" sequence="20"/>
-    <menuitem id="menu_appointment" name="App" sequence="30"/>
-    <menuitem id="menu_notes" name="Notes" sequence="60"/>
-    <menuitem id="menu_patient" name="Pat" sequence="130"/>
-    <menuitem id="menu_hospital" name="Management" sequence="160"/>
-    <menuitem id="menu_base" name="Base" sequence="170"/>
-
-    <menuitem id="menu_operation" name="" sequence="190"/>
-    <menuitem id="menu_operation" name="Opera" sequence="90"/>
-    <menuitem id="menu_operation" name="Opera" sequence="90"/>
-    <menuitem id="menu_operation" name="Opera" sequence="90"/>
-    <menuitem id="menu_operation" name="Opera" sequence="90"/>
-
-    <!--Product-->
-    <menuitem id="menu_product" name="Product" sequence="100"/>
-    <menuitem id="menu_stores" name="Stores" sequence="110"/>
-    <menuitem id="menu_purchase" name="Purchase" sequence="120"/>
-    <menuitem id="menu_sales" name="Sales" sequence="140"/>
-
-    <!--Employee-->
-    <menuitem id="menu_employee" name="Employee" sequence="40"/>
-    <menuitem id="menu_hr" name="Human Resources" sequence="50"/>
-    <menuitem id="menu_recruitment" name="Recruitment" sequence="180"/>
-    <menuitem id="menu_time_management" name="Time Management" sequence="70"/>
-    <menuitem id="menu_leave_management" name="Leave Management" sequence="80"/>
-    <menuitem id="menu_payroll" name="Payroll" sequence="90"/>
+    <menuitem id="menu_doctor" name="Doctor" sequence="30"/>
+    <menuitem id="menu_patient" name="Patient" sequence="40"/>
+    <menuitem id="menu_employee" name="Employee" sequence="50"/>
+    <menuitem id="menu_hr" name="Human Resources" sequence="60"/>
+    <menuitem id="menu_inventory" name="Inventory" sequence="70"/>
+    <menuitem id="menu_purchase" name="Purchase" sequence="80"/>
+    <menuitem id="menu_account" name="Account" sequence="90"/>
 
 </odoo>

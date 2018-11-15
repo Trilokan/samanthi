@@ -29,13 +29,93 @@
         "sequence/product.xml",
 
         "views/base/person.xml",
+        "views/base/patient.xml",
 
-        # Account
-        "views/account/account.xml",
-        "views/account/journal_entries.xml",
-        "views/account/journal_items.xml",
-        "views/account/customer_payment.xml",
-        "views/account/reconciliation.xml",
+        # Hospitality
+        "views/hospitality/admission.xml",
+        "views/hospitality/discharge.xml",
+        "views/hospitality/bed_status.xml",
+        "views/hospitality/ambulance.xml",
+        "views/hospitality/ward.xml",
+        "views/hospitality/bed.xml",
+
+        # # Operation
+        # "views/operation/operation.xml",
+        # "views/operation/ot_booking.xml",
+        # "views/operation/ot_procedure.xml",
+        #
+        # Contact
+        "views/contact/doctor.xml",
+        "views/contact/patient.xml",
+        "views/contact/nurse.xml",
+        "views/contact/staff.xml",
+        "views/contact/driver.xml",
+        "views/contact/supplier.xml",
+        "views/contact/service.xml",
+        "views/contact/others.xml",
+
+        # Appointment
+        "views/appointment/opt.xml",
+        "views/appointment/ot.xml",
+        "views/appointment/meetings.xml",
+
+        # Doctor
+        "views/doctor/doctor_availability.xml",
+        "views/doctor/duty_timings.xml",
+
+        # Notes
+        "views/notes/notes.xml",
+        "views/notes/notification.xml",
+        "views/notes/reminder.xml",
+
+        # Employee
+        "views/employee/employee.xml",
+        "views/employee/hr_category.xml",
+        "views/employee/hr_contact.xml",
+        "views/employee/hr_department.xml",
+        "views/employee/hr_designation.xml",
+        "views/employee/hr_experience.xml",
+        "views/employee/hr_qualification.xml",
+
+        # Recruitment Management
+        "views/recruitment/resume_bank.xml",
+        "views/recruitment/vacancy_position.xml",
+        "views/recruitment/appointment_order.xml",
+
+        # Time Management
+        "views/time_management/time_configuration.xml",
+        "views/time_management/shift.xml",
+        "views/time_management/week_schedule.xml",
+        "views/time_management/attendance.xml",
+        "views/time_management/shift_change.xml",
+        "views/time_management/monthly_attendance.xml",
+        "views/time_management/add_employee.xml",
+        "views/time_management/time_sheet.xml",
+        "views/time_management/time_sheet_application.xml",
+        "views/time_management/holiday_change.xml",
+
+        # Leave  Management
+        "views/leave_management/leave_application.xml",
+        "views/leave_management/comp_off.xml",
+        "views/leave_management/permission.xml",
+        "views/leave_management/leave_configuration.xml",
+        "views/leave_management/leave_level.xml",
+        "views/leave_management/leave_type.xml",
+
+        # Leave Account
+        "views/leave_account/leave_journal_entry.xml",
+        "views/leave_account/leave_journal_item.xml",
+        "views/leave_account/leave_reconcile.xml",
+        "views/leave_account/leave_voucher.xml",
+        
+        # Payroll
+        "views/payroll/hr_pay_update_wiz.xml",
+        "views/payroll/hr_pay.xml",
+        "views/payroll/payroll_generation.xml",
+        "views/payroll/payslip.xml",
+        "views/payroll/salary_rule.xml",
+        "views/payroll/salary_rule_slab.xml",
+        "views/payroll/salary_structure.xml",
 
         # Product
         "views/product/product_group.xml",
@@ -60,63 +140,37 @@
         "views/asserts/hos_asserts.xml",
         "views/asserts/asserts_notification.xml",
         "views/asserts/asserts_maintenance.xml",
-        
+
         # Purchase
         "views/purchase/indent.xml",
+        "views/purchase/purchase_quotation.xml",
+        "views/purchase/purchase_order.xml",
+        "views/purchase/direct_material_receipt.xml",
+        "views/purchase/material_receipt.xml",
 
-        # Contact
-        "views/contact/doctor.xml",
-        "views/contact/patient.xml",
-        "views/contact/nurse.xml",
-        "views/contact/staff.xml",
-        "views/contact/driver.xml",
-        "views/contact/supplier.xml",
-        "views/contact/service.xml",
-        "views/contact/others.xml",
+        # Pharmacy
 
-        # Appointment
-        "views/appointment/opt.xml",
-        "views/appointment/ot.xml",
-        "views/appointment/meetings.xml",
+        # Invoice
 
-        # Employee
-        "views/employee/employee.xml",
-        "views/employee/hr_category.xml",
-        "views/employee/hr_contact.xml",
-        "views/employee/hr_department.xml",
-        "views/employee/hr_designation.xml",
-        "views/employee/hr_experience.xml",
-        "views/employee/hr_qualification.xml",
-        
-        # Notes
-        "views/notes/notes.xml",
-        "views/notes/notification.xml",
-        "views/notes/reminder.xml",
+        # Account
+        "views/account/account.xml",
+        "views/account/journal_entries.xml",
+        "views/account/journal_items.xml",
+        "views/account/customer_payment.xml",
+        "views/account/reconciliation.xml",
 
-        # Time Management
-
-        # Leave  Management
-        "views/leave_management/leave_application.xml",
-        "views/leave_management/comp_off.xml",
-        "views/leave_management/permission.xml",
-        "views/leave_management/leave_configuration.xml",
-        "views/leave_management/leave_level.xml",
-        "views/leave_management/leave_type.xml",
-
-        # Recruitment Management
-        "views/recruitment/resume_bank.xml",
-        "views/recruitment/vacancy_position.xml",
-        "views/recruitment/appointment_order.xml",
-
-        # Time Management
-        # Time Management
-
+        # # Menu
+        "views/menu/hospital.xml",
         "views/menu/contact.xml",
-        "views/menu/appointment.xml",
+        "views/menu/doctor.xml",
+        # "views/menu/patient.xml",
         "views/menu/employee.xml",
-        "views/menu/account.xml",
-        "views/menu/product.xml",
         "views/menu/hr.xml",
+        "views/menu/inventory.xml",
+        "views/menu/purchase.xml",
+        # "views/menu/pharmacy.xml",
+        "views/menu/account.xml",
+
     ],
     "demo": [
 

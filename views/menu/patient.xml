@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <!--Employee: Time Management-->
+    <!--Patient: Identity-->
+    <menuitem id="hospital_identity" name="Identity" parent="menu_hospital" sequence="10"/>
+    <menuitem id="hospital_identity_hos_patient" name="Identity" parent="menu_hospital" sequence="10"/>
+
+    <!--Patient: OPT-->
+    <menuitem id="hospital_identity" name="Identity" parent="menu_hospital" sequence="10"/>
+    <menuitem id="hospital_identity" name="Identity" parent="menu_hospital" sequence="10"/>
+    <menuitem id="hospital_identity" name="Identity" parent="menu_hospital" sequence="10"/>
+    <menuitem id="hospital_identity" name="Identity" parent="menu_hospital" sequence="10"/>
+
+    <!--Patient: IPT-->
+
+    <!--Patient: Billing-->
+    <!--Patient: Configuration-->
 
 </odoo>

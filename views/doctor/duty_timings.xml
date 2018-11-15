@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Tree -->
+    <record id="view_duty_timings_tree" model="ir.ui.view">
+        <field name="name">duty.timings.tree</field>
+        <field name="model">duty.timings</field>
+        <field name="arch" type="xml">
+            <tree string="Duty Timings">
+                <field name="person_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form -->
+    <record id="view_duty_timings_form" model="ir.ui.view">
+        <field name="name">duty.timings.form</field>
+        <field name="model">duty.timings</field>
+        <field name="arch" type="xml">
+            <form string="Duty Timings">
+                <sheet>
+                    <div id="s_header">
+                        <h1>Duty Timings</h1>
+                    </div>
+                    <group>
+                        <field name="person_id"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_duty_timings" model="ir.actions.act_window">
+        <field name="name">Duty Timings</field>
+        <field name="res_model">duty.timings</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+</odoo>

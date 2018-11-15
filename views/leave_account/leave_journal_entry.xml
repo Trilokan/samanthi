@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Tree -->
+    <record id="view_leave_journal_entry_tree" model="ir.ui.view">
+        <field name="name">leave.journal.entry.tree</field>
+        <field name="model">leave.journal.entry</field>
+        <field name="arch" type="xml">
+            <tree string="Leave Journal Entry">
+                <field name="date"/>
+                <field name="period_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form -->
+    <record id="view_leave_journal_entry_form" model="ir.ui.view">
+        <field name="name">leave.journal.entry.form</field>
+        <field name="model">leave.journal.entry</field>
+        <field name="arch" type="xml">
+            <form string="Leave Journal Entry">
+                <sheet>
+                    <div id="s_header">
+                        <h1>Leave Journal Entry</h1>
+                    </div>
+                    <group>
+                        <field name="date"/>
+                        <field name="period_id"/>
+                    </group>
+                    <field name="journal_item">
+                        <tree editable="bottom">
+                            <field name="date"/>
+                            <field name="name"/>
+                            <field name="person_id"/>
+                            <field name="account_id"/>
+                            <field name="description"/>
+                            <field name="credit"/>
+                            <field name="debit"/>
+                            <field name="reconcile_id"/>
+                            <field name="part_reconcile_id"/>
+                            <field name="progress" invisible="1"/>
+                        </tree>
+                    </field>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_leave_journal_entry" model="ir.actions.act_window">
+        <field name="name">Leave Journal Entry</field>
+        <field name="res_model">leave.journal.entry</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+</odoo>

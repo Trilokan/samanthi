@@ -12,3 +12,8 @@ from . import stock
 from . import purchase
 from . import asserts
 from . import recruitment
+from . import hospital
+from . import doctor
+from . import time_management
+from . import leave_account
+from . import payroll

@@ -40,10 +40,10 @@ class QuoteDetail(models.Model):
     _description = 'Quotation Details'
 
     product_id = fields.Many2one(comodel_name='hos.product', string='Product', readonly=True)
-    uom_id = fields.Many2one(comodel_name='hos.uom', string='UOM', related="product_id.uom_id")
+    uom_id = fields.Many2one(comodel_name='product.uom', string='UOM', related="product_id.uom_id")
     quantity = fields.Float(string='Quantity', readonly=True)
     person_ids = fields.Many2many(comodel_name='hos.person', string='Vendors')
-    po_detail = fields.One2many(comodel_name='purchase.detail',
+    po_detail = fields.One2many(comodel_name='purchase.order.detail',
                                 inverse_name='quote_detail_id',
                                 string='Purchase Order Detail')
     purchase_history = fields.One2many(comodel_name='purchase.history',

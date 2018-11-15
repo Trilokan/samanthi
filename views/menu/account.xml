@@ -2,10 +2,11 @@
 <odoo>
 
     <!--Account-->
-    <menuitem id="account_hos_account" name="Account" action="action_hos_account" parent="menu_account" sequence="10"/>
-    <menuitem id="account_journal_entries" name="Journal Entries" action="action_journal_entries" parent="menu_account" sequence="20"/>
-    <menuitem id="account_journal_items" name="Journal Items" action="action_journal_items" parent="menu_account" sequence="30"/>
-    <menuitem id="account_customer_payment" name="Customer Payment" action="action_customer_payment" parent="menu_account" sequence="40"/>
-    <menuitem id="account_hos_reconcile" name="Reconcile" action="action_hos_reconcile" parent="menu_account" sequence="50"/>
+    <menuitem id="account_account" name="Account" parent="menu_account" sequence="10"/>
+    <menuitem id="account_account_hos_account" name="Account" action="action_hos_account" parent="account_account" sequence="10"/>
+    <menuitem id="account_account_journal_entries" name="Journal Entries" action="action_journal_entries" parent="account_account" sequence="20"/>
+    <menuitem id="account_account_journal_items" name="Journal Items" action="action_journal_items" parent="account_account" sequence="30"/>
+    <menuitem id="account_account_customer_payment" name="Customer Payment" action="action_customer_payment" parent="account_account" sequence="40"/>
+    <menuitem id="account_account_hos_reconcile" name="Reconcile" action="action_hos_reconcile" parent="account_account" sequence="50"/>
 
 </odoo>

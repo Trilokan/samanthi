@@ -2,17 +2,40 @@
 <odoo>
 
     <!--Hospital: Hospitality-->
-    <menuitem id="sub_menu_hospitality" name="Hospitality" parent="menu_hospital" sequence="10"/>
-    <menuitem id="hospitality_admission" name="Admission" action="action_hospital_admission" parent="sub_menu_hospitality" sequence="10"/>
-    <menuitem id="hospitality_discharge" name="Discharge" action="action_hospital_discharge" parent="sub_menu_hospitality" sequence="20"/>
-    <menuitem id="hospitality_bed_status" name="Bed Status" action="action_bed_status" parent="sub_menu_hospitality" sequence="30"/>
+    <menuitem id="hospital_hospitality" name="Hospitality" parent="menu_hospital" sequence="10"/>
+    <menuitem id="hospital_hospitality_admission" name="Admission" action="action_admission_discharge_admission" parent="hospital_hospitality" sequence="10"/>
+    <menuitem id="hospital_hospitality_discharge" name="Discharge" action="action_admission_discharge_discharge" parent="hospital_hospitality" sequence="20"/>
+    <menuitem id="hospital_hospitality_bed_status" name="Bed Status" action="action_bed_status" parent="hospital_hospitality" sequence="30"/>
+    <menuitem id="hospital_hospitality_hos_ambulance" name="Ambulance" action="action_hos_ambulance" parent="hospital_hospitality" sequence="30"/>
 
-    <!--Hospital: Operation-->
-    <menuitem id="sub_menu_operation" name="Operation" parent="menu_hospital" sequence="20"/>
-    <menuitem id="operation_hos_operation" name="Operation" action="action_hos_operation" parent="sub_menu_operation" sequence="10"/>
-    <menuitem id="operation_ot_booking" name="OT Booking" action="action_hos_operation_booking" parent="sub_menu_operation" sequence="20"/>
-    <menuitem id="operation_ot_procedure" name="OT Procedure" action="action_ot_procedure" parent="sub_menu_operation" sequence="30"/>
+    <!--Hospital: Identity-->
+    <menuitem id="hospital_identity" name="Identity" parent="menu_hospital" sequence="20"/>
+    <menuitem id="hospital_identity_hos_patient" name="Patient" action="action_hos_patient" parent="hospital_identity" sequence="10"/>
+    <menuitem id="hospital_identity_hos_person" name="Vendor" action="action_hos_person" parent="hospital_identity" sequence="20"/>
+
+    <!--Hospital: Hospital Management-->
+    <menuitem id="hospital_hospital_management" name="Hospital Management" parent="menu_hospital" sequence="30"/>
+    <menuitem id="hospital_hospital_management_hos_department" name="Department" action="action_hr_department" parent="hospital_hospital_management" sequence="10"/>
+    <menuitem id="hospital_hospital_management_hos_ward" name="Ward" action="action_hos_ward" parent="hospital_hospital_management" sequence="20"/>
+    <menuitem id="hospital_hospital_management_hos_bed" name="Bed" action="action_hos_bed" parent="hospital_hospital_management" sequence="30"/>
+
+    <!--&lt;!&ndash;Hospital: Operation&ndash;&gt;-->
+    <!--<menuitem id="hospital_operation" name="Operation" parent="menu_hospital" sequence="40"/>-->
+    <!--<menuitem id="hospital_operation_hos_operation" name="Operation" action="action_hos_operation" parent="hospital_operation" sequence="10"/>-->
+    <!--<menuitem id="hospital_operation_ot_booking" name="OT Booking" action="action_hos_operation_booking" parent="hospital_operation" sequence="20"/>-->
+    <!--<menuitem id="hospital_operation_ot_procedure" name="OT Procedure" action="action_ot_procedure" parent="hospital_operation" sequence="30"/>-->
 
     <!--Hospital: Billing-->
+    <!--<menuitem id="hospital_bills" name="Billing" parent="menu_hospital" sequence="50"/>-->
+    <!--<menuitem id="operation_hos_operation" name="Pharmacy" action="action_hos_operation" parent="sub_menu_operation" sequence="10"/>-->
+    <!--<menuitem id="operation_hos_operation" name="Treatment" action="action_hos_operation" parent="sub_menu_operation" sequence="10"/>-->
+    <!--<menuitem id="operation_hos_operation" name="Purchase" action="action_hos_operation" parent="sub_menu_operation" sequence="10"/>-->
+    <!--<menuitem id="operation_hos_operation" name="Others" action="action_hos_operation" parent="sub_menu_operation" sequence="10"/>-->
+    <!--<menuitem id="operation_hos_operation" name="service" action="action_hos_operation" parent="sub_menu_operation" sequence="10"/>-->
+
+    <!--Hospital: Report-->
+    <menuitem id="hospital_report" name="Report" parent="menu_hospital" sequence="60"/>
+
+
 
 </odoo>

@@ -14,7 +14,7 @@ PROGRESS_INFO = [("draft", "Draft"), ("confirmed", "Confirmed"), ("cancel", "Can
 class DoctorAvailability(models.Model):
     _name = "doctor.availability"
     _inherit = "mail.thread"
-    _rec_name = "employee_id"
+    _rec_name = "person_id"
 
     person_id = fields.Many2one(comodel_name="hos.person", string="Doctor", required=True)
     from_time = fields.Datetime(string="From Time", default=CURRENT_TIME, required=True)

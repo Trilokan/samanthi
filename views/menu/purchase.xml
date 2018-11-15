@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!--Purchase-->
+    <menuitem id="purchase_purchase" name="Purchase" parent="menu_purchase" sequence="40"/>
+    <menuitem id="purchase_purchase_purchase_indent" name="Purchase Indent" action="action_purchase_indent" parent="purchase_purchase" sequence="10"/>
+    <menuitem id="purchase_purchase_purchase_quote" name="Quotation" action="action_purchase_quote" parent="purchase_purchase" sequence="20"/>
+    <menuitem id="purchase_purchase_purchase_order" name="Purchase Order" action="action_purchase_order" parent="purchase_purchase" sequence="30"/>
+    <menuitem id="purchase_purchase_material_receipt" name="Material Receipt" action="action_material_receipt" parent="purchase_purchase" sequence="10"/>
+    <menuitem id="purchase_purchase_direct_material_receipt" name="Direct Material Receipt" action="action_direct_material_receipt" parent="purchase_purchase" sequence="50"/>
+    <!--<menuitem id="purchase_purchase_invoice" name="Purchase Invoice" action="action_purchase_invoice" parent="sub_menu_purchase" sequence="60"/>-->
+
+
+</odoo>
