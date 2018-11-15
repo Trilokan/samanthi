@@ -160,16 +160,16 @@
         "views/account/reconciliation.xml",
 
         # # Menu
-        "views/menu/hospital.xml",
-        "views/menu/contact.xml",
-        "views/menu/doctor.xml",
+        # "views/menu/hospital.xml",
+        # "views/menu/contact.xml",
+        # "views/menu/doctor.xml",
         # "views/menu/patient.xml",
-        "views/menu/employee.xml",
-        "views/menu/hr.xml",
-        "views/menu/inventory.xml",
+        # "views/menu/employee.xml",
+        # "views/menu/hr.xml",
+        # "views/menu/inventory.xml",
         "views/menu/purchase.xml",
         # "views/menu/pharmacy.xml",
-        "views/menu/account.xml",
+        # "views/menu/account.xml",
 
     ],
     "demo": [
