@@ -50,6 +50,7 @@ class MaterialReceiptDetail(models.Model):
     product_id = fields.Many2one(comodel_name="hos.product", string="Item", required=True)
     description = fields.Text(string="Item Description")
     uom_id = fields.Many2one(comodel_name="product.uom", string="UOM", related="product_id.uom_id")
+    requested_quantity = fields.Float(string="Quantity", default=0, readonly=True)
     quantity = fields.Float(string="Quantity", default=0, required=True)
     comment = fields.Text(string="Comment")
     receipt_id = fields.Many2one(comodel_name="material.receipt", string="Material Receipt")

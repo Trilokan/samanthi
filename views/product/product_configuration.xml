@@ -38,6 +38,7 @@
                         <field name="assert_id"/>
                         <field name="virtual_left"/>
                         <field name="virtual_right"/>
+                        <field name="tax_id"/>
                         <field name="company_id" invisible="1"/>
                     </group>
                 </sheet>

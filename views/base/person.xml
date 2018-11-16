@@ -35,9 +35,8 @@
                     <notebook>
                         <page string="Contact Details">
                             <group>
-                                <group>
-                                    <label for="street" string="Address"/>
-                                    <div>
+                                <group string="Address">
+                                    <div style="width: 95%">
                                         <div class="address_format">
                                             <field name="door_no" style="width: 30%" placeholder="Door No..."/>
                                             <field name="building_name" style="width: 70%" placeholder="Building name..."/>
@@ -54,6 +53,19 @@
                                         <field name="pin_code" placeholder="ZIP" style="width: 55%"/>
                                     </div>
                                 </group>
+
+                                <group string="Contact Detail">
+                                    <field name="alternate_contact"/>
+                                    <field name="alternate_contact_no"/>
+                                    <field name="alternate_email"/>
+                                </group>
+
+                                <group string="Alternate Contact">
+                                    <field name="contact_person"/>
+                                    <field name="contact_no"/>
+                                    <field name="email"/>
+                                </group>
+
                             </group>
                         </page>
                         <page string="Account Details">
@@ -62,11 +74,6 @@
                                 <field name="license_no"/>
                                 <field name="tin_no"/>
                                 <field name="pan_no"/>
-                                <field name="contact_person"/>
-                                <field name="state_id"/>
-                                <field name="email"/>
-                                <field name="contact_no"/>
-                                <field name="alternate_contact"/>
                                 <field name="payable_id"/>
                                 <field name="receivable_id"/>
                             </group>

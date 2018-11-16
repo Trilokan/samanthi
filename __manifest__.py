@@ -28,6 +28,7 @@
         "sequence/account.xml",
         "sequence/product.xml",
 
+        "views/base/company.xml",
         "views/base/person.xml",
         "views/base/patient.xml",
 
@@ -145,6 +146,7 @@
         "views/purchase/indent.xml",
         "views/purchase/purchase_quotation.xml",
         "views/purchase/purchase_order.xml",
+        "views/purchase/purchase_invoice.xml",
         "views/purchase/direct_material_receipt.xml",
         "views/purchase/material_receipt.xml",
 
@@ -166,7 +168,7 @@
         # "views/menu/patient.xml",
         # "views/menu/employee.xml",
         # "views/menu/hr.xml",
-        # "views/menu/inventory.xml",
+        "views/menu/inventory.xml",
         "views/menu/purchase.xml",
         # "views/menu/pharmacy.xml",
         # "views/menu/account.xml",

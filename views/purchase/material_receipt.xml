@@ -41,6 +41,7 @@
                                    options="{'no_create_edit': True, 'no_create':True, 'no_open':True}"/>
                             <field name="description"/>
                             <field name="uom_id" readonly="1"/>
+                            <field name="requested_quantity"/>
                             <field name="quantity"/>
                             <field name="comment"/>
                             <field name="receipt_id" invisible="1"/>

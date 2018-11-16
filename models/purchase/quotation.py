@@ -40,43 +40,42 @@ class QuoteDetail(models.Model):
     _description = 'Quotation Details'
 
     product_id = fields.Many2one(comodel_name='hos.product', string='Product', readonly=True)
+    description = fields.Text(string="Item Description", readonly=True)
     uom_id = fields.Many2one(comodel_name='product.uom', string='UOM', related="product_id.uom_id")
     quantity = fields.Float(string='Quantity', readonly=True)
     person_ids = fields.Many2many(comodel_name='hos.person', string='Vendors')
-    po_detail = fields.One2many(comodel_name='purchase.order.detail',
-                                inverse_name='quote_detail_id',
-                                string='Purchase Order Detail')
-    purchase_history = fields.One2many(comodel_name='purchase.history',
-                                       inverse_name='quote_detail_id',
-                                       string='Purchase History')
+    po_detail = fields.One2many(comodel_name='purchase.order.detail', inverse_name='quote_detail_id')
+    purchase_history = fields.One2many(comodel_name='purchase.history', inverse_name='quote_detail_id')
     comment = fields.Text(string='Comment')
     quote_id = fields.Many2one(comodel_name='purchase.quote', string='Quotation')
 
     @api.multi
     def order_detail_creation(self):
+        conf = self.env["product.configuration"].search([("company_id", "=", self.env.user.company_id.id)])
+        default_tax_id = conf.tax_id.id
         for person in self.person_ids:
             order = self.env["purchase.order"].search([("indent_id", "=", self.quote_id.indent_id.id),
                                                        ("person_id", "=", person.id)])
 
             if order:
-                order_detail = self.env["purchase.detail"].search([("product_id", "=", self.product_id.id),
+                order_detail = self.env["purchase.order.detail"].search([("product_id", "=", self.product_id.id),
                                                                    ("order_id", "=", order.id)])
 
                 if not order_detail:
-                    self.env["purchase.detail"].create({"person_id": person.id,
-                                                        "product_id": self.product_id.id,
-                                                        "uom_id": self.uom_id.id,
-                                                        "requested_quantity": self.quantity,
-                                                        "quote_detail_id": self.id,
-                                                        "tax_id": self.env.user.company_id.tax_default_id.id,
-                                                        "order_id": order.id})
+                    self.env["purchase.order.detail"].create({"person_id": person.id,
+                                                              "product_id": self.product_id.id,
+                                                              "uom_id": self.uom_id.id,
+                                                              "requested_quantity": self.quantity,
+                                                              "quote_detail_id": self.id,
+                                                              "tax_id": default_tax_id,
+                                                              "order_id": order.id})
 
             else:
                 order_detail = [(0, 0, {"person_id": person.id,
                                         "product_id": self.product_id.id,
                                         "uom_id": self.uom_id.id,
                                         "quote_detail_id": self.id,
-                                        "tax_id": self.env.user.company_id.tax_default_id.id,
+                                        "tax_id": default_tax_id,
                                         "requested_quantity": self.quantity})]
 
                 data = {"indent_id": self.quote_id.indent_id.id,

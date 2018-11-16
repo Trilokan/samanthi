@@ -50,6 +50,10 @@ class HospitalPerson(models.Model):
                                  readonly=True)
 
     is_employee = fields.Boolean(string="Is Employee")
+    state_id = fields.Many2one(comodel_name="res.country.state",
+                               string="State",
+                               default=lambda self: self.env.user.company_id.state_id.id,
+                               required=True)
 
     # Smart Button
 

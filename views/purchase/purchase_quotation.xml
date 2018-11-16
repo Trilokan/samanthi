@@ -20,7 +20,7 @@
         <field name="arch" type="xml">
             <form string="Quotation">
                 <header>
-                    <button name="trigger_order_creation" string="PO Creation" type="object"/>
+                    <button name="trigger_generate_order" string="PO Creation" type="object"/>
                 </header>
                 <sheet>
                     <group col="4">
@@ -42,6 +42,7 @@
                                     <sheet>
                                         <group>
                                             <field name="product_id" readonly="1"/>
+                                            <field name="description" readonly="1"/>
                                             <field name="uom_id" readonly="1"/>
                                             <field name="quantity" readonly="1"/>
                                         </group>
@@ -52,8 +53,9 @@
                                             <page string="Quotation Detail">
                                                 <field name="po_detail">
                                                     <tree editable="bottom" create="false" delete="false">
-                                                        <field name="vendor_id" readonly="1"/>
+                                                        <field name="person_id" readonly="1"/>
                                                         <field name="product_id" readonly="1"/>
+                                                        <field name="description" readonly="1"/>
                                                         <field name="uom_id" readonly="1"/>
                                                         <field name="requested_quantity" readonly="1"/>
                                                         <field name="accepted_quantity"/>

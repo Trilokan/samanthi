@@ -6,3 +6,4 @@ from . import purchase_order
 from . import purchase_order_detail
 from . import direct_material_receipt
 from . import material_receipt
+from . import purchase_invoice

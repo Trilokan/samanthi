@@ -48,6 +48,7 @@ class PurchaseIndent(models.Model):
         quote_detail = []
         for rec in recs:
             quote_detail.append((0, 0, {"product_id": rec.product_id.id,
+                                        "description": rec.description,
                                         "quantity": rec.quantity,
                                         "purchase_history": self.get_last_5_invoice_transaction(rec.product_id.id)}))
 

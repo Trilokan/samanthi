@@ -18,6 +18,7 @@
                         <group>
                             <field name="sundry_creditor_id"/>
                             <field name="sundry_debtor_id"/>
+                            <field name="state_id"/>
                         </group>
                     </page>
                     <page string="Template">

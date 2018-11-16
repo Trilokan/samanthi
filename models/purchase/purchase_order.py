@@ -15,7 +15,7 @@ class PurchaseOrder(models.Model):
     _inherit = "mail.thread"
 
     name = fields.Char(string='Name', readonly=True)
-    date = fields.Date(string="Date", default=CURRENT_INDIA, readonly=True)
+    date = fields.Date(string="Date", default=CURRENT_DATE, readonly=True)
     person_id = fields.Many2one(comodel_name="hos.person", string="Vendor", readonly=True)
     indent_id = fields.Many2one(comodel_name="purchase.indent", string="Purchase Indent", readonly=True)
     quote_id = fields.Many2one(comodel_name="purchase.quote", string="Quotation", readonly=True)
@@ -96,40 +96,31 @@ class PurchaseOrder(models.Model):
                     "grand_total_amount": grand_total_amount,
                     "round_off_amount": round_off_amount})
 
-    def trigger_grn(self):
-        data = {}
-
-        hos_move = []
-        recs = self.order_detail
+    def generate_material_receipt(self, recs):
+        receipt_detail = []
         for rec in recs:
-            if (rec.accepted_quantity > 0) and (rec.unit_price > 0):
-                hos_move.append((0, 0, {"reference": self.name,
-                                        "source_location_id": self.env.user.company_id.purchase_location_id.id,
-                                        "destination_location_id": self.env.user.company_id.store_location_id.id,
-                                        "picking_type": "in",
-                                        "product_id": rec.product_id.id,
-                                        "requested_quantity": rec.accepted_quantity}))
+            receipt_detail.append((0, 0, {"product_id": rec.product_id.id,
+                                          "description": rec.description,
+                                          "requested_quantity": rec.accepted_quantity}))
 
-        if hos_move:
-            data["person_id"] = self.vendor_id.id
-            data["reference"] = self.name
-            data["picking_detail"] = hos_move
-            data["picking_type"] = 'in'
-            data["date"] = datetime.now().strftime("%Y-%m-%d")
-            data["po_id"] = self.id
-            data["source_location_id"] = self.env.user.company_id.purchase_location_id.id
-            data["destination_location_id"] = self.env.user.company_id.store_location_id.id
-            data["picking_category"] = "po"
-            picking_id = self.env["hos.picking"].create(data)
-            return True
-        return False
+        if receipt_detail:
+            receipt = {"person_id": self.person_id.id,
+                       "po_id": self.id,
+                       "indent_id": self.indent_id.id,
+                       "receipt_detail": receipt_detail}
+
+            self.env["material.receipt"].create(receipt)
 
     @api.multi
     def trigger_po_approve(self):
         self.total_calculation()
 
-        if not self.trigger_grn():
+        recs = self.env["purchase.order.detail"].search([("order_id", "=", self.id), ("total_amount", ">", 0)])
+
+        if not recs:
             raise exceptions.ValidationError("Error! Please check Product lines")
+
+        self.generate_material_receipt(recs)
 
         writter = "PO approved by {0}".format(self.env.user.name)
         self.write({"progress": "approved", "writter": writter})
