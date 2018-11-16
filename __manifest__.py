@@ -149,6 +149,7 @@
         "views/purchase/purchase_invoice.xml",
         "views/purchase/direct_material_receipt.xml",
         "views/purchase/material_receipt.xml",
+        "views/purchase/material_inspection.xml",
 
         # Pharmacy
 

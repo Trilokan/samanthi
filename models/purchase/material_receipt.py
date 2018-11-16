@@ -3,7 +3,7 @@
 from odoo import models, fields, api, exceptions
 from datetime import datetime
 
-PROGRESS_INFO = [("draft", "Draft"), ("received", "Received"), ("cancel", "Cancel")]
+PROGRESS_INFO = [("draft", "Draft"), ("received", "Received"), ("inspected", "Inspected"), ("cancel", "Cancel")]
 CURRENT_DATE = datetime.now().strftime("%Y-%m-%d")
 CURRENT_TIME = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 CURRENT_INDIA = datetime.now().strftime("%d-%m-%Y %H:%M:%S")
@@ -19,6 +19,7 @@ class MaterialReceipt(models.Model):
     po_id = fields.Many2one(comodel_name="purchase.order", string="Purchase Order", readonly=True)
     indent_id = fields.Many2one(comodel_name="purchase.indent", string="Purchase Indent", readonly=True)
     received_by = fields.Many2one(comodel_name="hos.person", string="Received By", readonly=True)
+    inspected_by = fields.Many2one(comodel_name="hos.person", string="Inspected By", readonly=True)
     receipt_detail = fields.One2many(comodel_name="material.receipt.detail", inverse_name="receipt_id")
     progress = fields.Selection(selection=PROGRESS_INFO, string="Progress", default="draft")
     writter = fields.Text(string="Writter", track_visibility="always")
@@ -95,9 +96,9 @@ class MaterialReceipt(models.Model):
             self.env["material.receipt"].create(receipt)
 
     @api.multi
-    def trigger_receipt(self):
-        received_by = self.env.user.person_id.id
-        recs = self.env["store.issue.detail"].search([("issue_id", "=", self.id), ("quantity", "<=", 0)])
+    def trigger_inspection(self):
+        inspected_by = self.env.user.person_id.id
+        recs = self.env["material.receipt.detail"].search([("issue_id", "=", self.id), ("quantity", ">", 0)])
 
         if not recs:
             raise exceptions.ValidationError("Error! No Products found")
@@ -105,6 +106,12 @@ class MaterialReceipt(models.Model):
         self.generate_move(recs)
         self.generate_remaining()
 
+        writter = "Material Receipt inspected by {0} on {1}".format(self.env.user.name, CURRENT_INDIA)
+        self.write({"progress": "inspected", "writter": writter, "inspected_by": inspected_by})
+
+    @api.multi
+    def trigger_received(self):
+        received_by = self.env.user.person_id.id
         writter = "Material Receipt by {0} on {1}".format(self.env.user.name, CURRENT_INDIA)
         self.write({"progress": "received", "writter": writter, "received_by": received_by})
 
@@ -123,6 +130,7 @@ class MaterialReceiptDetail(models.Model):
     uom_id = fields.Many2one(comodel_name="product.uom", string="UOM", related="product_id.uom_id")
     requested_quantity = fields.Float(string="Requested Quantity", default=0, readonly=True)
     received_quantity = fields.Float(string="Received Quantity", default=0, readonly=True)
+    receiving_quantity = fields.Float(string="Receiving Quantity", default=0, required=True)
     quantity = fields.Float(string="Quantity", default=0, required=True)
     comment = fields.Text(string="Comment")
     receipt_id = fields.Many2one(comodel_name="material.receipt", string="Material Receipt")
@@ -132,6 +140,9 @@ class MaterialReceiptDetail(models.Model):
     def check_issue_quantity(self):
         if self.quantity > (self.requested_quantity - self.received_quantity):
             raise exceptions.ValidationError("Error! Received quantity more than requested")
+
+        if self.quantity > (self.requested_quantity - self.receiving_quantity):
+            raise exceptions.ValidationError("Error! Receiving quantity more than requested")
 
     @api.model
     def create(self, vals):
