@@ -130,6 +130,7 @@ class InvoiceDetail(models.Model):
 
     person_id = fields.Many2one(comodel_name="hos.person", string="Vendor", readonly=True)
     product_id = fields.Many2one(comodel_name="hos.product", string="Description", required=True)
+    description = fields.Text(string="Item Description", readonly=True)
     uom_id = fields.Many2one(comodel_name="product.uom", string="UOM", related="product_id.uom_id")
     unit_price = fields.Float(string="Unit Price")
     quantity = fields.Float(string="Quantity", required=True)

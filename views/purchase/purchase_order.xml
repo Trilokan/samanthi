@@ -51,6 +51,22 @@
                                     <field name="quote_detail_id" invisible="1"/>
                                     <field name="progress" invisible="1"/>
                                 </tree>
+                                <form>
+                                    <div id="s_header">
+                                        <h1>Purchase Order Detail</h1>
+                                    </div>
+                                    <group>
+                                        <field name="product_id"/>
+                                        <field name="description"/>
+                                        <field name="uom_id"/>
+                                        <field name="requested_quantity"/>
+                                        <field name="accepted_quantity"/>
+                                        <field name="unit_price"/>
+                                        <field name="discount"/>
+                                        <field name="tax_id"/>
+                                        <field name="total_amount" string="Amount"/>
+                                    </group>
+                                </form>
                             </field>
                         </page>
                     </notebook>

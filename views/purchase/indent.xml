@@ -53,6 +53,18 @@
                             <field name="indent_id" invisible="1"/>
                             <field name="progress" invisible="1"/>
                         </tree>
+                        <form>
+                            <div id="s_header">
+                                <h1>Purchase Indent Detail</h1>
+                            </div>
+                            <group>
+                                <field name="product_id"/>
+                                <field name="description"/>
+                                <field name="uom_id"/>
+                                <field name="requested_quantity"/>
+                                <field name="quantity"/>
+                            </group>
+                        </form>
                     </field>
                     <footer>
                         <button name="trigger_confirm" string="Confirm" type="object"
