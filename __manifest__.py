@@ -138,6 +138,7 @@
         "views/stock/store_accept.xml",
 
         # Asserts
+        "views/asserts/asserts_capitalisation.xml",
         "views/asserts/hos_asserts.xml",
         "views/asserts/asserts_notification.xml",
         "views/asserts/asserts_maintenance.xml",
@@ -161,6 +162,9 @@
         "views/account/journal_items.xml",
         "views/account/customer_payment.xml",
         "views/account/reconciliation.xml",
+        "views/account/journal.xml",
+        "views/account/year.xml",
+        "views/account/period.xml",
 
         # # Menu
         # "views/menu/hospital.xml",

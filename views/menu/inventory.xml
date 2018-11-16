@@ -21,12 +21,14 @@
     <menuitem id="inventory_stock_store_accept" name="Store Accept" action="action_store_accept" parent="inventory_stock" sequence="60"/>
     <menuitem id="inventory_stock_stock_adjustment" name="Stock Adjustment" action="action_stock_adjustment" parent="inventory_stock" sequence="70"/>
     <menuitem id="inventory_stock_hos_move" name="Stock Move" action="action_hos_move" parent="inventory_stock" sequence="80"/>
-    <!--<menuitem id="stock_material_receipt_normal" name="Material Receipt" action="action_material_receipt_normal" parent="sub_menu_stock" sequence="80"/>-->
-    <!--<menuitem id="stock_material_receipt_direct" name="Direct Material Receipt" action="action_material_receipt_direct" parent="sub_menu_stock" sequence="90"/>-->
+    <menuitem id="inventory_stock_material_receipt_received" name="Material Receipt" action="action_material_receipt_received" parent="inventory_stock" sequence="80"/>
+    <menuitem id="inventory_stock_direct_material_receipt" name="Direct Material Receipt" action="action_direct_material_receipt" parent="inventory_stock" sequence="90"/>
+    <menuitem id="inventory_stock_hos_move" name="Stock Move" action="action_hos_move" parent="inventory_stock" sequence="100"/>
+    <!--<menuitem id="inventory_stock_hos_batch" name="Batch Stock" action="action_hos_batch" parent="inventory_stock" sequence="100"/>-->
 
     <!--Assert-->
     <menuitem id="inventory_asserts" name="Asserts" parent="menu_inventory" sequence="30"/>
-    <!--<menuitem id="asserts_assert_capitalisation" name="Asserts Capitalisation" action="action_assert_capitalisation" parent="sub_menu_asserts" sequence="10"/>-->
+    <menuitem id="inventory_asserts_assert_capitalisation" name="Asserts Capitalisation" action="action_asserts_capitalisation" parent="inventory_asserts" sequence="10"/>
     <menuitem id="inventory_asserts_hos_asserts" name="Asserts" action="action_hos_asserts" parent="inventory_asserts" sequence="20"/>
     <menuitem id="inventory_asserts_asserts_service" name="Maintenance" action="action_asserts_maintenance" parent="inventory_asserts" sequence="30"/>
     <menuitem id="inventory_asserts_asserts_reminder" name="Notification" action="action_asserts_reminder" parent="inventory_asserts" sequence="40"/>

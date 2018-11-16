@@ -35,13 +35,15 @@
                         <field name="progress" widget="statusbar" style="float: right;padding: 20px;"/>
                     </div>
                     <h2><field name="name"/></h2>
-                    <group col="4">
+                    <group string="Product">
                         <field name="date" attrs="{'readonly': [('progress', '!=', 'draft')]}"/>
-                        <field name="source_id" attrs="{'readonly': [('progress', '!=', 'draft')]}"/>
-                        <field name="destination_id" attrs="{'readonly': [('progress', '!=', 'draft')]}"/>
                         <field name="product_id" attrs="{'readonly': [('progress', '!=', 'draft')]}"/>
                         <field name="description" attrs="{'readonly': [('progress', '!=', 'draft')]}"/>
                         <field name="uom_id" attrs="{'readonly': [('progress', '!=', 'draft')]}"/>
+                    </group>
+                    <group col="4" string="Transaction">
+                        <field name="source_id" attrs="{'readonly': [('progress', '!=', 'draft')]}"/>
+                        <field name="destination_id" attrs="{'readonly': [('progress', '!=', 'draft')]}"/>
                         <field name="quantity" attrs="{'readonly': [('progress', '!=', 'draft')]}"/>
                         <field name="unit_price" attrs="{'readonly': [('progress', '!=', 'draft')]}"/>
                         <field name="reference" attrs="{'readonly': [('progress', '!=', 'draft')]}"/>
