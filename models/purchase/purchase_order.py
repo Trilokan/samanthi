@@ -22,26 +22,21 @@ class PurchaseOrder(models.Model):
     vendor_ref = fields.Char(string="Vendor Ref")
     processed_by = fields.Many2one(comodel_name="hos.person", string="Processed By", readonly=True)
     processed_on = fields.Date(string='Processed On', readonly=True)
-    order_detail = fields.One2many(comodel_name='purchase.order.detail',
-                                   inverse_name='order_id',
-                                   string='Order Detail')
+    order_detail = fields.One2many(comodel_name='purchase.order.detail', inverse_name='order_id')
     progress = fields.Selection(PROGRESS_INFO, default='draft', string='Progress')
     comment = fields.Text(string='Comment')
-
     discounted_amount = fields.Float(string='Discounted Amount', readonly=True, help='Amount after discount')
     taxed_amount = fields.Float(string='Taxed Amount', readonly=True, help='Tax after discounted amount')
     untaxed_amount = fields.Float(string='Untaxed Amount', readonly=True)
     sgst = fields.Float(string='SGST', readonly=True)
     cgst = fields.Float(string='CGST', readonly=True)
     igst = fields.Float(string='IGST', readonly=True)
-
     sub_total_amount = fields.Float(string='Sub Total', readonly=True)
     discount_amount = fields.Float(string='Discount Amount', readonly=True, help='Discount value')
     total_amount = fields.Float(string='Total', readonly=True)
     tax_amount = fields.Float(string='Tax Amount', readonly=True, help='Tax value')
     round_off_amount = fields.Float(string='Round-Off', readonly=True)
     grand_total_amount = fields.Float(string='Grand Total', readonly=True)
-
     expected_delivery = fields.Char(string='Expected Delivery')
     freight = fields.Char(string='Freight')
     payment = fields.Char(string='Payment')

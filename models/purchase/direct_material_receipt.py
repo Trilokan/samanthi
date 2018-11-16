@@ -27,18 +27,53 @@ class DirectMaterialReceipt(models.Model):
         writter = "Direct Material Receipt cancel by {0} on {1}".format(self.env.user.name, CURRENT_INDIA)
         self.write({"progress": "cancel", "writter": writter})
 
-    def purchase_stock_move(self):
-        recs = self.receipt_detail
+    def generate_move(self, recs):
+        config = self.env["product.configuration"].search([("company_id", "=", self.env.user.company_id.id)])
+
+        source_id = config.purchase_id.id
+        destination_id = config.store_id.id
 
         for rec in recs:
-            pass
+            result = {"source_id": source_id,
+                      "destination_id": destination_id,
+                      "reference": rec.name,
+                      "product_id": rec.product_id.id,
+                      "description": rec.description,
+                      "quantity": rec.quantity,
+                      "progress": "moved"}
 
+            self.env["hos.move"].create(result)
+
+    @api.multi
     def trigger_invoice_generation(self):
-        pass
+        recs = self.receipt_detail
 
-    def trigger_received(self):
+        invoice_detail = []
+        for rec in recs:
+            invoice_detail.append((0, 0, {"product_id": rec.product_id.id,
+                                          "description": rec.description,
+                                          "quantity": rec.quantity}))
+
+        if invoice_detail:
+            invoice = {"person_id": self.person_id.id,
+                       "direct_receipt_id": self.id,
+                       "invoice_type": "dpo",
+                       "invoice_detail": invoice_detail}
+
+            self.env["purchase.invoice"].create(invoice)
+
+    @api.multi
+    def trigger_receipt(self):
+        received_by = self.env.user.person_id.id
+        recs = self.env["store.issue.detail"].search([("issue_id", "=", self.id), ("quantity", "<=", 0)])
+
+        if not recs:
+            raise exceptions.ValidationError("Error! No Products found")
+
+        self.generate_move(recs)
+
         writter = "Direct Material Receipt by {0} on {1}".format(self.env.user.name, CURRENT_INDIA)
-        self.write({"progress": "received", "writter": writter})
+        self.write({"progress": "received", "writter": writter, "received_by": received_by})
 
     @api.model
     def create(self, vals):

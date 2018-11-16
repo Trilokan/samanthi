@@ -29,8 +29,11 @@
                     </div>
                     <h2><field name="name"/></h2>
                     <group col="4">
-                        <field name="date" attrs="{'readonly': [('progress', '!=', 'draft')]}"/>
-                        <field name="person_id" attrs="{'readonly': [('progress', '!=', 'draft')]}"/>
+                        <field name="date"/>
+                        <field name="person_id"/>
+                        <field name="indent_id"/>
+                        <field name="po_id"/>
+                        <field name="received_by"/>
                     </group>
                     <field name="receipt_detail"
                            attrs="{'readonly': [('progress', '!=', 'draft')]}">
@@ -49,7 +52,7 @@
                         </tree>
                     </field>
                 <footer>
-                        <button name="trigger_received" string="Received" type="object"
+                        <button name="trigger_receipt" string="Received" type="object"
                                 attrs="{'invisible': [('progress', '!=', 'draft')]}"/>
                         <button name="trigger_invoice_generation" string="Generate Invoice" type="object"
                                 attrs="{'invisible': [('progress', '=', 'draft')]}"/>
