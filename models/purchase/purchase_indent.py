@@ -58,8 +58,6 @@ class PurchaseIndent(models.Model):
 
             self.env["purchase.quote"].create(quote)
 
-        return quote_detail
-
     @api.multi
     def trigger_approve(self):
         recs = self.env["purchase.indent.detail"].search([("indent_id", "=", self.id), ("quantity", ">", 0)])

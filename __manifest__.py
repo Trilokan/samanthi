@@ -172,7 +172,7 @@
         "views/menu/inventory.xml",
         "views/menu/purchase.xml",
         # "views/menu/pharmacy.xml",
-        # "views/menu/account.xml",
+        "views/menu/account.xml",
 
     ],
     "demo": [

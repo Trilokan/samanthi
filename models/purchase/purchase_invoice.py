@@ -6,11 +6,7 @@ from .. import calculation
 
 
 PROGRESS_INFO = [('draft', 'Draft'), ('approved', 'approved'), ('cancel', 'Cancel')]
-INVOICE_TYPE = [("dpo", "Direct Purchase Bill"),
-                ("po", "Purchase Bill"),
-                ("por", "Purchase Return Bill"),
-                ("so", "Sale Bill"),
-                ("sor", "Sale Return Bill")]
+INVOICE_TYPE = [("dpo", "Direct Purchase Bill"), ("po", "Purchase Bill")]
 CURRENT_DATE = datetime.now().strftime("%Y-%m-%d")
 CURRENT_TIME = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 CURRENT_INDIA = datetime.now().strftime("%d-%m-%Y %H:%M:%S")
@@ -63,18 +59,27 @@ class PurchaseInvoice(models.Model):
     #                                  string="Invoice detail")
     # Account_detail
 
-    def default_vals_creation(self, vals):
-        code = "{0}.{1}".format("hos.invoice", vals["invoice_type"])
-        vals['name'] = self.env['ir.sequence'].next_by_code(code)
-        vals['company_id'] = self.env.user.company_id.id
-        vals['writter'] = self.env.user.name
-        if vals.get('date', True):
-            vals['date'] = datetime.now().strftime("%Y-%m-%d")
-        return vals
+    def generate_journal_entries(self, recs):
+        item_ids = []
+        for rec in recs:
+            item_ids.append((0, 0, {"description": 0,
+                                    "person_id": self.person_id.id,
+                                    "account_id": 0,
+                                    "credit": 0,
+                                    "debit": 0}))
+
+        if item_ids:
+            entry = {"journal_id": 0,
+                     "period_id": 0,
+                     "reference": self.name,
+                     "item_ids": item_ids}
+
+            self.env["journal.entries"].create(entry)
 
     @api.multi
     def trigger_approve(self):
         self.total_calculation()
+        self.generate_journal_entries()
 
         writter = "Invoice approved by {0}".format(self.env.user.name)
         self.write({"progress": "approved", "writter": writter})
@@ -126,6 +131,12 @@ class PurchaseInvoice(models.Model):
                     "total_amount": total_amount,
                     "grand_total_amount": grand_total_amount,
                     "round_off_amount": round_off_amount})
+
+    @api.model
+    def create(self, vals):
+        code = "{0}.{1}".format("purchase.invoice", vals["invoice_type"])
+        vals['name'] = self.env['ir.sequence'].next_by_code(code)
+        return vals
 
 
 class InvoiceDetail(models.Model):
