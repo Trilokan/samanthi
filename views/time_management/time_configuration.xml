@@ -6,10 +6,11 @@
         <field name="name">time.configuration.tree</field>
         <field name="model">time.configuration</field>
         <field name="arch" type="xml">
-            <tree string="Time Configuration">
-                <field name="name"/>
-                <field name="code"/>
-                <field name="value"/>
+            <tree string="Time Configuration" create="false" edit="false" delete="false">
+                <field name="half_day"/>
+                <field name="full_day"/>
+                <field name="in_time"/>
+                <field name="out_time"/>
             </tree>
         </field>
     </record>
@@ -19,15 +20,20 @@
         <field name="name">time.configuration.form</field>
         <field name="model">time.configuration</field>
         <field name="arch" type="xml">
-            <form string="Time Configuration">
+            <form string="Time Configuration" create="false" edit="false" delete="false">
                 <sheet>
                     <div id="s_header">
                         <h1>Time Configuration</h1>
                     </div>
                     <group>
-                        <field name="name"/>
-                        <field name="code"/>
-                        <field name="value"/>
+                        <group string="Day (Hours)">
+                            <field name="half_day"/>
+                            <field name="full_day"/>
+                        </group>
+                        <group string="Grace Time (Minutes)">
+                            <field name="in_time"/>
+                            <field name="out_time"/>
+                        </group>
                     </group>
                 </sheet>
             </form>

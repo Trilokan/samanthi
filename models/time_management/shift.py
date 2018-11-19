@@ -23,6 +23,8 @@ class Shift(models.Model):
                                  default=lambda self: self.env.user.company_id.id,
                                  readonly=True)
 
+    _sql_constraints = [("name", "unique(name)", "Shift must be unique")]
+
     @api.multi
     def trigger_calculate(self):
 

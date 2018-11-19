@@ -172,11 +172,13 @@
         # "views/menu/doctor.xml",
         # "views/menu/patient.xml",
         # "views/menu/employee.xml",
-        # "views/menu/hr.xml",
+        "views/menu/hr.xml",
         "views/menu/inventory.xml",
         "views/menu/purchase.xml",
         # "views/menu/pharmacy.xml",
         "views/menu/account.xml",
+
+        "data/time_management.xml",
 
     ],
     "demo": [
