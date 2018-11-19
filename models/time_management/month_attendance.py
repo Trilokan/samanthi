@@ -13,14 +13,9 @@ class MonthAttendance(models.Model):
     _rec_name = "period_id"
 
     period_id = fields.Many2one(comodel_name="period.period", string="Month", required=True)
-    month_detail = fields.One2many(comodel_name="time.attendance",
-                                   inverse_name="month_id",
-                                   string="Month Detail")
+    month_detail = fields.One2many(comodel_name="time.attendance", inverse_name="month_id")
     progress = fields.Selection(PROGRESS_INFO, string='Progress', default="draft")
-    company_id = fields.Many2one(comodel_name="res.company",
-                                 string="Company",
-                                 default=lambda self: self.env.user.company_id.id,
-                                 readonly=True)
+    company_id = fields.Many2one(comodel_name="res.company", string="Company", default=lambda self: self.env.user.company_id.id, readonly=True)
 
     _sql_constraints = [('unique_period_id', 'unique (period_id)', 'Error! Month must be unique')]
 
@@ -223,42 +218,33 @@ class MonthAttendance(models.Model):
 
         self.write({"progress": "closed"})
 
-    def get_model_data(self, period_id, employee, leave_item):
-
-        journal = {"period_id": period_id.id,
-                   "person_id": employee.person_id.id,
-                   "journal_detail": leave_item,
-                   "progress": "posted",
-                   "reference": period_id.name}
-
-        return journal
-
-    def get_model_line_data(self, period_id, employee):
-        leave_item = []
-        configs = self.env["leave.configuration"].search([("leave_level_id", "=", employee.leave_level_id.id)])
+    def get_model_data(self, period_id, employee):
+        levels = self.env["leave.level.detail"].search([("level_id", "=", employee.leave_level_id.id)])
 
         # Credit Detail - Employee
-        for config in configs:
-            journal_detail = {"period_id": period_id.id,
-                              "person_id": employee.person_id.id,
-                              "leave_account_id": employee.leave_account_id.id,
-                              "description": "{0} Leave Credit".format(config.leave_type_id.name),
-                              "reference": period_id.name,
-                              "leave_order": config.leave_order}
+        leave_item = []
+        for level in levels:
+            journal_detail = {"person_id": employee.person_id.id,
+                              "description": "{0} Leave Credit".format(level.type_id.name)}
 
             # Leave Journal Credit
             journal_credit = journal_detail
-            journal_credit.update({"debit": config.leave_credit,
-                                   "leave_account_id": employee.leave_account_id.id})
+            journal_credit.update({"debit": level.credit,
+                                   "account_id": employee.leave_account_id.id})
             leave_item.append((0, 0, journal_credit))
 
             # Leave Journal Debit
             journal_debit = journal_detail
-            journal_debit.update({"credit": config.leave_credit,
-                                  "leave_account_id": self.env.user.company_id.leave_credit_id.id})
+            journal_debit.update({"credit": level.credit,
+                                  "account_id": level.type_id.account_id.id})
             leave_item.append((0, 0, journal_debit))
 
-            return leave_item
+        if leave_item:
+            journal_entry = {"period_id": period_id.id,
+                             "journal_item": leave_item,
+                             "progress": "posted"}
+
+            self.env["leave.journal.entry"].create(journal_entry)
 
     @api.multi
     def trigger_open(self):
@@ -266,13 +252,10 @@ class MonthAttendance(models.Model):
             raise exceptions.ValidationError("Error! Please close all open months before open")
 
         # Leave Credits from leave configuration
-        employees = self.env["hr.employee"].search([])
+        employees = self.env["hr.employee"].search([("leave_level_id", "!=", False)])
 
         for employee in employees:
-            leave_item = self.get_model_line_data(self.period_id, employee)
-            journal = self.get_model_data(self.period_id, employee, leave_item)
-
-            self.env["leave.journal"].create(journal)
+            journal = self.get_model_data(self.period_id, employee)
 
         self.write({"progress": "open"})
 

@@ -21,7 +21,7 @@ class Employee(models.Model):
     # Contact
     email = fields.Char(string="Email")
     contact_no = fields.Char(string="Contact No", required=True)
-    alternate_contact = fields.Char(string="Alternate Contact")
+    alternate_contact_no = fields.Char(string="Alternate Contact", required=True)
 
     # Account Details
     bank = fields.Char(string="Bank")
@@ -77,11 +77,7 @@ class Employee(models.Model):
                                  readonly=True)
 
     def generate_leave_account(self, vals):
-        leave_account = {"name": vals["name"],
-                         "code": self.env['ir.sequence'].next_by_code("leave.account")}
-
-        leave_account_id = self.env["leave.account"].create(leave_account)
-
+        leave_account_id = self.env["leave.account"].create({"name": vals["name"]})
         return leave_account_id.id
 
     def generate_person(self, vals):
@@ -90,7 +86,7 @@ class Employee(models.Model):
         data = {"name": vals["name"],
                 "contact_no": vals["contact_no"],
                 "email": vals.get("email", False),
-                "alternate_contact": vals.get("alternate_contact", False),
+                "alternate_contact_no": vals.get("alternate_contact_no", False),
                 "person_uid": vals["employee_uid"],
                 "person_type": employee_category_id.name.lower()}
 

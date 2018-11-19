@@ -3,7 +3,7 @@
 from odoo import models, fields, api
 from datetime import datetime
 
-PROGRESS_INFO = [("draft", "Draft"), ("received", "Received"), ("cancel", "Cancel")]
+PROGRESS_INFO = [("draft", "Draft"), ("posted", "Posted"), ("cancel", "Cancel")]
 CURRENT_DATE = datetime.now().strftime("%Y-%m-%d")
 CURRENT_TIME = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 CURRENT_INDIA = datetime.now().strftime("%d-%m-%Y %H:%M:%S")
@@ -30,13 +30,13 @@ class LeaveJournalItem(models.Model):
     date = fields.Date(string="Date", required=True, default=CURRENT_DATE)
     name = fields.Char(string="Name", readonly=True)
     person_id = fields.Many2one(comodel_name="hos.person", string="Person", required=True)
-    account_id = fields.Many2one(comodel_name="hos.person", string="Person", required=True)
+    account_id = fields.Many2one(comodel_name="leave.account", string="Account", required=True)
     description = fields.Text(string="Description")
     credit = fields.Float(string="Credit", default=0, required=True)
     debit = fields.Float(string="Debit", default=0, required=True)
-    reconcile_id = fields.Many2one(comodel_name="leave.reconcile", string="Reconcile", required=True)
-    part_reconcile_id = fields.Many2one(comodel_name="leave.reconcile", string="Partial Reconcile", required=True)
-    entry_id = fields.Many2one(comodel_name="leave.journal.entry", string="Entry", required=True)
+    reconcile_id = fields.Many2one(comodel_name="leave.reconcile", string="Reconcile", required=False)
+    part_reconcile_id = fields.Many2one(comodel_name="leave.reconcile", string="Partial Reconcile")
+    entry_id = fields.Many2one(comodel_name="leave.journal.entry", string="Entry")
     progress = fields.Selection(selection=PROGRESS_INFO, string="Progress", related="entry_id.progress")
 
     @api.model

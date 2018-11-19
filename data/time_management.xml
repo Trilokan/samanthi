@@ -42,5 +42,15 @@
         <field name="out_time">30</field>
     </record>
 
+    <!-- Time Management : Leave Type: Loss Of Pay -->
+    <record id="time_management_leave_type_lop" model="leave.type">
+        <field name="name">Loss Of Pay</field>
+        <field name="code">LOP</field>
+    </record>
+
+    <!-- Time Management : Leave Configuration-->
+    <record id="time_management_leave_configuration_lop" model="leave.configuration">
+        <field name="lop_id" ref="nagini.time_management_leave_type_lop" />
+    </record>
 
 </odoo>

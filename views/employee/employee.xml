@@ -77,29 +77,31 @@
                     <notebook>
                         <page string="Contact Details">
                             <group>
-                                <group>
-                                    <label for="street" string="Address"/>
-                                    <div>
-                                        <div class="address_format">
-                                            <field name="door_no" style="width: 30%" placeholder="Door No..."/>
-                                            <field name="building_name" style="width: 70%" placeholder="Building name..."/>
+                                <group string="Address">
+                                    <div style="width: 85%">
+                                        <div>
+                                            <div class="address_format">
+                                                <field name="door_no" style="width: 30%" placeholder="Door No..."/>
+                                                <field name="building_name" style="width: 70%" placeholder="Building name..."/>
+                                            </div>
+                                            <field name="street_1" placeholder="Street 1..."/>
+                                            <field name="street_2" placeholder="Street 2..."/>
+                                            <field name="locality" placeholder="Locality..."/>
+                                            <field name="city" placeholder="City..."/>
+                                            <field name="landmark" placeholder="Landmark..."/>
+                                            <div class="address_format">
+                                                <field name="country_id" style="width: 45%" placeholder="Country" options="{'create': false, 'create_edit': false}" modifiers="{}"/>
+                                                <field name="state_id" style="width: 55%" options="{'create': false, 'create_edit': false}" placeholder="State" modifiers="{}"/>
+                                            </div>
+                                            <field name="pin_code" placeholder="ZIP" style="width: 55%"/>
                                         </div>
-                                        <field name="street_1" placeholder="Street 1..."/>
-                                        <field name="street_2" placeholder="Street 2..."/>
-                                        <field name="locality" placeholder="Locality..."/>
-                                        <field name="city" placeholder="City..."/>
-                                        <field name="landmark" placeholder="Landmark..."/>
-                                        <div class="address_format">
-                                            <field name="country_id" style="width: 45%" placeholder="Country" options="{'create': false, 'create_edit': false}" modifiers="{}"/>
-                                            <field name="state_id" style="width: 55%" options="{'create': false, 'create_edit': false}" placeholder="State" modifiers="{}"/>
-                                        </div>
-                                        <field name="pin_code" placeholder="ZIP" style="width: 55%"/>
                                     </div>
                                 </group>
-                                <group>
+                                <group string="Personnel Contact">
                                     <field name="personnel_mobile"/>
                                     <field name="personnel_email"/>
                                     <field name="permanent_address"/>
+                                    <field name="alternate_contact_no"/>
                                 </group>
                             </group>
                         </page>

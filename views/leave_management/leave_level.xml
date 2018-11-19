@@ -30,6 +30,7 @@
                     <field name="level_detail">
                         <tree editable="bottom">
                             <field name="type_id"/>
+                            <field name="credit"/>
                             <field name="sequence"/>
                         </tree>
                     </field>
