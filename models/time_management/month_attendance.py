@@ -218,25 +218,26 @@ class MonthAttendance(models.Model):
 
         self.write({"progress": "closed"})
 
-    def get_model_data(self, period_id, employee):
+    def generate_journal_entries(self, period_id, employee):
         levels = self.env["leave.level.detail"].search([("level_id", "=", employee.leave_level_id.id)])
 
         # Credit Detail - Employee
         leave_item = []
         for level in levels:
-            journal_detail = {"person_id": employee.person_id.id,
-                              "description": "{0} Leave Credit".format(level.type_id.name)}
-
             # Leave Journal Credit
-            journal_credit = journal_detail
-            journal_credit.update({"debit": level.credit,
-                                   "account_id": employee.leave_account_id.id})
+            journal_credit = {"person_id": employee.person_id.id,
+                              "description": "{0} Leave Credit".format(level.type_id.name),
+                              "credit": level.credit,
+                              "account_id": employee.leave_account_id.id}
+
             leave_item.append((0, 0, journal_credit))
 
             # Leave Journal Debit
-            journal_debit = journal_detail
-            journal_debit.update({"credit": level.credit,
-                                  "account_id": level.type_id.account_id.id})
+            journal_debit = {"person_id": employee.person_id.id,
+                             "description": "{0} Leave Credit".format(level.type_id.name),
+                             "debit": level.credit,
+                             "account_id": level.type_id.account_id.id}
+
             leave_item.append((0, 0, journal_debit))
 
         if leave_item:
@@ -255,7 +256,7 @@ class MonthAttendance(models.Model):
         employees = self.env["hr.employee"].search([("leave_level_id", "!=", False)])
 
         for employee in employees:
-            journal = self.get_model_data(self.period_id, employee)
+            self.generate_journal_entries(self.period_id, employee)
 
         self.write({"progress": "open"})
 

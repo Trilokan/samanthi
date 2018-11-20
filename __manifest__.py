@@ -104,6 +104,7 @@
         "views/leave_management/leave_type.xml",
 
         # Leave Account
+        "views/leave_account/leave_account.xml",
         "views/leave_account/leave_journal_entry.xml",
         "views/leave_account/leave_journal_item.xml",
         "views/leave_account/leave_reconcile.xml",

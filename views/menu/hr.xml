@@ -9,7 +9,7 @@
 
     <!--HR: Time Management-->
     <menuitem id="hr_time" name="Time Management" parent="menu_hr" sequence="10"/>
-    <menuitem id="hr_time_week_schedule" name="Week Schedule" parent="hr_time" sequence="10"/>
+    <menuitem id="hr_time_week_schedule" name="Week Schedule" action="action_week_schedule" parent="hr_time" sequence="10"/>
     <menuitem id="hr_time_shift_change" name="Shift Change" parent="hr_time" sequence="20"/>
     <menuitem id="hr_time_month_attendance" name="Monthly Attendance" action="action_month_attendance" parent="hr_time" sequence="30"/>
     <menuitem id="hr_time_time_attendance" name="Daily Attendance" action="action_time_attendance" parent="hr_time" sequence="40"/>
@@ -31,6 +31,7 @@
     <menuitem id="hr_leave_leave_level" name="Leave Level" action="action_leave_level" parent="hr_leave" sequence="10"/>
     <menuitem id="hr_leave_leave_type" name="Leave Type" action="action_leave_type" parent="hr_leave" sequence="10"/>
     <menuitem id="hr_leave_leave_voucher" name="Leave Voucher" action="" parent="hr_leave" sequence="10"/>
+    <menuitem id="hr_leave_leave_account" name="Leave Account" action="action_leave_account" parent="hr_leave" sequence="10"/>
     <menuitem id="hr_leave_journal_entry" name="Leave Journal Entry" action="action_leave_journal_entry" parent="hr_leave" sequence="10"/>
     <menuitem id="hr_leave_journal_item" name="Leave Journal Item" action="action_leave_journal_item" parent="hr_leave" sequence="10"/>
     <menuitem id="hr_leave_reconcile" name="Leave Reconcile" action="action_leave_reconcile" parent="hr_leave" sequence="10"/>

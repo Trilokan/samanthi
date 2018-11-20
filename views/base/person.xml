@@ -32,6 +32,9 @@
                             <h2><field name="person_uid"/></h2>
                         </div>
                     </div>
+                    <group>
+                        <field name="is_employee"/>
+                    </group>
                     <notebook>
                         <page string="Contact Details">
                             <group>

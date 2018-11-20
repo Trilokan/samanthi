@@ -14,63 +14,49 @@ class WeekSchedule(models.Model):
     _inherit = "mail.thread"
 
     from_date = fields.Date(string="From Date", required=True)
-    till_date = fields.Date(string="Till Date", required=True)
-    schedule_detail = fields.One2many(comodel_name="week.schedule.detail",
-                                      inverse_name="schedule_id",
-                                      string="Schedule Detail")
-    off_detail = fields.One2many(comodel_name="week.off.detail",
-                                 inverse_name="schedule_id",
-                                 string="Week-Off Detail")
+    till_date = fields.Date(string="Till Date", readonly=True)
+    schedule_detail = fields.One2many(comodel_name="week.schedule.detail", inverse_name="schedule_id")
+    off_detail = fields.One2many(comodel_name="week.off.detail", inverse_name="schedule_id")
     progress = fields.Selection(selection=PROGRESS_INFO, string="Progress", default="draft")
-    company_id = fields.Many2one(comodel_name="res.company",
-                                 string="Company",
-                                 default=lambda self: self.env.user.company_id.id,
-                                 readonly=True)
+    company_id = fields.Many2one(comodel_name="res.company", string="Company", default=lambda self: self.env.user.company_id.id, readonly=True)
     writter = fields.Text(string="Writter", track_visibility="always")
 
-    def check_lines(self):
-        if not self.schedule_detail:
-            raise exceptions.ValidationError("Error! Atleast One employee required for schedule approve")
+    def _get_date_range(self, d1, d2):
+        date_list = []
+        from_obj = datetime.strptime(d1, "%Y-%m-%d")
+        till_obj = datetime.strptime(d2, "%Y-%m-%d")
+        days_range = (till_obj - from_obj).days + 1
 
-    @api.constrains("from_date", "till_date")
-    def check_date(self):
+        for days in range(0, days_range):
+            from_date = from_obj + timedelta(days=days)
+            date_list.append(from_date.strftime("%Y-%m-%d"))
+
+        return date_list
+
+    @api.constrains("from_date")
+    def update_till_date(self):
         """ From Date < Till Date """
-        date_greater = self.env["model.date"].from_date_greater(self.from_date, self.till_date, "%Y-%m-%d")
-        if date_greater:
-            raise exceptions.ValidationError("Error! From Date should be greater than Till Date")
-
-        days = self.env["model.date"].date_difference(self.from_date, self.till_date, "%Y-%m-%d")
-        if days != 7:
-            raise exceptions.ValidationError("Error! From Date and Till Date should be within a week")
-
         from_date = datetime.strptime(self.from_date, "%Y-%m-%d")
-        if from_date.weekday() != 0:
-            raise exceptions.ValidationError("Error! Week should start from Monday")
+        if from_date.strftime("%w") != "1":
+            raise exceptions.ValidationError("Error! From Date should be monday")
 
-        week_schedule = self.env["week.schedule"].search_count([("from_date", "=", self.from_date)])
-        if week_schedule > 1:
-            raise exceptions.ValidationError("Error! Duplicate Week Schedule")
+        till_date = from_date + timedelta(days=7)
+        self.till_date = till_date.strftime("%Y-%m-%d")
 
     def generate_attendance(self):
-        date_range = self.env["model.date"].date_list(self.from_date, self.till_date, "%Y-%m-%d")
+        date_range = self._get_date_range(self.from_date, self.till_date)
 
         for date in date_range:
+            month_id = self.env["month.attendance"].search([("period_id.from_date", "<=", date),
+                                                            ("period_id.till_date", ">=", date)])
+
+            if not month_id:
+                raise exceptions.ValidationError("Error! Attendance Month is not set")
+
             date_obj = datetime.strptime(date, "%Y-%m-%d")
-            attendance_detail = self.get_model_line_data(date_obj, date)
-            attendance = self.get_model_data(date, attendance_detail)
+            self.generate_attendance_line(date_obj, date, month_id)
 
-            self.env["time.attendance"].create(attendance)
-
-    def get_model_data(self, date, attendance_detail):
-        month_id = self.env["month.attendance"].search([("period_id.from_date", "<=", date),
-                                                        ("period_id.till_date", ">=", date)])
-
-        if not month_id:
-            raise exceptions.ValidationError("Error! Attendance Month is not set")
-
-        return {"date": date, "month_id": month_id.id, "attendance_detail": attendance_detail}
-
-    def get_model_line_data(self, obj, date):
+    def generate_attendance_line(self, obj, date, month_id):
         attendance_detail = []
 
         recs = self.schedule_detail
@@ -88,7 +74,12 @@ class WeekSchedule(models.Model):
 
                 attendance_detail.append((0, 0, record_data))
 
-        return attendance_detail
+        if attendance_detail:
+            attendance = {"date": date,
+                          "month_id": month_id.id,
+                          "attendance_detail": attendance_detail}
+
+            self.env["time.attendance"].create(attendance)
 
     def get_day_progress(self, current_date, person_id):
         holiday = self.env["week.off.detail"].search([("date", "=", current_date),
@@ -99,8 +90,9 @@ class WeekSchedule(models.Model):
 
     @api.multi
     def trigger_schedule(self):
-        self.check_lines()
-        self.check_date()
+        if not self.schedule_detail:
+            raise exceptions.ValidationError("Error! Atleast One employee required for schedule approve")
+
         self.generate_attendance()
         self.write({'progress': 'scheduled'})
 

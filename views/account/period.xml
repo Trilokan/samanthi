@@ -6,7 +6,7 @@
         <field name="name">period.period.tree</field>
         <field name="model">period.period</field>
         <field name="arch" type="xml">
-            <tree string="Period">
+            <tree string="Period" create="false" edit="false" delete="false">
                 <field name="name"/>
                 <field name="from_date"/>
                 <field name="till_date"/>
@@ -20,7 +20,7 @@
         <field name="name">period.period.form</field>
         <field name="model">period.period</field>
         <field name="arch" type="xml">
-            <form string="Period">
+            <form string="Period" create="false" edit="false" delete="false">
                 <sheet>
                     <div id="s_header">
                         <h1>Period</h1>
