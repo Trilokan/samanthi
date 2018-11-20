@@ -8,9 +8,6 @@
         <field name="arch" type="xml">
             <form string="Monthly Attendance">
                 <sheet>
-                    <div id="s_header">
-                        <h1>Monthly Attendance</h1>
-                    </div>
                     <field name="report"/>
                 </sheet>
             </form>

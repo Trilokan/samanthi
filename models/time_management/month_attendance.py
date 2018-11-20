@@ -62,8 +62,8 @@ class MonthAttendance(models.Model):
 
     def get_working_days(self, person):
         working_day = self.env["time.attendance.detail"].search_count([("person_id", "=", person.id),
-                                                                   ("attendance_id.month_id", "=", self.id),
-                                                                   ("day_progress", "=", "working_day")])
+                                                                       ("attendance_id.month_id", "=", self.id),
+                                                                       ("day_progress", "=", "working_day")])
 
         return working_day
 
@@ -112,6 +112,15 @@ class MonthAttendance(models.Model):
         return available
 
     def generate_header(self, date_list):
+        top_header = """
+                        <tr>
+                            <th colspan="{0}">
+                                <h1>Monthly Attendance</h1>                                
+                            </th>
+                        </tr>
+                        <tr>{1}</tr>
+                     """
+
         header = ""
 
         header_list = ["Employee"] + date_list + ["Total Days",
@@ -123,8 +132,7 @@ class MonthAttendance(models.Model):
         for rec in header_list:
             header = "{0}\n<th>{1}</th>".format(header, rec)
 
-        header = "<tr>{0}</tr>".format(header)
-        return header
+        return top_header.format(len(header_list), header)
 
     def generate_body(self, date_list, person_list):
         body = ""
@@ -177,7 +185,7 @@ class MonthAttendance(models.Model):
         html = self.env.user.company_id.template_attendance
         report = html.format(header, body)
 
-        view = self.env.ref('shesha.view_month_attendance_wiz_form')
+        view = self.env.ref('nagini.view_month_attendance_wiz_form')
 
         return {
             'name': 'Monthly Attendance',

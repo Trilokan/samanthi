@@ -91,6 +91,7 @@
         "views/time_management/attendance.xml",
         "views/time_management/shift_change.xml",
         "views/time_management/monthly_attendance.xml",
+        "views/time_management/monthly_attendance_wiz.xml",
         "views/time_management/add_employee.xml",
         "views/time_management/time_sheet.xml",
         "views/time_management/time_sheet_application.xml",
