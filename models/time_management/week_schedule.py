@@ -27,7 +27,7 @@ class WeekSchedule(models.Model):
         till_obj = datetime.strptime(d2, "%Y-%m-%d")
         days_range = (till_obj - from_obj).days
 
-        for days in range(0, days_range):
+        for days in range(0, days_range + 1):
             from_date = from_obj + timedelta(days=days)
             date_list.append(from_date.strftime("%Y-%m-%d"))
 
@@ -40,7 +40,7 @@ class WeekSchedule(models.Model):
         if from_date.strftime("%w") != "1":
             raise exceptions.ValidationError("Error! From Date should be monday")
 
-        till_date = from_date + timedelta(days=7)
+        till_date = from_date + timedelta(days=6)
         self.till_date = till_date.strftime("%Y-%m-%d")
 
     def generate_attendance(self):

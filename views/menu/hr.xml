@@ -30,7 +30,7 @@
     <menuitem id="hr_leave_leave_configuration" name="Leave Configuration" action="action_leave_configuration" parent="hr_leave" sequence="10"/>
     <menuitem id="hr_leave_leave_level" name="Leave Level" action="action_leave_level" parent="hr_leave" sequence="10"/>
     <menuitem id="hr_leave_leave_type" name="Leave Type" action="action_leave_type" parent="hr_leave" sequence="10"/>
-    <menuitem id="hr_leave_leave_voucher" name="Leave Voucher" action="" parent="hr_leave" sequence="10"/>
+    <menuitem id="hr_leave_leave_voucher" name="Leave Voucher" action="action_leave_voucher" parent="hr_leave" sequence="10"/>
     <menuitem id="hr_leave_leave_account" name="Leave Account" action="action_leave_account" parent="hr_leave" sequence="10"/>
     <menuitem id="hr_leave_journal_entry" name="Leave Journal Entry" action="action_leave_journal_entry" parent="hr_leave" sequence="10"/>
     <menuitem id="hr_leave_journal_item" name="Leave Journal Item" action="action_leave_journal_item" parent="hr_leave" sequence="10"/>

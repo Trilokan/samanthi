@@ -14,5 +14,6 @@ class LeaveConfiguration(models.Model):
     _inherit = "mail.thread"
 
     lop_id = fields.Many2one(comodel_name="leave.type", string="Loss Of Pay", required=True)
+    account_id = fields.Many2one(comodel_name="leave.account", string="Leave Account", required=True)
     company_id = fields.Many2one(comodel_name="res.company", string="Company",
                                  default=lambda self: self.env.user.company_id.id, readonly=True)

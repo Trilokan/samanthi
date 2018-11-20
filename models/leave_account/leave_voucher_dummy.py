@@ -15,7 +15,7 @@ class LeaveVoucherDummy(models.Model):
     date = fields.Date(string="Date", required=True, default=CURRENT_DATE)
     name = fields.Char(string="Name", readonly=True)
     person_id = fields.Many2one(comodel_name="hos.person", string="Person", required=True)
-    account_id = fields.Many2one(comodel_name="hos.person", string="Person", required=True)
+    account_id = fields.Many2one(comodel_name="leave.account", string="Account", required=True)
     description = fields.Text(string="Description")
     credit = fields.Float(string="Credit", default=0, required=True)
     debit = fields.Float(string="Debit", default=0, required=True)

@@ -2,7 +2,7 @@
 
 from odoo import fields, models, api, exceptions, _
 from datetime import datetime, timedelta
-
+from calendar import monthrange
 
 PROGRESS_INFO = [('draft', 'draft'), ('open', 'Open'), ('closed', 'Closed')]
 
@@ -198,13 +198,21 @@ class MonthAttendance(models.Model):
             'context': {'report': report}
         }
 
-    @api.multi
-    def trigger_closed(self):
+    def check_attendance(self):
         draft = self.env["time.attendance"].search_count([("month_id", "=", self.id), ("progress", "!=", "verified")])
 
         if draft:
             raise exceptions.ValidationError("Error! Daily attendance report is not verified")
 
+        _, num_days = monthrange(int(self.period_id.year_id.name), int(self.period_id.name))
+        attendance = self.env["time.attendance"].search_count([("month_id", "=", self.id), ("progress", "=", "verified")])
+
+        if num_days != attendance:
+            raise exceptions.ValidationError("Error! {0} Days missing in attendance".format(num_days - attendance))
+
+    @api.multi
+    def trigger_closed(self):
+        self.check_attendance()
         employees = self.env["hr.employee"].search([])
 
         for employee in employees:
@@ -212,7 +220,8 @@ class MonthAttendance(models.Model):
 
             voucher = {"period_id": self.period_id.id,
                        "person_id": employee.person_id.id,
-                       "count": total_absent}
+                       "month_id": self.id,
+                       "leave_taken": total_absent}
 
             # Check already voucher is created
             check_voucher = self.env["leave.voucher"].search([("period_id", "=", self.period_id.id),
@@ -220,11 +229,11 @@ class MonthAttendance(models.Model):
 
             if not check_voucher:
                 voucher_id = self.env["leave.voucher"].create(voucher)
-                voucher_id.get_cr_lines()
-                voucher_id.update_count()
-                voucher_id.trigger_posting()
-
-        self.write({"progress": "closed"})
+        #         voucher_id.get_leave_journal_items()
+        #         voucher_id.reconciliation()
+        #         voucher_id.generate_posting()
+        #
+        # self.write({"progress": "closed"})
 
     def generate_journal_entries(self, period_id, employee):
         levels = self.env["leave.level.detail"].search([("level_id", "=", employee.leave_level_id.id)])
