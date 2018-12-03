@@ -27,8 +27,34 @@
                     <group>
                         <field name="date"/>
                     </group>
-                    <field name="part_reconcile_ids"/>
-                    <field name="reconcile_ids"/>
+                    <separator string="Partial Reconcile"/>
+                    <field name="part_reconcile_ids">
+                        <tree>
+                            <field name="date"/>
+                            <field name="person_id"/>
+                            <field name="account_id"/>
+                            <field name="description"/>
+                            <field name="credit"/>
+                            <field name="debit"/>
+                            <field name="reconcile_id"/>
+                            <field name="part_reconcile_id"/>
+                            <field name="progress"/>
+                        </tree>
+                    </field>
+                    <separator string="Full Reconcile"/>
+                    <field name="reconcile_ids">
+                        <tree>
+                            <field name="date"/>
+                            <field name="person_id"/>
+                            <field name="account_id"/>
+                            <field name="description"/>
+                            <field name="credit"/>
+                            <field name="debit"/>
+                            <field name="reconcile_id"/>
+                            <field name="part_reconcile_id"/>
+                            <field name="progress"/>
+                        </tree>
+                    </field>
                 </sheet>
             </form>
         </field>

@@ -223,17 +223,10 @@ class MonthAttendance(models.Model):
                        "month_id": self.id,
                        "leave_taken": total_absent}
 
-            # Check already voucher is created
-            check_voucher = self.env["leave.voucher"].search([("period_id", "=", self.period_id.id),
-                                                              ("person_id", "=", employee.person_id.id)])
+            voucher_id = self.env["leave.voucher"].create(voucher)
+            voucher_id.trigger_recon()
 
-            if not check_voucher:
-                voucher_id = self.env["leave.voucher"].create(voucher)
-        #         voucher_id.get_leave_journal_items()
-        #         voucher_id.reconciliation()
-        #         voucher_id.generate_posting()
-        #
-        # self.write({"progress": "closed"})
+        self.write({"progress": "closed"})
 
     def generate_journal_entries(self, period_id, employee):
         levels = self.env["leave.level.detail"].search([("level_id", "=", employee.leave_level_id.id)])

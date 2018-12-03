@@ -13,8 +13,8 @@ class LeaveReconcile(models.Model):
 
     date = fields.Date(string="Date", required=True, default=CURRENT_DATE)
     name = fields.Char(string="Name", readonly=True)
-    part_reconcile_ids = fields.One2many(comodel_name="leave.journal.item", inverse_name="part_reconcile_id", string="Partial Reconcile")
-    reconcile_ids = fields.One2many(comodel_name="leave.journal.item", inverse_name="reconcile_id", string="Fully Reconcile")
+    part_reconcile_ids = fields.One2many(comodel_name="leave.journal.item", inverse_name="part_reconcile_id")
+    reconcile_ids = fields.One2many(comodel_name="leave.journal.item", inverse_name="reconcile_id")
 
     def swap_reconciliation_id(self, rec):
         rec.reconcile_id = rec.part_reconcile_id.id

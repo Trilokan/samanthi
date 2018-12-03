@@ -27,6 +27,7 @@
 
         "sequence/account.xml",
         "sequence/product.xml",
+        "sequence/hr.xml",
 
         "views/base/company.xml",
         "views/base/users.xml",

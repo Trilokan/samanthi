@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from odoo import models, fields, api
+from odoo import models, fields, api, exceptions
 from datetime import datetime
 
 PROGRESS_INFO = [("draft", "Draft"), ("posted", "Posted")]
@@ -22,7 +22,6 @@ class LeaveVoucher(models.Model):
     leave_taken = fields.Float(string="Leave Taken", default=0, required=True)
     lop = fields.Float(string="Loss Of Pay", default=0, required=True)
     progress = fields.Selection(selection=PROGRESS_INFO, string="Progress", default="draft")
-    entry_id = fields.Many2one(comodel_name="leave.journal.entry", string="Journal Entry")
     account_id = fields.Many2one(comodel_name="leave.account", string="Account")
     entry_id = fields.Many2one(comodel_name="leave.journal.entry", string="Entry")
 
@@ -41,10 +40,10 @@ class LeaveVoucher(models.Model):
                     rec.reconcile = rec.opening + balance
                     leave_taken = leave_taken - balance
 
-                    data = {"date": self.date,
-                            "person_id": self.person_id.id,
-                            "account_id": self.account_id.id,
-                            "description": "Leave Taken for {0} Reconcile".format(self.month_id.period_id.name),
+                    data = {"date": rec.date,
+                            "person_id": rec.person_id.id,
+                            "account_id": rec.account_id.id,
+                            "description": rec.description,
                             "debit": balance,
                             "part_reconcile_id": rec.part_reconcile_id.id,
                             "voucher_id": self.id}
@@ -54,10 +53,10 @@ class LeaveVoucher(models.Model):
                 else:
                     rec.reconcile = rec.opening + leave_taken
 
-                    data = {"date": self.date,
-                            "person_id": self.person_id.id,
-                            "account_id": self.account_id.id,
-                            "description": "Leave Taken for {0} Reconcile".format(self.month_id.period_id.name),
+                    data = {"date": rec.date,
+                            "person_id": rec.person_id.id,
+                            "account_id": rec.account_id.id,
+                            "description": rec.description,
                             "debit": leave_taken,
                             "part_reconcile_id": rec.part_reconcile_id.id,
                             "voucher_id": self.id}
@@ -95,6 +94,7 @@ class LeaveVoucher(models.Model):
                     "voucher_id": self.id}
 
             self.env["leave.voucher.dummy"].create(data)
+            self.lop = reconcile
 
     def get_leave_journal_items(self):
         employee_id = self.env["hr.employee"].search([("person_id", "=", self.person_id.id)])
@@ -112,12 +112,16 @@ class LeaveVoucher(models.Model):
                     "person_id": rec.person_id.id,
                     "description": rec.description,
                     "available": rec.credit,
+                    "opening": 0,
                     "item_id": rec.id}
 
             if rec.part_reconcile_id:
-                items = self.env["journal.items"].search([("reconcile_part_id", "=", rec.reconcile_part_id.id)])
+                items = self.env["leave.journal.item"].search([("part_reconcile_id", "=", rec.part_reconcile_id.id)])
                 data["opening"] = sum(items.mapped('debit'))
                 data["part_reconcile_id"] = rec.part_reconcile_id.id,
+
+            if data["available"] < data["opening"]:
+                raise exceptions.ValidationError("Error! Please check leave reconcilation")
 
             debit.append((0, 0, data))
 
@@ -130,8 +134,8 @@ class LeaveVoucher(models.Model):
         for rec in recs:
             data = {"date": rec.date,
                     "account_id": rec.account_id.id,
-                    "person_id": self.person_id.id,
-                    "description": "Leave Reconciliation for {0}".format(self.month_id.period_id.name),
+                    "person_id": rec.person_id.id,
+                    "description": rec.description,
                     "period_id": self.month_id.period_id.id,
                     "credit": rec.credit,
                     "debit": rec.debit,
