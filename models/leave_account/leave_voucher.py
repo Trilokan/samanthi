@@ -3,7 +3,7 @@
 from odoo import models, fields, api
 from datetime import datetime
 
-PROGRESS_INFO = [("draft", "Draft"), ("confirmed", "Confirmed"), ("posted", "Posted")]
+PROGRESS_INFO = [("draft", "Draft"), ("posted", "Posted")]
 CURRENT_DATE = datetime.now().strftime("%Y-%m-%d")
 CURRENT_TIME = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 CURRENT_INDIA = datetime.now().strftime("%d-%m-%Y %H:%M:%S")
@@ -26,8 +26,7 @@ class LeaveVoucher(models.Model):
     account_id = fields.Many2one(comodel_name="leave.account", string="Account")
     entry_id = fields.Many2one(comodel_name="leave.journal.entry", string="Entry")
 
-    def generate_posting(self):
-        pass
+    _sql_constraints = [("month", "unique(month_id, person_id)", "Leave duplicates not allowed")]
 
     def reconciliation(self, credits, leave_taken):
         for rec in credits:
@@ -41,20 +40,26 @@ class LeaveVoucher(models.Model):
                 if leave_taken > balance:
                     rec.reconcile = rec.opening + balance
                     leave_taken = leave_taken - balance
-                    data = {"debit": balance,
-                            "part_reconcile_id": rec.part_reconcile_id.id,
-                            "account_id": self.account_id.id,
+
+                    data = {"date": self.date,
                             "person_id": self.person_id.id,
+                            "account_id": self.account_id.id,
+                            "description": "Leave Taken for {0} Reconcile".format(self.month_id.period_id.name),
+                            "debit": balance,
+                            "part_reconcile_id": rec.part_reconcile_id.id,
                             "voucher_id": self.id}
 
                     self.env["leave.voucher.dummy"].create(data)
 
                 else:
                     rec.reconcile = rec.opening + leave_taken
-                    data = {"debit": leave_taken,
-                            "part_reconcile_id": rec.part_reconcile_id.id,
-                            "account_id": self.account_id.id,
+
+                    data = {"date": self.date,
                             "person_id": self.person_id.id,
+                            "account_id": self.account_id.id,
+                            "description": "Leave Taken for {0} Reconcile".format(self.month_id.period_id.name),
+                            "debit": leave_taken,
+                            "part_reconcile_id": rec.part_reconcile_id.id,
                             "voucher_id": self.id}
 
                     self.env["leave.voucher.dummy"].create(data)
@@ -70,15 +75,23 @@ class LeaveVoucher(models.Model):
         voucher_detail = self.voucher_detail
         leave_taken = self.leave_taken
 
-        data = {"credit": leave_taken,
+        data = {"date": self.date,
+                "person_id": self.person_id.id,
                 "account_id": config.account_id.id,
+                "description": "Leave Taken for {0}".format(self.month_id.period_id.name),
+                "credit": leave_taken,
                 "voucher_id": self.id}
+
+        self.env["leave.voucher.dummy"].create(data)
 
         reconcile = self.reconciliation(voucher_detail, leave_taken)
 
         if reconcile:
-            data = {"debit": reconcile,
+            data = {"date": self.date,
+                    "person_id": self.person_id.id,
                     "account_id": config.lop_id.id,
+                    "description": "Loss Of Pay for {0}".format(self.month_id.period_id.name),
+                    "debit": reconcile,
                     "voucher_id": self.id}
 
             self.env["leave.voucher.dummy"].create(data)
@@ -93,9 +106,11 @@ class LeaveVoucher(models.Model):
                                                       ("credit", ">", 0)])
 
         for rec in recs:
-            data = {"name": rec.name,
-                    "description": rec.description,
+            data = {"date": rec.date,
+                    "name": rec.name,
                     "account_id": rec.account_id.id,
+                    "person_id": rec.person_id.id,
+                    "description": rec.description,
                     "available": rec.credit,
                     "item_id": rec.id}
 
@@ -113,9 +128,10 @@ class LeaveVoucher(models.Model):
 
         item = []
         for rec in recs:
-            data = {"description": "Leave Reconciliation",
+            data = {"date": rec.date,
                     "account_id": rec.account_id.id,
                     "person_id": self.person_id.id,
+                    "description": "Leave Reconciliation for {0}".format(self.month_id.period_id.name),
                     "period_id": self.month_id.period_id.id,
                     "credit": rec.credit,
                     "debit": rec.debit,
@@ -128,12 +144,24 @@ class LeaveVoucher(models.Model):
         self.entry_id = entry_id.id
 
     @api.multi
+    def update_reconciliation(self):
+        for rec in self.voucher_detail:
+            rec.item_id.part_reconcile_id = rec.part_reconcile_id.id
+            self.env["leave.reconcile"].check_reconciliation(rec.part_reconcile_id.id)
+
+    @api.multi
     def trigger_recon(self):
         self.voucher_detail.unlink()
         self.voucher_dummy.unlink()
         self.get_leave_journal_items()
         self.leave_reconcile()
         self.generate_leave_journals()
+        self.update_reconciliation()
+        self.write({"progress": "posted"})
+
+    def trigger_cancel(self):
+
+        self.write({"progress": "cancel"})
 
     @api.model
     def create(self, vals):

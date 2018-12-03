@@ -40,6 +40,8 @@
                         <tree ediatble="bottom">
                             <field name="date"/>
                             <field name="name"/>
+                            <field name="person_id"/>
+                            <field name="account_id"/>
                             <field name="description"/>
                             <field name="available"/>
                             <field name="opening"/>
@@ -48,7 +50,7 @@
                             <field name="part_reconcile_id"/>
                         </tree>
                     </field>
-                    <field name="voucher_dummy">
+                    <field name="voucher_dummy" invisible="1">
                         <tree ediatble="bottom">
                             <field name="date"/>
                             <field name="name"/>
@@ -60,10 +62,7 @@
                             <field name="part_reconcile_id"/>
                         </tree>
                     </field>
-
-
-
-                    <button name="trigger_recon" string="Get" type="object"/>
+                    <button name="trigger_recon" string="Reconcile" type="object" attrs="{'invisible': [('progress', '=', 'posted')]}"/>
                 </sheet>
             </form>
         </field>

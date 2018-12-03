@@ -14,6 +14,8 @@ class LeaveVoucherDetail(models.Model):
 
     date = fields.Date(string="Date")
     name = fields.Char(string="Name")
+    person_id = fields.Many2one(comodel_name="hos.person", string="Person")
+    account_id = fields.Many2one(comodel_name="leave.account", string="Account")
     description = fields.Text(string="Description")
     available = fields.Float(string="Available", default=0)
     opening = fields.Float(string="Opening", default=0)
@@ -21,3 +23,4 @@ class LeaveVoucherDetail(models.Model):
     item_id = fields.Many2one(comodel_name="leave.journal.item", string="Journal Item")
     part_reconcile_id = fields.Many2one(comodel_name="leave.reconcile", string="Partial Reconcile")
     voucher_id = fields.Many2one(comodel_name="leave.voucher", string="Leave Voucher")
+
