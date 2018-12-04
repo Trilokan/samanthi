@@ -238,6 +238,7 @@ class MonthAttendance(models.Model):
             journal_credit = {"person_id": employee.person_id.id,
                               "description": "{0} Leave Credit".format(level.type_id.name),
                               "credit": level.credit,
+                              "type_id": level.type_id.id,
                               "account_id": employee.leave_account_id.id}
 
             leave_item.append((0, 0, journal_credit))
@@ -246,6 +247,7 @@ class MonthAttendance(models.Model):
             journal_debit = {"person_id": employee.person_id.id,
                              "description": "{0} Leave Credit".format(level.type_id.name),
                              "debit": level.credit,
+                             "type_id": level.type_id.id,
                              "account_id": level.type_id.account_id.id}
 
             leave_item.append((0, 0, journal_debit))

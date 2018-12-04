@@ -16,6 +16,7 @@ class LeaveVoucherDetail(models.Model):
     name = fields.Char(string="Name")
     person_id = fields.Many2one(comodel_name="hos.person", string="Person")
     account_id = fields.Many2one(comodel_name="leave.account", string="Account")
+    type_id = fields.Many2one(comodel_name="leave.type", string="Leave Type")
     description = fields.Text(string="Description")
     available = fields.Float(string="Available", default=0)
     opening = fields.Float(string="Opening", default=0)

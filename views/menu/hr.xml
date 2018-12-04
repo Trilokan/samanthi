@@ -51,5 +51,10 @@
     <menuitem id="hr_payroll_salary_rule" name="Salary Rule" action="action_salary_rule" parent="hr_payroll" sequence="10"/>
     <menuitem id="hr_payroll_salary_rule_slab" name="Salary Rule Slab" action="action_salary_rule_slab" parent="hr_payroll" sequence="10"/>
 
+    <!--Doctor: Doctor-->
+    <menuitem id="doctor_doctor" name="Doctor" parent="menu_hr" sequence="100"/>
+    <menuitem id="doctor_doctor_doctor_availability" name="Doctor Availability" action="action_doctor_availability" parent="doctor_doctor" sequence="10"/>
+    <menuitem id="doctor_doctor_doctor_timings" name="Duty Timings" action="action_duty_timings" parent="doctor_doctor" sequence="10"/>
+
 
 </odoo>

@@ -25,6 +25,69 @@
                     <group>
                         <field name="person_id"/>
                     </group>
+                    <table id="time_bar">
+                        <tr>
+                            <th>Days</th>
+                            <th>From Time</th>
+                            <th>Till Time</th>
+                            <th rowspan="8" text-align="center"><br>L</br>
+                                                           <br>U</br>
+                                                           <br>N</br>
+                                                           <br>C</br>
+                                                           <br>H</br></th>
+                            <th>From Time</th>
+                            <th>Till Time</th>
+                        </tr>
+                        <tr>
+                            <td align="Left">Monday</td>
+                            <td align="center"><field name="monday_fn_from_time" nolabel="1" widget="float_time"/></td>
+                            <td align="center"><field name="monday_fn_till_time" nolabel="1" widget="float_time"/></td>
+                            <td align="center"><field name="monday_an_from_time" nolabel="1" widget="float_time"/></td>
+                            <td align="center"><field name="monday_fn_till_time" nolabel="1" widget="float_time"/></td>
+                        </tr>
+                        <tr>
+                            <td align="Left">Tuesday</td>
+                            <td align="center"><field name="tuesday_fn_from_time" nolabel="1" widget="float_time"/></td>
+                            <td align="center"><field name="tuesday_fn_till_time" nolabel="1" widget="float_time"/></td>
+                            <td align="center"><field name="tuesday_an_from_time" nolabel="1" widget="float_time"/></td>
+                            <td align="center"><field name="tuesday_an_till_time" nolabel="1" widget="float_time"/></td>
+                        </tr>
+                        <tr>
+                            <td align="Left">Wednesday</td>
+                            <td align="center"><field name="wednesday_fn_from_time" nolabel="1" widget="float_time"/></td>
+                            <td align="center"><field name="wednesday_fn_till_time" nolabel="1" widget="float_time"/></td>
+                            <td align="center"><field name="wednesday_an_from_time" nolabel="1" widget="float_time"/></td>
+                            <td align="center"><field name="wednesday_an_till_time" nolabel="1" widget="float_time"/></td>
+                        </tr>
+                        <tr>
+                            <td align="Left">Thursday</td>
+                            <td align="center"><field name="thursday_fn_from_time" nolabel="1" widget="float_time"/></td>
+                            <td align="center"><field name="thursday_fn_till_time" nolabel="1" widget="float_time"/></td>
+                            <td align="center"><field name="thursday_an_from_time" nolabel="1" widget="float_time"/></td>
+                            <td align="center"><field name="thursday_an_till_time" nolabel="1" widget="float_time"/></td>
+                        </tr>
+                        <tr>
+                            <td align="Left">Friday</td>
+                            <td align="center"><field name="friday_fn_from_time" nolabel="1" widget="float_time"/></td>
+                            <td align="center"><field name="friday_an_till_time" nolabel="1" widget="float_time"/></td>
+                            <td align="center"><field name="friday_fn_from_time" nolabel="1" widget="float_time"/></td>
+                            <td align="center"><field name="friday_an_till_time" nolabel="1" widget="float_time"/></td>
+                        </tr>
+                        <tr>
+                            <td align="Left">Saturday</td>
+                            <td align="center"><field name="saturday_fn_from_time" nolabel="1" widget="float_time"/></td>
+                            <td align="center"><field name="saturday_fn_till_time" nolabel="1" widget="float_time"/></td>
+                            <td align="center"><field name="saturday_an_from_time" nolabel="1" widget="float_time"/></td>
+                            <td align="center"><field name="saturday_an_till_time" nolabel="1" widget="float_time"/></td>
+                        </tr>
+                        <tr>
+                            <td align="Left">Sunday</td>
+                            <td align="center"><field name="sunday_fn_from_time" nolabel="1" widget="float_time"/></td>
+                            <td align="center"><field name="sunday_fn_till_time" nolabel="1" widget="float_time"/></td>
+                            <td align="center"><field name="sunday_an_from_time" nolabel="1" widget="float_time"/></td>
+                            <td align="center"><field name="sunday_an_till_time" nolabel="1" widget="float_time"/></td>
+                        </tr>
+                    </table>
                 </sheet>
             </form>
         </field>

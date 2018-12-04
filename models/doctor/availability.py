@@ -22,9 +22,6 @@ class DoctorAvailability(models.Model):
     progress = fields.Selection(selection=PROGRESS_INFO, string="Progress", default="draft")
     writter = fields.Text(string="Writter", track_visibility="always")
 
-    company_id = fields.Many2one(comodel_name="res.company", string="Company",
-                                 default=lambda self: self.env.user.comoany_id.id)
-
     @api.multi
     def trigger_confirm(self):
         writter = "Availability Confirm By {0} on {1}".format(self.env.user.name, CURRENT_TIME_INDIA)

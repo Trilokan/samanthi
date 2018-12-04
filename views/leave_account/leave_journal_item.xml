@@ -32,6 +32,7 @@
                         <field name="date"/>
                         <field name="person_id"/>
                         <field name="account_id"/>
+                        <field name="type_id"/>
                         <field name="description"/>
                         <field name="credit"/>
                         <field name="debit"/>

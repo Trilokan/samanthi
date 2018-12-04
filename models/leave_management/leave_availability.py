@@ -18,7 +18,16 @@ class LeaveAvailability(models.TransientModel):
     @api.multi
     def onchange_person_id(self):
         if self.person_id.id:
-            pass
+            employee_id = self.env["hr.employee"].search([("person_id", "=", self.person_id.id)])
+            account_id = employee_id.leave_account_id.id
+
+            type_ids = self.env["leave.type"].search([])
+
+            for type_id in type_ids:
+                recs = self.env["leave.journal.item"].search([("account_id", "=", account_id),
+                                                              ("reconcile_id", "=", False),
+                                                              ("credit", ">", 0),
+                                                              ("type_id", "=", type_id.id)])
 
 
 class LeaveAvailabilityDetail(models.TransientModel):

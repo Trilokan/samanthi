@@ -31,11 +31,13 @@ class LeaveJournalItem(models.Model):
     name = fields.Char(string="Name", readonly=True)
     person_id = fields.Many2one(comodel_name="hos.person", string="Person", required=True)
     account_id = fields.Many2one(comodel_name="leave.account", string="Account", required=True)
+    type_id = fields.Many2one(comodel_name="leave.type", string="Leave Type")
     description = fields.Text(string="Description")
     credit = fields.Float(string="Credit", default=0, required=True)
     debit = fields.Float(string="Debit", default=0, required=True)
     reconcile_id = fields.Many2one(comodel_name="leave.reconcile", string="Reconcile", required=False)
     part_reconcile_id = fields.Many2one(comodel_name="leave.reconcile", string="Partial Reconcile")
+    priority = fields.Integer(string="Priority", default=0)
     entry_id = fields.Many2one(comodel_name="leave.journal.entry", string="Entry")
     progress = fields.Selection(selection=PROGRESS_INFO, string="Progress", related="entry_id.progress")
 
