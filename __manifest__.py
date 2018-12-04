@@ -105,6 +105,7 @@
         "views/leave_management/leave_configuration.xml",
         "views/leave_management/leave_level.xml",
         "views/leave_management/leave_type.xml",
+        "views/leave_management/leave_availability.xml",
 
         # Leave Account
         "views/leave_account/leave_account.xml",

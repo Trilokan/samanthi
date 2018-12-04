@@ -118,7 +118,7 @@ class LeaveVoucher(models.Model):
             if rec.part_reconcile_id:
                 items = self.env["leave.journal.item"].search([("part_reconcile_id", "=", rec.part_reconcile_id.id)])
                 data["opening"] = sum(items.mapped('debit'))
-                data["part_reconcile_id"] = rec.part_reconcile_id.id,
+                data["part_reconcile_id"] = rec.part_reconcile_id.id
 
             if data["available"] < data["opening"]:
                 raise exceptions.ValidationError("Error! Please check leave reconcilation")

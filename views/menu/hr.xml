@@ -35,7 +35,7 @@
     <menuitem id="hr_leave_journal_entry" name="Leave Journal Entry" action="action_leave_journal_entry" parent="hr_leave" sequence="10"/>
     <menuitem id="hr_leave_journal_item" name="Leave Journal Item" action="action_leave_journal_item" parent="hr_leave" sequence="10"/>
     <menuitem id="hr_leave_reconcile" name="Leave Reconcile" action="action_leave_reconcile" parent="hr_leave" sequence="10"/>
-    <!--<menuitem id="hr_leave_availability" name="Leave Availability" parent="hr_leave" sequence="10"/>-->
+    <menuitem id="hr_leave_availability" name="Leave Availability" action="action_leave_availability" parent="hr_leave" sequence="10"/>
 
     <!--HR: Recruitment-->
     <menuitem id="sub_menu_hr_recruitment" name="Recruitment" parent="menu_hr" sequence="40"/>
@@ -50,11 +50,6 @@
     <menuitem id="hr_payroll_salary_structure" name="Salary Structure" action="action_salary_structure" parent="hr_payroll" sequence="10"/>
     <menuitem id="hr_payroll_salary_rule" name="Salary Rule" action="action_salary_rule" parent="hr_payroll" sequence="10"/>
     <menuitem id="hr_payroll_salary_rule_slab" name="Salary Rule Slab" action="action_salary_rule_slab" parent="hr_payroll" sequence="10"/>
-
-    <!--Doctor: Doctor-->
-    <menuitem id="doctor_doctor" name="Doctor" parent="menu_hr" sequence="100"/>
-    <menuitem id="doctor_doctor_doctor_availability" name="Doctor Availability" action="action_doctor_availability" parent="doctor_doctor" sequence="10"/>
-    <menuitem id="doctor_doctor_doctor_timings" name="Duty Timings" action="action_duty_timings" parent="doctor_doctor" sequence="10"/>
 
 
 </odoo>
