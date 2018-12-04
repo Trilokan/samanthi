@@ -38,6 +38,7 @@
                         <field name="debit"/>
                         <field name="reconcile_id"/>
                         <field name="part_reconcile_id"/>
+                        <field name="priority"/>
                         <field name="progress" invisible="1"/>
                     </group>
                 </sheet>

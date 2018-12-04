@@ -43,6 +43,7 @@
                             <field name="account_id"/>
                             <field name="type_id"/>
                             <field name="description"/>
+                            <field name="priority"/>
                             <field name="available"/>
                             <field name="opening"/>
                             <field name="reconcile"/>

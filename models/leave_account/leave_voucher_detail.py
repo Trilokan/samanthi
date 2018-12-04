@@ -11,6 +11,7 @@ CURRENT_INDIA = datetime.now().strftime("%d-%m-%Y %H:%M:%S")
 
 class LeaveVoucherDetail(models.Model):
     _name = "leave.voucher.detail"
+    _order = "priority"
 
     date = fields.Date(string="Date")
     name = fields.Char(string="Name")
@@ -18,6 +19,7 @@ class LeaveVoucherDetail(models.Model):
     account_id = fields.Many2one(comodel_name="leave.account", string="Account")
     type_id = fields.Many2one(comodel_name="leave.type", string="Leave Type")
     description = fields.Text(string="Description")
+    priority = fields.Integer(string="Priority", default=0)
     available = fields.Float(string="Available", default=0)
     opening = fields.Float(string="Opening", default=0)
     reconcile = fields.Float(string="Reconcile", default=0)

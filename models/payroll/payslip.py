@@ -23,10 +23,12 @@ class Payslip(models.Model):
     _sql_constraints = [('payslip_uniq', 'unique(employee_id, month_id)', 'Payslip is already generated')]
 
     def check_items(self):
+        conf = self.env["leave.configuration"].search([("company_id", "=", self.env.user.company_id.id)])
+
         hr_pay = self.env["hr.pay"].search([("employee_id", "=", self.employee_id.id)])
-        lop = self.env["leave.item"].search([("person_id", "=", self.employee_id.person_id.id),
-                                             ("period_id", "=", self.month_id.period_id.id),
-                                             ("leave_account_id", "=", self.env.user.company_id.leave_lop_id.id)])
+        lop = self.env["leave.journal.item"].search([("person_id", "=", self.employee_id.person_id.id),
+                                                     ("entry_id.period_id", "=", self.month_id.period_id.id),
+                                                     ("account_id", "=", conf.lop_id.id)])
 
         if not hr_pay:
             raise exceptions.ValidationError("Error! Pay details is not configured")

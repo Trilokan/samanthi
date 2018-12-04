@@ -204,7 +204,9 @@ class MonthAttendance(models.Model):
         if draft:
             raise exceptions.ValidationError("Error! Daily attendance report is not verified")
 
-        _, num_days = monthrange(int(self.period_id.year_id.name), int(self.period_id.name))
+        date = datetime.strptime(self.period_id.from_date, "%Y-%m-%d")
+
+        _, num_days = monthrange(date.year, date.month)
         attendance = self.env["time.attendance"].search_count([("month_id", "=", self.id), ("progress", "=", "verified")])
 
         if num_days != attendance:
@@ -239,6 +241,7 @@ class MonthAttendance(models.Model):
                               "description": "{0} Leave Credit".format(level.type_id.name),
                               "credit": level.credit,
                               "type_id": level.type_id.id,
+                              "priority": level.sequence,
                               "account_id": employee.leave_account_id.id}
 
             leave_item.append((0, 0, journal_credit))
@@ -248,6 +251,7 @@ class MonthAttendance(models.Model):
                              "description": "{0} Leave Credit".format(level.type_id.name),
                              "debit": level.credit,
                              "type_id": level.type_id.id,
+                             "priority": level.sequence,
                              "account_id": level.type_id.account_id.id}
 
             leave_item.append((0, 0, journal_debit))
