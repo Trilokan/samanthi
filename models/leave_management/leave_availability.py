@@ -22,7 +22,8 @@ class LeaveAvailability(models.TransientModel):
             account_id = employee_id.leave_account_id.id
 
             availability = []
-            type_ids = self.env["leave.type"].search([])
+            config = self.env["leave.configuration"].search([("company_id", "=", self.env.user.company_id.id)])
+            type_ids = self.env["leave.type"].search([("id", "!=", config.lop_id.id)])
             for type_id in type_ids:
                 recs = self.env["leave.journal.item"].search([("account_id", "=", account_id),
                                                               ("reconcile_id", "=", False),
