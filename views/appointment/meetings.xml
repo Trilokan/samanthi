@@ -46,29 +46,53 @@
         </field>
     </record>
 
+    <record id="view_hos_appointment_meetings_calendar" model="ir.ui.view">
+        <field name="name">hos.appointment.meetings.calendar</field>
+        <field name="model">hos.appointment</field>
+        <field name="arch" type="xml">
+            <calendar string="OPT Appointment"
+                      color="employee_id"
+                      date_start="appointment_time"
+                      mode="month"
+                      quick_add="False"
+                      avatar_model="hr.employee">
+                <field name="person_id"/>
+                <field name="employee_id"/>
+            </calendar>
+        </field>
+    </record>
+
     <!-- Action-->
     <record id="action_hos_appointment_meetings" model="ir.actions.act_window">
         <field name="name">Meetings</field>
         <field name="res_model">hos.appointment</field>
         <field name="view_type">form</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">calendar,tree,form</field>
         <field name="domain">[('appointment_type', '=', 'meetings')]</field>
         <field name="context">{'default_appointment_type': 'meetings'}</field>
+        <field name="view_id" ref="view_hos_appointment_meetings_calendar"/>
+    </record>
+
+    <record model="ir.actions.act_window.view" id="action_hos_appointment_meetings_calendar">
+        <field eval="1" name="sequence"/>
+        <field name="view_mode">calendar</field>
+        <field name="view_id" ref="view_hos_appointment_meetings_calendar"/>
+        <field name="act_window_id" ref="action_hos_appointment_meetings"/>
+    </record>
+
+    <record model="ir.actions.act_window.view" id="action_hos_appointment_meetings_tree">
+        <field eval="2" name="sequence"/>
+        <field name="view_mode">tree</field>
         <field name="view_id" ref="view_hos_appointment_meetings_tree"/>
+        <field name="act_window_id" ref="action_hos_appointment_meetings"/>
     </record>
 
     <record model="ir.actions.act_window.view" id="action_hos_appointment_meetings_form">
-        <field eval="2" name="sequence"/>
+        <field eval="3" name="sequence"/>
         <field name="view_mode">form</field>
         <field name="view_id" ref="view_hos_appointment_meetings_form" />
         <field name="act_window_id" ref="action_hos_appointment_meetings"/>
     </record>
 
-    <record model="ir.actions.act_window.view" id="action_hos_appointment_meetings_tree">
-        <field eval="1" name="sequence"/>
-        <field name="view_mode">tree</field>
-        <field name="view_id" ref="view_hos_appointment_meetings_tree"/>
-        <field name="act_window_id" ref="action_hos_appointment_meetings"/>
-    </record>
 
 </odoo>

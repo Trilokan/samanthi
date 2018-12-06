@@ -79,6 +79,7 @@
         "views/employee/hr_designation.xml",
         "views/employee/hr_experience.xml",
         "views/employee/hr_qualification.xml",
+        "views/employee/todo.xml",
 
         # Recruitment Management
         "views/recruitment/resume_bank.xml",
@@ -174,9 +175,9 @@
         # # Menu
         # "views/menu/hospital.xml",
         # "views/menu/contact.xml",
-        # "views/menu/doctor.xml",
+        "views/menu/doctor.xml",
         # "views/menu/patient.xml",
-        # "views/menu/employee.xml",
+        "views/menu/employee.xml",
         "views/menu/hr.xml",
         "views/menu/inventory.xml",
         "views/menu/purchase.xml",

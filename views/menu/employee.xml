@@ -9,24 +9,24 @@
     <menuitem id="employee_time_attendance" name="Attendance" action="action_time_attendance" parent="employee_time" sequence="10"/>
 
     <!--Employee Leave Management-->
-    <menuitem id="employee_leave" name="Leave Management" parent="menu_employee" sequence="10"/>
+    <menuitem id="employee_leave" name="Leave Management" parent="menu_employee" sequence="20"/>
     <menuitem id="employee_leave_leave_application" name="Leave Request" action="action_leave_application" parent="employee_leave" sequence="10"/>
     <menuitem id="employee_leave_comp_off_application" name="Comp-Off" action="action_compoff_application" parent="employee_leave" sequence="20"/>
     <menuitem id="employee_leave_permission_application" name="Permission" action="action_permission_application" parent="employee_leave" sequence="30"/>
-    <menuitem id="employee_leave_leave_availability" name="Leave Availability" action="action_permission_application" parent="employee_leave" sequence="30"/>
+    <menuitem id="employee_leave_leave_availability" name="Leave Availability" action="action_leave_availability" parent="employee_leave" sequence="30"/>
 
     <!--Employee Notes-->
-    <menuitem id="employee_notes" name="Notes" parent="menu_employee" sequence="20"/>
+    <menuitem id="employee_notes" name="Notes" parent="menu_employee" sequence="30"/>
     <menuitem id="notes_hos_notes" name="Notes" action="action_hos_notes" parent="employee_notes" sequence="10"/>
     <menuitem id="notes_hos_notification" name="Notification" action="action_hos_notification" parent="employee_notes" sequence="20"/>
     <menuitem id="notes_hos_reminder" name="Reminder" action="action_hos_reminder" parent="employee_notes" sequence="30"/>
-    <!--<menuitem id="notes_hos_todo" name="To Do" action="action_hos_todo" parent="employee_notes" sequence="30"/>-->
+    <menuitem id="notes_hos_todo" name="ToDo" action="action_hos_todo" parent="employee_notes" sequence="40"/>
 
     <!--Employee: Stores-->
-    <menuitem id="employee_stores" name="Stores" parent="menu_employee" sequence="20"/>
-    <menuitem id="employee_stores_store_request" name="Store Request" action="action_leave_application" parent="employee_stores" sequence="10"/>
-    <menuitem id="employee_stores_store_return" name="Store Return" action="action_leave_application" parent="employee_stores" sequence="20"/>
-    <menuitem id="employee_stores_material_inspection" name="Material Inspection" action="action_leave_application" parent="employee_stores" sequence="20"/>
+    <menuitem id="employee_stores" name="Stores" parent="menu_employee" sequence="40"/>
+    <menuitem id="employee_stores_store_request" name="Store Request" action="action_store_request" parent="employee_stores" sequence="10"/>
+    <menuitem id="employee_stores_store_return" name="Store Return" action="action_store_return" parent="employee_stores" sequence="20"/>
+    <!--<menuitem id="employee_stores_material_inspection" name="Material Inspection" action="action_leave_application" parent="employee_stores" sequence="20"/>-->
 
     <!--&lt;!&ndash;Employee: Report&ndash;&gt;-->
     <!--<menuitem id="employee_report" name="Report" parent="menu_employee" sequence="20"/>-->
