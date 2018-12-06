@@ -13,11 +13,11 @@ class SalaryStructure(models.Model):
 
     name = fields.Char(string="Name", required=True)
     code = fields.Char(string="Code", required=True)
-    detail_ids = fields.One2many(comodel_name="salary.structure.detail",
-                                 inverse_name="structure_id",
-                                 string="Salary Structure Detail")
+    detail_ids = fields.One2many(comodel_name="salary.structure.detail", inverse_name="structure_id")
     progress = fields.Selection(selection=PROGRESS_INFO, string="Progress", default="draft")
     writter = fields.Text(string="Writter", track_visibility='always')
+
+    _sql_constraints = [('code_uniq', 'unique(code)', 'Salary Structure should not duplicated')]
 
     @api.multi
     def trigger_confirm(self):
@@ -38,10 +38,11 @@ class SalaryStructureDetail(models.Model):
 
     rule_id = fields.Many2one(comodel_name="salary.rule", string="Salary Rule", required=True)
     code = fields.Many2one(comodel_name="salary.rule.code", string="Code", related="rule_id.code")
-    sequence = fields.Integer(string="Sequence")
+    sequence = fields.Integer(string="Sequence", required=True)
     is_need = fields.Boolean(string="Is Need")
     structure_id = fields.Many2one(comodel_name="salary.structure", string="Salary Structure")
     pay_type = fields.Selection(PAY_TYPE, string='Pay Type', required=True)
     progress = fields.Selection(PROGRESS_INFO, string='Progress', related='structure_id.progress')
 
-    _sql_constraints = [('rule_uniq', 'unique(rule_id, structure_id)', 'Salary Structure should not duplicated')]
+    _sql_constraints = [('rule_uniq', 'unique(rule_id, structure_id)', 'Salary Structure Details should not duplicated'),
+                        ('sequence_check', 'CHECK(sequence < 1)', 'Check Sequence')]

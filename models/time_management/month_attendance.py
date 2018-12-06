@@ -26,7 +26,7 @@ class MonthAttendance(models.Model):
         from_date_obj = datetime.strptime(from_date, "%Y-%m-%d")
         till_date_obj = datetime.strptime(till_date, "%Y-%m-%d")
 
-        return (till_date_obj - from_date_obj).days
+        return (till_date_obj - from_date_obj).days + 1
 
     def get_total_days(self, person):
         total_days = self.env["time.attendance.detail"].search_count([("person_id", "=", person.id),
@@ -88,15 +88,15 @@ class MonthAttendance(models.Model):
         return full_day + (0.5 * half_day)
 
     def get_lop_days(self, person):
-        total = 0
-        recs = self.env["leave.item"].search([("period_id", "=", self.period_id.id),
-                                              ("person_id", "=", person.id),
-                                              ("leave_account_id", "=", self.env.user.company_id.leave_lop_id.id)])
+        conf = self.env["leave.configuration"].search([("company_id", "=", self.env.user.company_id.id)])
+        rec = self.env["leave.journal.item"].search([("entry_id.period_id", "=", self.period_id.id),
+                                                     ("person_id", "=", person.id),
+                                                     ("account_id", "=", conf.lop_id.id)])
 
-        for rec in recs:
-            total = total + rec.credit
+        if len(rec) != 1:
+            raise exceptions.ValidationError("Error! Multiple LOP in a month")
 
-        return total
+        return rec.debit
 
     def get_leave_available(self, person):
         employee_id = self.env["hr.employee"].search([("person_id", "=", person.id)])

@@ -11,18 +11,14 @@ class HRPay(models.Model):
     _inherit = "mail.thread"
     _rec_name = "employee_id"
 
-    employee_id = fields.Many2one(comodel_name="hr.employee",
-                                  string="Employee",
-                                  required=True)
+    employee_id = fields.Many2one(comodel_name="hr.employee", string="Employee", required=True)
     basic = fields.Float(string="Basic", required=True)
-    structure_id = fields.Many2one(comodel_name="salary.structure",
-                                   string="Salary Structure",
-                                   required=True)
-
+    structure_id = fields.Many2one(comodel_name="salary.structure", string="Salary Structure", required=True)
     progress = fields.Selection(selection=PROGRESS_INFO, string="Progress", default="draft")
     writter = fields.Text(string="Writter", track_visibility='always')
 
-    _sql_constraints = [('name_uniq', 'unique(employee_id)', 'Payscale is already configured')]
+    _sql_constraints = [('name_uniq', 'unique(employee_id)', 'Payscale is already configured'),
+                        ('basic_check', 'CHECK(basic < 1)', 'Check BASIC Pay')]
 
     def trigger_confirm(self):
         writter = "Pay detail for {0} with basic {1} Created by {2}".format(self.employee_id.name,

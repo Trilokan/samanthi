@@ -1,21 +1,32 @@
 # -*- coding: utf-8 -*-
 
 from odoo import fields, models, api, exceptions
+from datetime import datetime
 
 PROGRESS_INFO = [('draft', 'Draft'), ('generated', 'Generated')]
 PAY_TYPE = [('allowance', 'Allowance'), ('deduction', 'Deduction')]
+CURRENT_DATE = datetime.now().strftime("%Y-%m-%d")
+CURRENT_TIME = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+CURRENT_INDIA = datetime.now().strftime("%d-%m-%Y %H:%M:%S")
 
 
 # Payslip
 class Payslip(models.Model):
     _name = "pay.slip"
     _inherit = "mail.thread"
+    _rec_name = "employee_id"
 
+    date = fields.Date(string="Date", required=True, default=CURRENT_DATE)
     employee_id = fields.Many2one(comodel_name="hr.employee", string="Employee", readonly=True)
     month_id = fields.Many2one(comodel_name="month.attendance", string="Month", readonly=True)
-    payslip_details = fields.One2many(comodel_name="payslip.detail",
-                                      inverse_name="payslip_id",
-                                      string="Pay Slip Details")
+    payslip_details = fields.One2many(comodel_name="payslip.detail", inverse_name="payslip_id")
+    total_days = fields.Float(string="Total Days", readonly=True)
+    schedule_days = fields.Float(string="Scheduled Days", readonly=True)
+    lop_days = fields.Float(string="Lop Days", readonly=True)
+    present_days = fields.Float(string="Present Days", readonly=True)
+    absent_days = fields.Float(string="Absent Days", readonly=True)
+    total_holidays = fields.Float(string="Total Holidays", readonly=True)
+    holiday_present = fields.Float(string="Holiday Present", readonly=True)
     payslip_report = fields.Html(string="Payslip Report", readonly=True)
     writter = fields.Text(string="Writter", track_visibility='always')
     progress = fields.Selection(selection=PROGRESS_INFO, string="Progress", default="draft")
@@ -52,17 +63,13 @@ class Payslip(models.Model):
         sorted(recs, key=lambda x: x.sequence)
 
         person = self.employee_id.person_id
-        total_days = self.month_id.get_days_in_month()
-        schedule_days = self.month_id.get_total_days(person)
-        total_present = self.month_id.get_present_days(person)
-        total_absent = self.month_id.get_absent_days(person)
-        total_holidays = self.month_id.get_holidays(person)
-        total_holiday_present = self.month_id.get_holidays_present(person)
-        total_lop_days = self.month_id.get_lop_days(person)
-
-        lop = self.env["leave.item"].search([("person_id", "=", person.id),
-                                             ("period_id", "=", self.month_id.period_id.id),
-                                             ("leave_account_id", "=", self.env.user.company_id.leave_lop_id.id)])
+        self.total_days = self.month_id.get_days_in_month()
+        self.schedule_days = self.month_id.get_total_days(person)
+        self.present_days = self.month_id.get_present_days(person)
+        self.absent_days = self.month_id.get_absent_days(person)
+        self.total_holidays = self.month_id.get_holidays(person)
+        self.holiday_present = self.month_id.get_holidays_present(person)
+        self.lop_days = self.month_id.get_lop_days(person)
 
         for rec in recs:
             if rec.is_need:
@@ -70,13 +77,6 @@ class Payslip(models.Model):
                         "unit_price": pay[rec.rule_id.code.name],
                         "payslip_id": self.id,
                         "pay_order": rec.sequence,
-                        "total_days": total_days,
-                        "schedule_days": schedule_days,
-                        "lop_days": total_lop_days,
-                        "present_days": total_present,
-                        "absent_days": total_absent,
-                        "total_holidays": total_holidays,
-                        "holiday_present": total_holiday_present,
                         "pay_type": rec.pay_type}
                 payslip_detail = self.env["payslip.detail"].create(data)
                 payslip_detail.calculate_amount()
@@ -121,18 +121,11 @@ class PayslipDetail(models.Model):
     amount = fields.Float(string="Amount", readonly=True)
     pay_order = fields.Integer(string="Pay Order", readonly=True)
     pay_type = fields.Selection(PAY_TYPE, string='Pay Type', readonly=True)
-    total_days = fields.Float(string="Total Days", readonly=True)
-    schedule_days = fields.Float(string="Scheduled Days", readonly=True)
-    lop_days = fields.Float(string="Lop Days", readonly=True)
-    present_days = fields.Float(string="Present Days", readonly=True)
-    absent_days = fields.Float(string="Absent Days", readonly=True)
-    total_holidays = fields.Float(string="Total Holidays", readonly=True)
-    holiday_present = fields.Float(string="Holiday Present", readonly=True)
     payslip_id = fields.Many2one(comodel_name="pay.slip", string="payslip")
 
     def calculate_amount(self):
         unit_price = self.unit_price / 30
-        amount = (unit_price * self.schedule_days) - (unit_price * self.lop_days)
+        amount = (unit_price * self.payslip_id.schedule_days) - (unit_price * self.payslip_id.lop_days)
         self.write({"amount": amount})
 
     _sql_constraints = [('salary_details_uniq', 'unique(code, payslip_id)', 'Salary details should not duplicated')]

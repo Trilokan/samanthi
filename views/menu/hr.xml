@@ -46,6 +46,7 @@
     <!--HR: Payroll-->
     <menuitem id="hr_payroll" name="Payroll" parent="menu_hr" sequence="10"/>
     <menuitem id="hr_payroll_pay_slip" name="Payslip" action="action_pay_slip" parent="hr_payroll" sequence="10"/>
+    <menuitem id="hr_payroll_hr_pay" name="Employee Pay" action="action_hr_pay" parent="hr_payroll" sequence="20"/>
     <menuitem id="hr_payroll_payroll_generation" name="Payroll Generation" action="action_payroll_generation" parent="hr_payroll" sequence="10"/>
     <menuitem id="hr_payroll_salary_structure" name="Salary Structure" action="action_salary_structure" parent="hr_payroll" sequence="10"/>
     <menuitem id="hr_payroll_salary_rule" name="Salary Rule" action="action_salary_rule" parent="hr_payroll" sequence="10"/>
