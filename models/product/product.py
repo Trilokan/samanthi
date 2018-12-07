@@ -20,27 +20,22 @@ class Product(models.Model):
     payable = fields.Many2one(comodel_name="hos.account", string="Accounts Payable")
     receivable = fields.Many2one(comodel_name="hos.account", string="Accounts Receivable")
     warehouse_ids = fields.One2many(comodel_name="stock.warehouse",
-                                    inverse_name="product_id",
                                     string="Warehouse",
-                                    domain=lambda self: self._get_warehouse_ids(),
-                                    readonly=True)
-    company_id = fields.Many2one(comodel_name="res.company",
-                                 string="Company",
-                                 default=lambda self: self.env.user.company_id.id,
-                                 readonly=True)
+                                    compute="_get_warehouse_ids")
 
+    _sql_constraints = [("code", "unique(code)", "Product Code must be unique")]
+
+    @api.one
     def _get_warehouse_ids(self):
         config = self.env["product.configuration"].search([("company_id", "=", self.env.user.company_id.id)])
         domain = [('location_id.location_left', '>=', config.virtual_left),
                   ('location_id.location_right', '<=', config.virtual_right)]
 
-        virtual_location = self.env["stock.warehouse"].search(domain)
-
-        return [("id", "not in", virtual_location.ids)]
+        self.warehouse_ids = self.env["stock.warehouse"].search(domain)
 
     @api.multi
     def trigger_confirm(self):
-        config = self.env["product.configuration"].search([("company_id", "=", self.company_id.id)])
+        config = self.env["product.configuration"].search([("company_id", "=", self.env.user.company_id.id)])
         store_location_id = config.store_id.id
 
         if not store_location_id:

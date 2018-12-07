@@ -10,7 +10,8 @@ class ProductTax(models.Model):
     code = fields.Char(string="Code", required=True)
     rate = fields.Float(string="Rate", default=0, required=True)
 
-    _sql_constraints = [("code", "unique(code)", "Tax must be unique")]
+    _sql_constraints = [("code", "unique(code)", "Tax must be unique"),
+                        ("name_rate", "unique(name, rate)", "Tax must be unique")]
 
     @api.multi
     def name_get(self):

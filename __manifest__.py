@@ -184,7 +184,7 @@
         # "views/menu/pharmacy.xml",
         "views/menu/account.xml",
 
-        "data/time_management.xml",
+        # "data/time_management.xml",
 
     ],
     "demo": [
