@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from odoo import models, fields
+from odoo import models, fields, api
 
 
 class StockWarehouse(models.Model):
@@ -10,10 +10,14 @@ class StockWarehouse(models.Model):
     location_id = fields.Many2one(comodel_name="stock.location", string="Location", readonly=True)
     quantity = fields.Float(string="Quantity", compute="_get_stock")
 
-    _sql_constraints = [('product_location',
-                         'unique (product_id, location_id)',
-                         'Error! Product location must be unique')]
-
     def _get_stock(self):
         for record in self:
             record.quantity = self.env["hos.stock"].get_current_stock(record.product_id.id, record.location_id.id)
+
+    @api.model
+    def create(self, vals):
+        record = self.env["stock.warehouse"].search_count([("product_id", "=", vals["product_id"]),
+                                                           ("location_id", "=", vals["location_id"])])
+
+        if not record:
+            return super(StockWarehouse, self).create(vals)
