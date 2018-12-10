@@ -33,6 +33,7 @@
         "views/base/users.xml",
         "views/base/person.xml",
         "views/base/patient.xml",
+        "views/base/person_type.xml",
 
         # Hospitality
         "views/hospitality/admission.xml",
@@ -174,8 +175,8 @@
 
         # # Menu
         # "views/menu/hospital.xml",
-        # "views/menu/contact.xml",
-        "views/menu/doctor.xml",
+        "views/menu/contact.xml",
+        # "views/menu/doctor.xml",
         # "views/menu/patient.xml",
         "views/menu/employee.xml",
         "views/menu/hr.xml",
@@ -184,6 +185,8 @@
         # "views/menu/pharmacy.xml",
         "views/menu/account.xml",
 
+        "data/person_type.xml",
+        "data/hr_category.xml",
         "data/time_management.xml",
 
     ],

@@ -8,7 +8,6 @@
         <field name="arch" type="xml">
             <tree string="Supplier">
                 <field name="name"/>
-                <field name="person_type"/>
                 <field name="person_uid"/>
             </tree>
         </field>
@@ -85,7 +84,7 @@
         <field name="res_model">hos.person</field>
         <field name="view_type">form</field>
         <field name="view_mode">tree,form</field>
-        <field name="domain">[('person_type', '=', 'supplier')]</field>
+        <field name="domain">[('type_ids.name', '=', 'Supplier')]</field>
         <field name="view_id" ref="view_hos_person_supplier_tree"/>
     </record>
 

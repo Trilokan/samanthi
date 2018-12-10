@@ -6,6 +6,7 @@
     <menuitem id="hr_employee_hr_employee" name="Employee" action="action_hr_employee" parent="hr_employee" sequence="10"/>
     <menuitem id="hr_employee_hr_department" name="Department" action="action_hr_department" parent="hr_employee" sequence="20"/>
     <menuitem id="hr_employee_hr_designation" name="Designation" action="action_hr_designation" parent="hr_employee" sequence="30"/>
+    <menuitem id="hr_employee_hr_category" name="Category" action="action_hr_category" parent="hr_employee" sequence="40"/>
 
     <!--HR: Time Management-->
     <menuitem id="hr_time" name="Time Management" parent="menu_hr" sequence="30"/>

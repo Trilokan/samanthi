@@ -86,7 +86,7 @@
         <field name="res_model">hos.person</field>
         <field name="view_type">form</field>
         <field name="view_mode">tree,form</field>
-        <field name="domain">[('person_type', '=', 'driver')]</field>
+        <field name="domain">[('type_ids.name', '=', 'Driver')]</field>
         <field name="view_id" ref="view_hos_person_driver_tree"/>
     </record>
 

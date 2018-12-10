@@ -82,12 +82,15 @@ class Employee(models.Model):
 
     def generate_person(self, vals):
         employee_category_id = self.env["hr.category"].search([("id", "=", vals["employee_category_id"])])
+        category_type_id = self.env["person.type"].search([("name", "=", employee_category_id.name)])
+        employee_type_id = self.env["person.type"].search([("name", "=", "Staff")])
 
         data = {"name": vals["name"],
                 "contact_no": vals["contact_no"],
                 "email": vals.get("email", False),
                 "alternate_contact_no": vals.get("alternate_contact_no", False),
                 "person_uid": vals["employee_uid"],
+                "type_ids": [(6, 0, [category_type_id.id, employee_type_id.id])],
                 "person_type": employee_category_id.name.lower()}
 
         person_id = self.env["hos.person"].create(data)

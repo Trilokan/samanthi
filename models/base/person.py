@@ -3,16 +3,6 @@
 from odoo import models, fields, api
 
 
-PERSON_TYPE = [("patient", "Patient"),
-               ("doctor", "Doctor"),
-               ("nurse", "Nurse"),
-               ("staff", "Staff"),
-               ("driver", "Driver"),
-               ("supplier", "Supplier"),
-               ("customer", "Customer"),
-               ("service", "Service")]
-
-
 class HospitalPerson(models.Model):
     _name = "hos.person"
     _inherit = "hos.address"
@@ -22,7 +12,6 @@ class HospitalPerson(models.Model):
     image = fields.Binary(string="Image")
     small_image = fields.Binary(string="Image")
 
-    person_type = fields.Selection(selection=PERSON_TYPE, string="Person Type")
     attachment_ids = fields.Many2many(comodel_name="ir.attachment", string="Attachment")
 
     # Contact Detail (hos.address)
@@ -33,7 +22,7 @@ class HospitalPerson(models.Model):
     # Alternate Contact
     alternate_contact = fields.Char(string="Alternate Contact")
     alternate_email = fields.Char(string="Email")
-    alternate_contact_no = fields.Char(string="Contact No", required=True)
+    alternate_contact_no = fields.Char(string="Contact No")
 
     # Account Detail
     gst_no = fields.Char(string="GST No")
@@ -50,6 +39,11 @@ class HospitalPerson(models.Model):
                                  readonly=True)
 
     is_employee = fields.Boolean(string="Is Employee")
+    is_patient = fields.Boolean(string="Is Patient")
+    is_supplier = fields.Boolean(string="Is Supplier")
+
+    type_ids = fields.Many2many(comodel_name="person.type", string="Person Type")
+
     state_id = fields.Many2one(comodel_name="res.country.state",
                                string="State",
                                default=lambda self: self.env.user.company_id.state_id.id,
@@ -84,3 +78,11 @@ class HospitalPerson(models.Model):
         vals.update(self.generate_account(vals))
 
         return super(HospitalPerson, self).create(vals)
+
+
+class PersonType(models.Model):
+    _name = "person.type"
+
+    name = fields.Char(string="Name", required=True)
+    person_ids = fields.Many2many(comodel_name="hos.person", string="Person")
+

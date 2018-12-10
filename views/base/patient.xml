@@ -43,6 +43,7 @@
                     <group>
                         <field name="email"/>
                         <field name="contact_no"/>
+                        <field name="alternate_contact"/>
                     </group>
                     <notebook>
                         <page string="Contact Details">

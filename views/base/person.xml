@@ -34,10 +34,21 @@
                     </div>
                     <group>
                         <field name="is_employee"/>
+                        <field name="type_ids" widget="many2many_tags"/>
                     </group>
                     <notebook>
                         <page string="Contact Details">
                             <group>
+
+                                <group string="Account Details">
+                                    <field name="gst_no"/>
+                                    <field name="license_no"/>
+                                    <field name="tin_no"/>
+                                    <field name="pan_no"/>
+                                    <field name="payable_id"/>
+                                    <field name="receivable_id"/>
+                                </group>
+
                                 <group string="Address">
                                     <div style="width: 95%">
                                         <div class="address_format">
@@ -69,16 +80,6 @@
                                     <field name="email"/>
                                 </group>
 
-                            </group>
-                        </page>
-                        <page string="Account Details">
-                            <group col="4">
-                                <field name="gst_no"/>
-                                <field name="license_no"/>
-                                <field name="tin_no"/>
-                                <field name="pan_no"/>
-                                <field name="payable_id"/>
-                                <field name="receivable_id"/>
                             </group>
                         </page>
                     </notebook>

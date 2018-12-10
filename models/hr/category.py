@@ -8,6 +8,5 @@ class HRCategory(models.Model):
     _name = "hr.category"
 
     name = fields.Char(string="Category", required=True)
-    company_id = fields.Many2one(comodel_name="res.company", string="Company",
-                                 default=lambda self: self.env.user.company_id.id,
-                                 readonly=True)
+
+    _sql_constraints = [("name", "unique(name)", "Employee Category must be unique")]

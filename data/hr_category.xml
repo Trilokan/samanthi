@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Employee Category : Doctor -->
+    <record id="hr_category_Doctor" model="hr.category">
+        <field name="name">Doctor</field>
+    </record>
+
+    <!-- Employee Category : Nurse -->
+    <record id="hr_category_nurse" model="hr.category">
+        <field name="name">Nurse</field>
+    </record>
+
+    <!-- Employee Category : Staff -->
+    <record id="hr_category_staff" model="hr.category">
+        <field name="name">Staff</field>
+    </record>
+
+    <!-- Employee Category : Driver -->
+    <record id="hr_category_driver" model="hr.category">
+        <field name="name">Driver</field>
+    </record>
+
+
+</odoo>

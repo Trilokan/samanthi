@@ -86,7 +86,7 @@
         <field name="res_model">hos.person</field>
         <field name="view_type">form</field>
         <field name="view_mode">tree,form</field>
-        <field name="domain">[('person_type', '=', 'service')]</field>
+        <field name="domain">[('type_ids.name', '=', 'Service')]</field>
         <field name="view_id" ref="view_hos_person_service_tree"/>
     </record>
 

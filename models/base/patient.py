@@ -80,11 +80,14 @@ class Patient(models.Model):
                 record.age = "({0}) Years ({1}) Days".format(years, (total_days-years*365))
 
     def generate_person(self, vals):
+        patient_type_id = self.env["person.type"].search([("name", "=", "Patient")])
+
         data = {"name": vals["name"],
                 "contact_no": vals["contact_no"],
                 "email": vals.get("email", False),
                 "alternate_contact": vals.get("alternate_contact", False),
                 "person_uid": vals["patient_uid"],
+                "type_ids": [(6, 0, [patient_type_id.id])],
                 "person_type": "patient"}
 
         person_id = self.env["hos.person"].create(data)

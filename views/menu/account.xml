@@ -20,6 +20,12 @@
     <menuitem id="account_configuration_period_period" name="Period" action="action_period_period" parent="account_configuration" sequence="20"/>
     <menuitem id="account_configuration_hos_journal" name="Journals" action="action_hos_journal" parent="account_configuration" sequence="30"/>
 
+    <!--Account: Base-->
+    <menuitem id="account_base" name="Base" parent="menu_account" sequence="40"/>
+    <menuitem id="account_base_hos_person" name="Person" action="action_hos_person" parent="account_base" sequence="10"/>
+    <menuitem id="account_base_hos_patient" name="Person" action="action_hos_patient" parent="account_base" sequence="20"/>
+    <menuitem id="account_base_person_type" name="Person Type" action="action_person_type" parent="account_base" sequence="30"/>
+
     <!--Account: Report-->
     <!--<menuitem id="account_report" name="Report" parent="menu_account" sequence="30"/>-->
     <!--<menuitem id="account_report_accounts_chart" name="Chart Of Accounts" action="action_accounts_chart" parent="account_report" sequence="30"/>-->
