@@ -3,7 +3,11 @@
 from odoo import models, fields, api, exceptions
 from datetime import datetime
 
-PROGRESS_INFO = [("draft", "Draft"), ("confirm", "Confirm"), ("done", "Done"), ("cancel", "Cancel")]
+PROGRESS_INFO = [("draft", "Draft"),
+                 ('paid', 'Paid'),
+                 ("scheduled", "Scheduled"),
+                 ("done", "Done"),
+                 ("cancel", "Cancel")]
 THEATER_PROGRESS = [("draft", "Draft"), ("booked", "Booked"), ("cancel", "Cancel")]
 CURRENT_DATE = datetime.now().strftime("%Y-%m-%d")
 CURRENT_TIME = datetime.now().strftime("%Y-%m-%d %H:%M:%S")

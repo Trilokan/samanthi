@@ -42,6 +42,7 @@
         "views/hospitality/ambulance.xml",
         "views/hospitality/ward.xml",
         "views/hospitality/bed.xml",
+        "views/hospitality/patient_shifting.xml",
 
         # # Operation
         # "views/operation/operation.xml",
@@ -174,7 +175,7 @@
         "views/account/period.xml",
 
         # # Menu
-        # "views/menu/hospital.xml",
+        "views/menu/hospital.xml",
         "views/menu/contact.xml",
         # "views/menu/doctor.xml",
         # "views/menu/patient.xml",

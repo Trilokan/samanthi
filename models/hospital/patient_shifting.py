@@ -17,6 +17,7 @@ class PatientShifting(models.Model):
 
     date = fields.Datetime(string="Date", default=CURRENT_TIME, required=True)
     person_id = fields.Many2one(comodel_name="hos.person", string="Person")
-    source = fields.Many2one(comodel_name="hos.bed", string="Source", required=True)
-    destination = fields.Many2one(comodel_name="hos.bed", string="Destination ", required=True)
+    source_id = fields.Many2one(comodel_name="hos.bed", string="Source", required=True)
+    destination_id = fields.Many2one(comodel_name="hos.bed", string="Destination ", required=True)
     progress = fields.Selection(selection=PROGRESS_INFO, string="Progress", default="draft")
+

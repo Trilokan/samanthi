@@ -15,9 +15,10 @@
 
     <!--Hospital: Hospital Management-->
     <menuitem id="hospital_hospital_management" name="Hospital Management" parent="menu_hospital" sequence="30"/>
-    <menuitem id="hospital_hospital_management_hos_department" name="Department" action="action_hr_department" parent="hospital_hospital_management" sequence="10"/>
-    <menuitem id="hospital_hospital_management_hos_ward" name="Ward" action="action_hos_ward" parent="hospital_hospital_management" sequence="20"/>
-    <menuitem id="hospital_hospital_management_hos_bed" name="Bed" action="action_hos_bed" parent="hospital_hospital_management" sequence="30"/>
+    <menuitem id="hospital_hospital_management_patient_shifting" name="Patient Shifting" action="action_patient_shifting" parent="hospital_hospital_management" sequence="10"/>
+    <menuitem id="hospital_hospital_management_hos_department" name="Department" action="action_hr_department" parent="hospital_hospital_management" sequence="20"/>
+    <menuitem id="hospital_hospital_management_hos_ward" name="Ward" action="action_hos_ward" parent="hospital_hospital_management" sequence="30"/>
+    <menuitem id="hospital_hospital_management_hos_bed" name="Bed" action="action_hos_bed" parent="hospital_hospital_management" sequence="40"/>
 
     <!--&lt;!&ndash;Hospital: Operation&ndash;&gt;-->
     <!--<menuitem id="hospital_operation" name="Operation" parent="menu_hospital" sequence="40"/>-->

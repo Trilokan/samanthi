@@ -24,7 +24,21 @@
                     </div>
                     <group>
                         <field name="date"/>
+                        <field name="total_bed"/>
+                        <field name="vacant_bed"/>
+                        <field name="occupied_bed"/>
                     </group>
+                    <field name="occupied_ids">
+                        <tree>
+                            <field name="person_id"/>
+                            <field name="bed_id"/>
+                        </tree>
+                    </field>
+                    <field name="vacant_ids">
+                        <tree>
+                            <field name="bed_id"/>
+                        </tree>
+                    </field>
                 </sheet>
             </form>
         </field>
