@@ -23,13 +23,47 @@
                     <div id="s_header">
                         <h1>Operation</h1>
                     </div>
-                    <group>
+                    <div id="p_header">
+                        <field name="progress" widget="statusbar" style="float: right;padding: 20px;"/>
+                    </div>
+                    <h2><field name="name"/></h2>
+                    <group col="4">
                         <field name="date"/>
-                        <field name="name"/>
+                        <field name="patient_id"/>
+                        <field name="doctor_id"/>
+                        <field name="treatment_id"/>
+                        <field name="type_id"/>
+                        <field name="theater_id"/>
                         <field name="procedure"/>
                     </group>
+
+                    <notebook>
+                        <page string="Nurse/ Staff">
+                            <field name="staff_id"/>
+                        </page>
+                        <page string="Attachments">
+                            <field name="attachment_ids" widget="many2many_binary"/>
+                        </page>
+                    </notebook>
+
                 </sheet>
             </form>
+        </field>
+    </record>
+
+    <!-- Calendar -->
+    <record id="view_hos_operation_operation_calendar" model="ir.ui.view">
+        <field name="name">hos.operation.calendar</field>
+        <field name="model">hos.operation</field>
+        <field name="arch" type="xml">
+            <calendar string="Operation"
+                      color="doctor_id"
+                      date_start="operation_date"
+                      mode="month"
+                      quick_add="False"
+                      avatar_model="hr.employee">
+                <field name="doctor_id"/>
+            </calendar>
         </field>
     </record>
 
@@ -40,6 +74,13 @@
         <field name="view_type">form</field>
         <field name="view_mode">tree,form</field>
         <field name="view_id" ref="view_hos_operation_operation_tree"/>
+    </record>
+
+    <record model="ir.actions.act_window.view" id="action_hos_operation_operation_form">
+        <field eval="3" name="sequence"/>
+        <field name="view_mode">calendar</field>
+        <field name="view_id" ref="view_hos_operation_operation_calendar" />
+        <field name="act_window_id" ref="action_hos_operation_operation"/>
     </record>
 
     <record model="ir.actions.act_window.view" id="action_hos_operation_operation_form">
@@ -55,5 +96,6 @@
         <field name="view_id" ref="view_hos_operation_operation_tree"/>
         <field name="act_window_id" ref="action_hos_operation_operation"/>
     </record>
+
 
 </odoo>

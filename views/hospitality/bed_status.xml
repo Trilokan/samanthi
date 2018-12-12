@@ -1,17 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <!-- Tree -->
-    <record id="view_bed_status_tree" model="ir.ui.view">
-        <field name="name">bed.status.tree</field>
-        <field name="model">bed.status</field>
-        <field name="arch" type="xml">
-            <tree string="Bed Status">
-                <field name="date"/>
-            </tree>
-        </field>
-    </record>
-
     <!-- Form -->
     <record id="view_bed_status_form" model="ir.ui.view">
         <field name="name">bed.status.form</field>
@@ -23,22 +12,50 @@
                         <h1>Bed Status</h1>
                     </div>
                     <group>
-                        <field name="date"/>
-                        <field name="total_bed"/>
-                        <field name="vacant_bed"/>
-                        <field name="occupied_bed"/>
+                        <field name="date" invisible="1"/>
                     </group>
-                    <field name="occupied_ids">
-                        <tree>
+                    <group>
+                        <div style="width:40%;">
+                            <table id="time_bar">
+                                <tr>
+                                    <th rowspan="2"> Total Bed: <field name="total_bed" nolabel="1"/> </th>
+                                    <th colspan="4"> Occupied: <field name="occupied_bed" nolabel="1"/></th>
+                                </tr>
+                                <tr>
+                                    <th> Vacant: <field name="vacant_bed" nolabel="1"/></th>
+                                </tr>
+                            </table>
+                        </div>
+                    </group>
+
+                    <field name="occupied_ids" mode="kanban">
+                        <kanban create="false">
                             <field name="person_id"/>
                             <field name="bed_id"/>
-                        </tree>
+                            <templates>
+                                <t t-name="kanban-box">
+                                    <div class="oe_kanban_global_click o_kanban_record">
+                                        <div t-if="record.person_id.raw_value">Patient: <field name="person_id"/></div>
+                                        <div t-if="record.bed_id.raw_value">Bed: <field name="bed_id"/></div>
+                                    </div>
+                                </t>
+                            </templates>
+                        </kanban>
                     </field>
-                    <field name="vacant_ids">
-                        <tree>
+
+                    <field name="vacant_ids" mode="kanban">
+                        <kanban create="false">
                             <field name="bed_id"/>
-                        </tree>
+                            <templates>
+                                <t t-name="kanban-box">
+                                    <div class="oe_kanban_global_click o_kanban_record">
+                                        <div t-if="record.bed_id.raw_value">Bed: <field name="bed_id"/></div>
+                                    </div>
+                                </t>
+                            </templates>
+                        </kanban>
                     </field>
+
                 </sheet>
             </form>
         </field>
@@ -49,7 +66,7 @@
         <field name="name">Bed Status</field>
         <field name="res_model">bed.status</field>
         <field name="view_type">form</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">form</field>
     </record>
 
 </odoo>

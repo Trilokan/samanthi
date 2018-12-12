@@ -20,11 +20,13 @@
     <menuitem id="hospital_hospital_management_hos_ward" name="Ward" action="action_hos_ward" parent="hospital_hospital_management" sequence="30"/>
     <menuitem id="hospital_hospital_management_hos_bed" name="Bed" action="action_hos_bed" parent="hospital_hospital_management" sequence="40"/>
 
-    <!--&lt;!&ndash;Hospital: Operation&ndash;&gt;-->
-    <!--<menuitem id="hospital_operation" name="Operation" parent="menu_hospital" sequence="40"/>-->
-    <!--<menuitem id="hospital_operation_hos_operation" name="Operation" action="action_hos_operation" parent="hospital_operation" sequence="10"/>-->
-    <!--<menuitem id="hospital_operation_ot_booking" name="OT Booking" action="action_hos_operation_booking" parent="hospital_operation" sequence="20"/>-->
-    <!--<menuitem id="hospital_operation_ot_procedure" name="OT Procedure" action="action_ot_procedure" parent="hospital_operation" sequence="30"/>-->
+    <!--Hospital: Operation-->
+    <menuitem id="hospital_operation" name="Operation" parent="menu_hospital" sequence="40"/>
+    <menuitem id="hospital_operation_hos_operation_operation" name="Operation" action="action_hos_operation_operation" parent="hospital_operation" sequence="10"/>
+    <menuitem id="hospital_operation_operation_type" name="Operation List" action="action_operation_type" parent="hospital_operation" sequence="20"/>
+    <menuitem id="hospital_operation_hos_operation_ot_status" name="OT Status" action="action_hos_operation_ot_status" parent="hospital_operation" sequence="30"/>
+    <menuitem id="hospital_operation_operation_theater" name="Operation Theater" action="action_operation_theater" parent="hospital_operation" sequence="40"/>
+
 
     <!--Hospital: Billing-->
     <!--<menuitem id="hospital_bills" name="Billing" parent="menu_hospital" sequence="50"/>-->

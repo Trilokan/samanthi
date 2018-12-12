@@ -9,3 +9,4 @@ class OperationType(models.Model):
     name = fields.Char(string="Name", required=True)
     code = fields.Char(string="Code", required=True)
     procedure = fields.Html(string="Procedure", required=True)
+    active = fields.Boolean(string="Active", default=True)

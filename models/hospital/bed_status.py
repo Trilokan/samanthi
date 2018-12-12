@@ -12,7 +12,7 @@ class BedStatus(models.TransientModel):
     _name = "bed.status"
 
     date = fields.Datetime(string="Date", required=True)
-    total_bed = fields.Integer(string="Total Bed")
+    total_bed = fields.Integer(string="Total Bed", comput="_get_total_bed")
     vacant_bed = fields.Integer(string="Vacant Bed", compute="_get_vacant_bed")
     occupied_bed = fields.Integer(string="Occupied Bed", compute="_get_occupied_bed")
     vacant_ids = fields.One2many(comodel_name="bed.vacant", inverse_name="status_id")

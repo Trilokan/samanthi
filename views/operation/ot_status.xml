@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Action -->
+    <record id="action_hos_operation_ot_status" model="ir.actions.act_window">
+        <field name="name">Operation</field>
+        <field name="res_model">hos.operation</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">calendar</field>
+        <field name="view_id" ref="view_hos_operation_operation_calendar"/>
+    </record>
+
+    <record model="ir.actions.act_window.view" id="action_hos_operation_ot_status_form">
+        <field eval="1" name="sequence"/>
+        <field name="view_mode">calendar</field>
+        <field name="view_id" ref="view_hos_operation_operation_calendar" />
+        <field name="act_window_id" ref="action_hos_operation_ot_status"/>
+    </record>
+
+</odoo>

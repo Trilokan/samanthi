@@ -45,10 +45,11 @@
         "views/hospitality/patient_shifting.xml",
 
         # # Operation
-        # "views/operation/operation.xml",
-        # "views/operation/ot_booking.xml",
-        # "views/operation/ot_procedure.xml",
-        #
+        "views/operation/operations.xml",
+        "views/operation/ot_status.xml",
+        "views/operation/operation_theater.xml",
+        "views/operation/operation_type.xml",
+
         # Contact
         "views/contact/doctor.xml",
         "views/contact/patient.xml",

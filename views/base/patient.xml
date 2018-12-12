@@ -125,6 +125,14 @@
         </field>
     </record>
 
+    <!-- Action Register Patient-->
+    <record id="action_hos_patient_register" model="ir.actions.act_window">
+        <field name="name">Patient</field>
+        <field name="res_model">hos.patient</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+    </record>
+
     <!-- Action -->
     <record id="action_hos_patient" model="ir.actions.act_window">
         <field name="name">Patient</field>

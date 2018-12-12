@@ -29,7 +29,7 @@
                         <field name="admission_progress" widget="statusbar" style="float: right;padding: 20px;"/>
                     </div>
                     <div class="oe_button_box" name="button_box">
-                        <button name="smart_open_patient" string="Patient" type="object" class="oe_stat_button" icon="fa-wheelchair"/>
+                        <button name="%(action_hos_patient_register)d" string="Patient" type="action" class="oe_stat_button" icon="fa-wheelchair"/>
                         <button name="smart_open_payment" string="Payment" type="object" class="oe_stat_button" icon="fa-inr"/>
                     </div>
 
@@ -50,14 +50,17 @@
                         </div>
                     </div>
 
-                    <group col="4" string="Admission Detail">
+                    <group col="4">
                         <field name="date"/>
                         <field name="admission_on"/>
                         <field name="admission_by"/>
                         <field name="admission_reason"/>
                         <field name="admission_status"/>
-                        <field name="admission_attachment" widget="many2many_binary"/>
                         <field name="admission_bed_id"/>
+                        <field name="admission_attachment" widget="many2many_binary"/>
+                    </group>
+                    <group>
+                        <field name="admission_comment" placeholder="Admission In Detail..."/>
                     </group>
 
                     <group>
@@ -65,19 +68,19 @@
                             <div style="width: 85%">
                                 <div>
                                     <div class="address_format">
-                                        <field name="door_no" style="width: 30%" readonly="1"/>
-                                        <field name="building_name" style="width: 70%" readonly="1"/>
+                                        <field name="door_no" style="width: 30%" placeholder="Door No"/>
+                                        <field name="building_name" style="width: 70%" placeholder="Building Name"/>
                                     </div>
-                                    <field name="street_1" readonly="1"/>
-                                    <field name="street_2" readonly="1"/>
-                                    <field name="locality" readonly="1"/>
-                                    <field name="city" readonly="1"/>
-                                    <field name="landmark" readonly="1"/>
+                                    <field name="street_1" placeholder="Street 1"/>
+                                    <field name="street_2" placeholder="Street 2"/>
+                                    <field name="locality" placeholder="Locality"/>
+                                    <field name="city" placeholder="City"/>
+                                    <field name="landmark" placeholder="Landmark"/>
                                     <div class="address_format">
-                                        <field name="country_id" style="width: 45%" readonly="1"/>
-                                        <field name="state_id" style="width: 55%" readonly="1"/>
+                                        <field name="country_id" style="width: 45%" placeholder="Country"/>
+                                        <field name="state_id" style="width: 55%" placeholder="State"/>
                                     </div>
-                                    <field name="pin_code" style="width: 55%" readonly="1"/>
+                                    <field name="pin_code" style="width: 55%" placeholder="PIN Code"/>
                                 </div>
                             </div>
                         </group>

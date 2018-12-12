@@ -17,3 +17,4 @@ from . import doctor
 from . import time_management
 from . import leave_account
 from . import payroll
+from . import operation

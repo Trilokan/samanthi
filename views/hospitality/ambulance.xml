@@ -25,14 +25,17 @@
                     <div id="s_header">
                         <h1>Ambulance</h1>
                     </div>
-                    <group>
+                    <div id="p_header">
+                        <field name="progress" widget="statusbar" style="float: right;padding: 20px;"/>
+                    </div>
+                    <h2><field name="name"/></h2>
+                    <group col="4">
                         <field name="date"/>
-                        <field name="name"/>
                         <field name="patient_id"/>
                         <field name="driver_id"/>
-                        <field name="employee_ids"/>
                         <field name="travel_type"/>
                     </group>
+
                     <group>
                         <group string="Source">
                             <field name="from_time"/>
@@ -47,7 +50,7 @@
                             <field name="to_contact_no"/>
                         </group>
                     </group>
-                    <group string="Account Details">
+                    <group string="Account Details" col="4">
                         <!--<field name="invoice_id"/>-->
                         <field name="total_distance"/>
                         <field name="total_hrs"/>

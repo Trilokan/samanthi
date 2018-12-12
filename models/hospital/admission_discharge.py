@@ -42,7 +42,7 @@ class AdmissionDischarge(models.Model):
     pin_code = fields.Char(string="Pincode", related="patient_id.pin_code")
 
     # Admission Details
-    admission_on = fields.Date(string="Date", default=CURRENT_DATE)
+    admission_on = fields.Date(string="Admission Date", default=CURRENT_DATE)
     admission_by = fields.Many2one(comodel_name="hos.person", string="Admit By")
     admission_reason = fields.Many2one(comodel_name="admission.reason", string="Reason")
     admission_status = fields.Selection(selection=ADMIT_DISC_TYPE, string="Patient Status")
@@ -52,7 +52,7 @@ class AdmissionDischarge(models.Model):
     admission_bed_id = fields.Many2one(comodel_name="hos.bed", string="Bed")
 
     # Discharge Details
-    discharge_on = fields.Date(string="Date")
+    discharge_on = fields.Date(string="Discharge Date")
     discharge_by = fields.Many2one(comodel_name="hos.person", string="Discharge By")
     discharge_reason = fields.Many2one(comodel_name="admission.reason", string="Reason")
     discharge_status = fields.Selection(selection=ADMIT_DISC_TYPE, string="Patient Status")

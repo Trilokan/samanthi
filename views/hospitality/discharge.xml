@@ -61,25 +61,27 @@
                         <field name="discharge_attachment" widget="many2many_binary"/>
                         <field name="discharge_bed_id"/>
                     </group>
-
+                    <group>
+                        <field name="discharge_comment" placeholder="Discharge In Detail..."/>
+                    </group>
                     <group>
                         <group string="Address">
                             <div style="width: 85%">
                                 <div>
                                     <div class="address_format">
-                                        <field name="door_no" style="width: 30%" readonly="1"/>
-                                        <field name="building_name" style="width: 70%" readonly="1"/>
+                                        <field name="door_no" style="width: 30%" placeholder="Door No"/>
+                                        <field name="building_name" style="width: 70%" placeholder="Building Name"/>
                                     </div>
-                                    <field name="street_1" readonly="1"/>
-                                    <field name="street_2" readonly="1"/>
-                                    <field name="locality" readonly="1"/>
-                                    <field name="city" readonly="1"/>
-                                    <field name="landmark" readonly="1"/>
+                                    <field name="street_1" placeholder="Street 1"/>
+                                    <field name="street_2" placeholder="Street 2"/>
+                                    <field name="locality" placeholder="Locality"/>
+                                    <field name="city" placeholder="City"/>
+                                    <field name="landmark" placeholder="Landmark"/>
                                     <div class="address_format">
-                                        <field name="country_id" style="width: 45%" readonly="1"/>
-                                        <field name="state_id" style="width: 55%" readonly="1"/>
+                                        <field name="country_id" style="width: 45%" placeholder="Country"/>
+                                        <field name="state_id" style="width: 55%" placeholder="State"/>
                                     </div>
-                                    <field name="pin_code" style="width: 55%" readonly="1"/>
+                                    <field name="pin_code" style="width: 55%" placeholder="PIN Code"/>
                                 </div>
                             </div>
                         </group>
