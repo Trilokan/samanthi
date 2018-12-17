@@ -17,7 +17,6 @@ class PurchaseOrder(models.Model):
     name = fields.Char(string='Name', readonly=True)
     date = fields.Date(string="Date", default=CURRENT_DATE, readonly=True)
     person_id = fields.Many2one(comodel_name="hos.person", string="Vendor", readonly=True)
-    indent_id = fields.Many2one(comodel_name="purchase.indent", string="Purchase Indent", readonly=True)
     quote_id = fields.Many2one(comodel_name="purchase.quote", string="Quotation", readonly=True)
     vendor_ref = fields.Char(string="Vendor Ref")
     processed_by = fields.Many2one(comodel_name="hos.person", string="Processed By", readonly=True)
@@ -101,7 +100,6 @@ class PurchaseOrder(models.Model):
         if receipt_detail:
             receipt = {"person_id": self.person_id.id,
                        "po_id": self.id,
-                       "indent_id": self.indent_id.id,
                        "receipt_detail": receipt_detail}
 
             self.env["material.receipt"].create(receipt)

@@ -125,6 +125,7 @@ class MaterialReceipt(models.Model):
 class MaterialReceiptDetail(models.Model):
     _name = "material.receipt.detail"
 
+    indent_detail_id = fields.Many2one(comodel_name="purchase.indent.detail", string="Indent Detail")
     name = fields.Char(string="Name", readonly=True)
     product_id = fields.Many2one(comodel_name="hos.product", string="Item", required=True)
     description = fields.Text(string="Item Description")

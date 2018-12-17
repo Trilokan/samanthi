@@ -39,6 +39,7 @@ class QuoteDetail(models.Model):
     _name = 'quote.detail'
     _description = 'Quotation Details'
 
+    indent_detail_id = fields.Many2one(comodel_name='purchase.indent.detail', string='Indent Detail')
     product_id = fields.Many2one(comodel_name='hos.product', string='Product', readonly=True)
     description = fields.Text(string="Item Description", readonly=True)
     uom_id = fields.Many2one(comodel_name='product.uom', string='UOM', related="product_id.uom_id")

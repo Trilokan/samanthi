@@ -12,6 +12,7 @@ class PurchaseOrderDetail(models.Model):
     _description = 'Purchase Order Detail'
 
     quote_detail_id = fields.Many2one(comodel_name='quote.detail', string='Quotation')
+    indent_detail_id = fields.Many2one(comodel_name='purchase.indent.detail', string='Indent Detail')
     order_id = fields.Many2one(comodel_name='purchase.order', string='Purchase Order')
     person_id = fields.Many2one(comodel_name='hos.person', string='Vendor', readonly=True)
     product_id = fields.Many2one(comodel_name='hos.product', string='Product', related='quote_detail_id.product_id')
