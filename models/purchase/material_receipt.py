@@ -142,7 +142,7 @@ class MaterialReceiptDetail(models.Model):
         if self.quantity > (self.requested_quantity - self.received_quantity):
             raise exceptions.ValidationError("Error! Received quantity more than Order quantity")
 
-        if self.quantity > (self.requested_quantity - self.receiving_quantity):
+        if self.quantity > self.receiving_quantity:
             raise exceptions.ValidationError("Error! Receiving quantity more than Order quantity")
 
     @api.model

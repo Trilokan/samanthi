@@ -136,7 +136,7 @@ class PurchaseInvoice(models.Model):
     def create(self, vals):
         code = "{0}.{1}".format("purchase.invoice", vals["invoice_type"])
         vals['name'] = self.env['ir.sequence'].next_by_code(code)
-        return vals
+        return super(PurchaseInvoice, self).create(vals)
 
 
 class InvoiceDetail(models.Model):
