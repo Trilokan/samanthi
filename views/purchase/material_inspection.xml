@@ -36,13 +36,12 @@
                         <field name="received_by"/>
                     </group>
                     <field name="receipt_detail"
-                           attrs="{'readonly': [('progress', '!=', 'draft')]}">
-                        <tree editable="bottom">
+                           attrs="{'readonly': [('progress', '!=', 'received')]}">
+                        <tree editable="bottom" create="false" delete="false">
                             <field name="name" invisible="1"/>
                             <field name="id" invisible="1"/>
-                            <field name="product_id"
-                                   options="{'no_create_edit': True, 'no_create':True, 'no_open':True}"/>
-                            <field name="description"/>
+                            <field name="product_id" readonly="1"/>
+                            <field name="description" readonly="1"/>
                             <field name="uom_id" readonly="1"/>
                             <field name="receiving_quantity" readonly="1" string="Received Quantity"/>
                             <field name="quantity" string="Accepted Quantity"/>

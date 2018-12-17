@@ -6,7 +6,7 @@
         <field name="name">purchase.quote.tree</field>
         <field name="model">purchase.quote</field>
         <field name="arch" type="xml">
-            <tree string="Quotation">
+            <tree string="Quotation" create="false" delete="false">
                 <field name="date"/>
                 <field name="indent_id"/>
             </tree>

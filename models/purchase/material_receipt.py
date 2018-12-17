@@ -21,6 +21,7 @@ class MaterialReceipt(models.Model):
     received_by = fields.Many2one(comodel_name="hos.person", string="Received By", readonly=True)
     inspected_by = fields.Many2one(comodel_name="hos.person", string="Inspected By", readonly=True)
     receipt_detail = fields.One2many(comodel_name="material.receipt.detail", inverse_name="receipt_id")
+    invoice_flag = fields.Boolean(string="Invoice Flag")
     progress = fields.Selection(selection=PROGRESS_INFO, string="Progress", default="draft")
     writter = fields.Text(string="Writter", track_visibility="always")
 
@@ -98,7 +99,7 @@ class MaterialReceipt(models.Model):
     @api.multi
     def trigger_inspection(self):
         inspected_by = self.env.user.person_id.id
-        recs = self.env["material.receipt.detail"].search([("issue_id", "=", self.id), ("quantity", ">", 0)])
+        recs = self.env["material.receipt.detail"].search([("receipt_id", "=", self.id), ("quantity", ">", 0)])
 
         if not recs:
             raise exceptions.ValidationError("Error! No Products found")
@@ -128,7 +129,7 @@ class MaterialReceiptDetail(models.Model):
     product_id = fields.Many2one(comodel_name="hos.product", string="Item", required=True)
     description = fields.Text(string="Item Description")
     uom_id = fields.Many2one(comodel_name="product.uom", string="UOM", related="product_id.uom_id")
-    requested_quantity = fields.Float(string="Requested Quantity", default=0, readonly=True)
+    requested_quantity = fields.Float(string="Order Quantity", default=0, readonly=True)
     received_quantity = fields.Float(string="Received Quantity", default=0, readonly=True)
     receiving_quantity = fields.Float(string="Receiving Quantity", default=0, required=True)
     quantity = fields.Float(string="Quantity", default=0, required=True)
@@ -139,10 +140,10 @@ class MaterialReceiptDetail(models.Model):
     @api.constrains("quantity")
     def check_issue_quantity(self):
         if self.quantity > (self.requested_quantity - self.received_quantity):
-            raise exceptions.ValidationError("Error! Received quantity more than requested")
+            raise exceptions.ValidationError("Error! Received quantity more than Order quantity")
 
         if self.quantity > (self.requested_quantity - self.receiving_quantity):
-            raise exceptions.ValidationError("Error! Receiving quantity more than requested")
+            raise exceptions.ValidationError("Error! Receiving quantity more than Order quantity")
 
     @api.model
     def create(self, vals):

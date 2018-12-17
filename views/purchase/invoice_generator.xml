@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Form -->
+    <record id="view_invoice_generator_form" model="ir.ui.view">
+        <field name="name">invoice.generator.form</field>
+        <field name="model">invoice.generator</field>
+        <field name="arch" type="xml">
+            <form string="Invoice Generator">
+                <sheet>
+                    <div id="s_header">
+                        <h1>Invoice Generator</h1>
+                    </div>
+                    <group>
+                        <field name="order_id"/>
+                        <field name="receipt_ids"/>
+                    </group>
+                    <button name="get_quantity" string="Invoice Generation" type="object"/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_invoice_generator" model="ir.actions.act_window">
+        <field name="name">Invoice Generator</field>
+        <field name="res_model">invoice.generator</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+    </record>
+
+</odoo>

@@ -42,6 +42,7 @@
                         <field name="uom_id"/>
                         <field name="quantity"/>
                     </group>
+
                     <footer>
                         <button name="trigger_confirm" string="Confirm" type="object"
                                 attrs="{'invisible': [('progress', '!=', 'draft')]}"/>

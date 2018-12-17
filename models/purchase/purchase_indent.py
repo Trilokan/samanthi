@@ -84,7 +84,7 @@ class PurchaseIndentDetail(models.Model):
     description = fields.Text(string="Item Description")
     uom_id = fields.Many2one(comodel_name="product.uom", string="UOM", related="product_id.uom_id")
     requested_quantity = fields.Float(string="Request Quantity", default=0, required=True)
-    quantity = fields.Float(string="Quantity", default=0, required=True)
+    quantity = fields.Float(string="Approved Quantity", default=0, required=True)
     indent_id = fields.Many2one(comodel_name="purchase.indent", string="Purchase Indent")
     progress = fields.Selection(selection=PROGRESS_INFO, string="Progress", related="indent_id.progress")
 

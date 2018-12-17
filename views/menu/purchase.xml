@@ -9,6 +9,7 @@
     <menuitem id="purchase_purchase_material_receipt_received" name="Material Receipt" action="action_material_receipt_received" parent="purchase_purchase" sequence="40"/>
     <menuitem id="purchase_purchase_material_receipt_inspection" name="Material Inspection" action="action_material_receipt_inspection" parent="purchase_purchase" sequence="50"/>
     <menuitem id="purchase_purchase_direct_material_receipt" name="Direct Material Receipt" action="action_direct_material_receipt" parent="purchase_purchase" sequence="60"/>
+    <menuitem id="purchase_purchase_invoice_generator" name="V" action="action_invoice_generator" parent="purchase_purchase" sequence="60"/>
     <menuitem id="purchase_purchase_invoice" name="Purchase Invoice" action="action_purchase_invoice" parent="purchase_purchase" sequence="70"/>
 
     <!--Purchase: Identity-->

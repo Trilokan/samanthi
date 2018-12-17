@@ -59,11 +59,12 @@ class QuoteDetail(models.Model):
 
             if order:
                 order_detail = self.env["purchase.order.detail"].search([("product_id", "=", self.product_id.id),
-                                                                   ("order_id", "=", order.id)])
+                                                                         ("order_id", "=", order.id)])
 
                 if not order_detail:
                     self.env["purchase.order.detail"].create({"person_id": person.id,
                                                               "product_id": self.product_id.id,
+                                                              "description": self.description,
                                                               "uom_id": self.uom_id.id,
                                                               "requested_quantity": self.quantity,
                                                               "quote_detail_id": self.id,
@@ -73,6 +74,7 @@ class QuoteDetail(models.Model):
             else:
                 order_detail = [(0, 0, {"person_id": person.id,
                                         "product_id": self.product_id.id,
+                                        "description": self.description,
                                         "uom_id": self.uom_id.id,
                                         "quote_detail_id": self.id,
                                         "tax_id": default_tax_id,

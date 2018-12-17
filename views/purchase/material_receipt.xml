@@ -53,7 +53,7 @@
                         </tree>
                     </field>
                 <footer>
-                        <button name="trigger_receipt" string="Received" type="object"
+                        <button name="trigger_received" string="Received" type="object"
                                 attrs="{'invisible': [('progress', '!=', 'draft')]}"/>
                         <button name="trigger_invoice_generation" string="Generate Invoice" type="object"
                                 attrs="{'invisible': [('progress', '=', 'draft')]}"/>

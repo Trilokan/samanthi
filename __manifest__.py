@@ -166,6 +166,7 @@
         "views/purchase/direct_material_receipt.xml",
         "views/purchase/material_receipt.xml",
         "views/purchase/material_inspection.xml",
+        "views/purchase/invoice_generator.xml",
 
         # Pharmacy
 
