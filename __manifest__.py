@@ -146,6 +146,12 @@
         "views/stock/store_return.xml",
         "views/stock/store_accept.xml",
 
+        # Patient
+        "views/patient/diagnosis.xml",
+        "views/patient/symptoms.xml",
+        "views/patient/in_patient.xml",
+        "views/patient/prescription.xml",
+
         # Asserts
         "views/asserts/asserts_capitalisation.xml",
         "views/asserts/hos_asserts.xml",
@@ -176,8 +182,8 @@
         "views/account/period.xml",
 
         # # Menu
-        "views/menu/hospital.xml",
-        "views/menu/contact.xml",
+        # "views/menu/hospital.xml",
+        # "views/menu/contact.xml",
         # "views/menu/doctor.xml",
         # "views/menu/patient.xml",
         "views/menu/employee.xml",

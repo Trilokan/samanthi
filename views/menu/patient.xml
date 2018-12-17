@@ -12,12 +12,12 @@
     <!--<menuitem id="patient_opt_hos_appointment_opt" name="Appointment" parent="patient_opt" sequence="10"/>-->
 
 
-    <!--&lt;!&ndash;Patient: IPT&ndash;&gt;-->
-    <!--<menuitem id="patient_ipt" name="In Patient" parent="menu_hospital" sequence="10"/>-->
-    <!--<menuitem id="patient_ipt_hos_treatment" name="Treatment" parent="menu_hospital" sequence="10"/>-->
-    <!--<menuitem id="patient_ipt_hos_prescription" name="Prescription" parent="menu_hospital" sequence="10"/>-->
+    <!--Patient: IPT-->
+    <menuitem id="patient_ipt" name="In Patient" parent="menu_patient" sequence="10"/>
+    <!--<menuitem id="patient_ipt_in_patient" name="Treatment" action="action_in_patient" parent="patient_ipt" sequence="10"/>-->
     <!--<menuitem id="patient_ipt_treatment_visit" name="Doctor Visit" parent="menu_hospital" sequence="10"/>-->
     <!--<menuitem id="patient_ipt_patient_shifting" name="Patient Shifting" parent="menu_hospital" sequence="10"/>-->
+    <menuitem id="patient_ipt_hos_prescription" name="Prescription" action="action_patient_prescription" parent="patient_ipt" sequence="40"/>
     <!--<menuitem id="patient_ipt_hos_notes" name="Notes" parent="menu_hospital" sequence="10"/>-->
     <!--<menuitem id="patient_ipt_hos_reminder" name="Reminder" parent="menu_hospital" sequence="10"/>-->
 

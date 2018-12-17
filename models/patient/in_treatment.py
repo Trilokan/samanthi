@@ -11,7 +11,7 @@ CURRENT_INDIA = datetime.now().strftime("%d-%m-%Y %H:%M:%S")
 
 # Treatment Detail
 class PatientTreatmentDetail(models.Model):
-    _name = "patient.treatment.detail"
+    _name = "in.treatment"
     _inherit = "mail.thread"
 
     date = fields.Date(string="Date", default=CURRENT_DATE, required=True)
@@ -20,4 +20,4 @@ class PatientTreatmentDetail(models.Model):
     description = fields.Text(string="Description", requied=True)
     unit = fields.Float(string="Units")
     comment = fields.Text(string="Comment", requied=True)
-    treatment_id = fields.Many2one(comodel_name="patient.treatment", string="Treatment")
+    in_patient_id = fields.Many2one(comodel_name="in.patient", string="Treatment")

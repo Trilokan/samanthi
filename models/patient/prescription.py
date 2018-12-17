@@ -5,7 +5,7 @@ from datetime import datetime
 from .. import calculation
 
 PROGRESS_INFO = [("draft", "Draft"), ("moved", "Moved")]
-MEDICINE_TYPE = [("after_food", "After Food"), ("before_food", "Before Food")]
+CONSUMPTION_TYPE = [("after_food", "After Food"), ("before_food", "Before Food")]
 CURRENT_DATE = datetime.now().strftime("%Y-%m-%d")
 CURRENT_TIME = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 CURRENT_INDIA = datetime.now().strftime("%d-%m-%Y %H:%M:%S")
@@ -21,18 +21,18 @@ class PatientPrescription(models.Model):
     person_id = fields.Many2one(comodel_name="hos.person", string="Person")
     total_days = fields.Float(string="Days")
     prescription_detail = fields.One2many(comodel_name="patient.prescription.detail", inverse_name="prescription_id")
-    treatment_id = fields.Many2one(comodel_name="patient.treatment", string="Treatment")
+    in_patient_id = fields.Many2one(comodel_name="in.patient", string="Treatment")
 
 
 class PatientPrescriptionDetail(models.Model):
     _name = "patient.prescription.detail"
 
-    product_id = fields.Many2one(comodel_name="hos.product", string="Product")
-    morning = fields.Boolean(string="Morning")
+    product_id = fields.Many2one(comodel_name="hos.product", string="Medicine")
+    morning = fields.Boolean(string="FN")
     noon = fields.Boolean(string="Noon")
-    night = fields.Boolean(string="Night")
+    night = fields.Boolean(string="AN")
     prescription_id = fields.Many2one(comodel_name="patient.prescription", string="Prescription")
-    medicine_type = fields.Selection(selection=MEDICINE_TYPE, string="Medicine Type")
+    consumption_type = fields.Selection(selection=CONSUMPTION_TYPE, string="Consumption Type")
     quantity = fields.Integer(string="Quantity")
 
 

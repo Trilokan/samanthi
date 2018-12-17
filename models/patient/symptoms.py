@@ -17,4 +17,6 @@ class PatientSymptoms(models.Model):
 
     name = fields.Char(string="Name", required=True)
     code = fields.Char(string="Code", readonly=True)
-    description = fields.Text(string="Description", required=True)
+    image = fields.Binary(string="Image")
+    description = fields.Html(string="Description", required=True)
+    attachment_ids = fields.Many2many(comodel_name="ir.attachment", string="Attachment")

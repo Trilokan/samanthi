@@ -18,3 +18,4 @@ from . import time_management
 from . import leave_account
 from . import payroll
 from . import operation
+from . import patient
