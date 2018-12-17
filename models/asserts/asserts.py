@@ -16,7 +16,6 @@ class Assert(models.Model):
 
     date = fields.Date(string="Date", default=CURRENT_DATE, required=True)
     name = fields.Char(string="Name", readonly=True)
-    move_id = fields.Many2one(comodel_name="hos.move", string="Move", required=True)
 
     # Manufacturing Details
     product_id = fields.Many2one(comodel_name="hos.product", string="Product", required=True)
@@ -29,7 +28,10 @@ class Assert(models.Model):
 
     # Seller Details
     vendor_id = fields.Many2one(comodel_name="hos.person", string="Vendor")
+    order_date = fields.Date(string="Order Date")
+    order_id = fields.Many2one(comodel_name="purchase.order", string="Purchase Order")
     purchase_date = fields.Date(string="Date of Purchase")
+    invoice_id = fields.Many2one(comodel_name="purchase.invoice", string="Purchase Invoice")
     # vendor_contact = ""
     # vendor_address = ""
 
@@ -60,11 +62,16 @@ class Assert(models.Model):
 
     _sql_constraints = [('unique_name', 'unique (name)', 'Error! Assert must be unique')]
 
+    @api.multi
+    def trigger_confirm(self):
+        writter = "Asserts capitalisation confirmed by {0} on {1}".format(self.env.user.name, CURRENT_INDIA)
+        self.write({"progress": "confirmed", "writter": writter})
+
     @api.model
     def create(self, vals):
         vals["name"] = self.env["ir.sequence"].next_by_code(self._name)
         vals["writter"] = "Assert Created by {0} on {1}".format(self.env.user.name, CURRENT_INDIA)
-        return vals
+        return super(Assert, self).create(vals)
 
 
 class AssertMaintenance(models.Model):

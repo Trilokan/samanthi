@@ -50,7 +50,6 @@ class StockAdjustment(models.Model):
                       "product_id": rec.product_id.id,
                       "description": rec.description,
                       "quantity": rec.quantity,
-                      "unit_price": rec.unit_price,
                       "progress": "moved"}
 
             self.env["hos.move"].create(result)

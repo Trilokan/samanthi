@@ -47,8 +47,11 @@
                         </page>
                         <page string="Vendor Details">
                             <group>
-                                <field name="vendor_id" attrs="{'readonly': [('progress', '!=', 'draft')]}"/>
+                                <field name="order_date" attrs="{'readonly': [('progress', '!=', 'draft')]}"/>
+                                <field name="order_id" attrs="{'readonly': [('progress', '!=', 'draft')]}"/>
                                 <field name="purchase_date" attrs="{'readonly': [('progress', '!=', 'draft')]}"/>
+                                <field name="invoice_id" attrs="{'readonly': [('progress', '!=', 'draft')]}"/>
+                                <field name="vendor_id" attrs="{'readonly': [('progress', '!=', 'draft')]}"/>
                             </group>
                         </page>
                         <page string="Maintenance Details">
@@ -81,6 +84,8 @@
                             </group>
                         </page>
                     </notebook>
+                    <button name="trigger_confirm" string="Confirm" type="object"
+                                attrs="{'invisible': [('progress', '!=', 'draft')]}"/>
                 </sheet>
                 <div class="oe_chatter">
                     <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
