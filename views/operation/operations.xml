@@ -29,6 +29,7 @@
                     <h2><field name="name"/></h2>
                     <group col="4">
                         <field name="date"/>
+                        <field name="operation_date"/>
                         <field name="patient_id"/>
                         <field name="doctor_id"/>
                         <field name="treatment_id"/>
@@ -45,7 +46,13 @@
                             <field name="attachment_ids" widget="many2many_binary"/>
                         </page>
                     </notebook>
-
+                    <footer>
+                        <button name="trigger_paid" string="Paid" type="object" attrs="{'invisible': [('progress', '!=', 'draft')]}"/>
+                        <button name="trigger_scheduled" string="Scheduled" type="object" attrs="{'invisible': [('progress', '!=', 'paid')]}"/>
+                        <button name="trigger_done" string="Done" type="object" attrs="{'invisible': [('progress', '!=', 'scheduled')]}"/>
+                        <button name="trigger_cancel" string="Cancel" type="object" attrs="{'invisible': [('progress', 'in', ['done', 'cancel'])]}"/>
+                        <button name="trigger_reschedule" string="Paid" type="object" attrs="{'invisible': [('progress', '!=', 'scheduled')]}"/>
+                    </footer>
                 </sheet>
             </form>
         </field>
@@ -72,7 +79,7 @@
         <field name="name">Operation</field>
         <field name="res_model">hos.operation</field>
         <field name="view_type">form</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">tree,form,calendar</field>
         <field name="view_id" ref="view_hos_operation_operation_tree"/>
     </record>
 

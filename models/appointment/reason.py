@@ -8,4 +8,4 @@ class AppointmentReason(models.Model):
 
     name = fields.Char(string="Name", required=True)
     code = fields.Char(string="Code", required=True)
-
+    meeting = fields.Boolean(string="Meetings")

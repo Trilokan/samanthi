@@ -9,7 +9,6 @@
             <tree string="Purchase Order">
                 <field name="date"/>
                 <field name="name"/>
-                <field name="indent_id"/>
                 <field name="quote_id"/>
                 <field name="progress"/>
             </tree>
@@ -30,7 +29,6 @@
                     <h2><field name="name"/></h2>
                     <group col="4">
                         <field name="date"/>
-                        <field name="indent_id"/>
                         <field name="quote_id"/>
                         <field name="person_id"/>
                         <field name="vendor_ref" attrs="{'readonly': [('progress', '!=', 'draft')]}"/>

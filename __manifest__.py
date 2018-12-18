@@ -62,8 +62,9 @@
 
         # Appointment
         "views/appointment/opt.xml",
-        "views/appointment/ot.xml",
+        # "views/appointment/ot.xml",
         "views/appointment/meetings.xml",
+        "views/appointment/appointment.xml",
 
         # Doctor
         "views/doctor/doctor_availability.xml",

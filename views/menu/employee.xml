@@ -34,4 +34,5 @@
     <!--<menuitem id="employee_time_week_schedule" name="Leave Management" action="" parent="employee_report" sequence="10"/>-->
     <!--<menuitem id="employee_time_week_schedule" name="Stock" action="" parent="employee_report" sequence="10"/>-->
 
+
 </odoo>

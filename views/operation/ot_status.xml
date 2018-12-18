@@ -7,6 +7,7 @@
         <field name="res_model">hos.operation</field>
         <field name="view_type">form</field>
         <field name="view_mode">calendar</field>
+        <field name="domain">[("progress", "=", "scheduled")]</field>
         <field name="view_id" ref="view_hos_operation_operation_calendar"/>
     </record>
 

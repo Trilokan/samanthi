@@ -20,7 +20,7 @@ class Operation(models.Model):
     date = fields.Date(string="Date", required=True, default=CURRENT_DATE)
     image = fields.Binary(string="Image")
     name = fields.Char(string="Name", readonly=True)
-    operation_date = fields.Date(string="Date")
+    operation_date = fields.Date(string="Date of Operation")
     patient_id = fields.Many2one(comodel_name="hos.person", string="Patient")
     treatment_id = fields.Many2one(comodel_name="hos.treatment.in", string="Treatment")
     doctor_id = fields.Many2one(comodel_name="hos.person", string="Doctor")
@@ -30,19 +30,29 @@ class Operation(models.Model):
     attachment_ids = fields.Many2many(comodel_name="ir.attachment", string="Attachment")
     progress = fields.Selection(selection=PROGRESS_INFO, string="Progress", default="draft")
     procedure = fields.Binary(string="Operation Procedure")
+    writter = fields.Text(string="Writter", track_visibility='always')
 
     @api.multi
     def trigger_paid(self):
-        self.write({"progress": "paid"})
+        writter = "Accounts payable noted by {0} on {1}".format(self.env.user.name, CURRENT_INDIA)
+        self.write({"progress": "paid", "writter": writter})
 
     @api.multi
     def trigger_scheduled(self):
-        self.write({"progress": "scheduled"})
+        writter = "Operations Scheduled by {0} on {1}".format(self.env.user.name, CURRENT_INDIA)
+        self.write({"progress": "scheduled", "writter": writter})
 
     @api.multi
     def trigger_done(self):
-        self.write({"progress": "done"})
+        writter = "Operations done by {0} on {1}".format(self.env.user.name, CURRENT_INDIA)
+        self.write({"progress": "done", "writter": writter})
 
     @api.multi
     def trigger_cancel(self):
-        self.write({"progress": "cancel"})
+        writter = "Operations cancel by {0} on {1}".format(self.env.user.name, CURRENT_INDIA)
+        self.write({"progress": "cancel", "writter": writter})
+
+    @api.multi
+    def trigger_reschedule(self):
+        writter = "Operation rescheduled by {0} on {1}".format(self.env.user.name, CURRENT_INDIA)
+        self.write({"progress": "paid", "writter": writter})

@@ -2,96 +2,63 @@
 <odoo>
 
     <!-- Tree -->
-    <record id="view_hos_appointment_meetings_tree" model="ir.ui.view">
-        <field name="name">hos.appointment.meetings.tree</field>
-        <field name="model">hos.appointment</field>
+    <record id="view_appointment_meeting_tree" model="ir.ui.view">
+        <field name="name">appointment.meeting.tree</field>
+        <field name="model">appointment.meeting</field>
         <field name="arch" type="xml">
-            <tree string="Meetings">
-                <field name="employee_id" string="Doctor/ Staff"/>
-                <field name="person_id" sttring="Meetings with"/>
-                <field name="appointment_time"/>
-                <field name="appointment_type"/>
+            <tree string="Meeting">
+                <field name="date"/>
+                <field name="employee_id"/>
                 <field name="reason"/>
                 <field name="comment"/>
-                <field name="progress"/>
             </tree>
         </field>
     </record>
 
     <!-- Form -->
-    <record id="view_hos_appointment_meetings_form" model="ir.ui.view">
-        <field name="name">hos.appointment.meetings.form</field>
-        <field name="model">hos.appointment</field>
+    <record id="view_appointment_meeting_form" model="ir.ui.view">
+        <field name="name">appointment.meeting.form</field>
+        <field name="model">appointment.meeting</field>
         <field name="arch" type="xml">
-            <form string="Meetings">
+            <form string="Meeting">
                 <sheet>
                     <div id="s_header">
-                        <h1>Meetings</h1>
-                    </div>
-                    <div id="p_header">
-                        <field name="progress" widget="statusbar" style="float: right;padding: 20px;"/>
+                        <h1>Meeting</h1>
                     </div>
                     <group col="4">
-                        <field name="appointment_time"/>
-                        <field name="appointment_type"/>
-                        <field name="employee_id" string="Doctor/ Staff"/>
-                        <field name="person_id" sttring="Meetings with"/>
+                        <field name="date"/>
+                        <field name="employee_id"/>
                     </group>
                     <group>
                         <field name="reason"/>
-                        <field name="comment"/>
                     </group>
+                    <field name="comment" placeholder="Description in detail..."/>
                 </sheet>
             </form>
         </field>
     </record>
 
-    <record id="view_hos_appointment_meetings_calendar" model="ir.ui.view">
-        <field name="name">hos.appointment.meetings.calendar</field>
-        <field name="model">hos.appointment</field>
+    <record id="view_appointment_meeting_calendar" model="ir.ui.view">
+        <field name="name">appointment.meeting.calendar</field>
+        <field name="model">appointment.meeting</field>
         <field name="arch" type="xml">
             <calendar string="OPT Appointment"
                       color="employee_id"
-                      date_start="appointment_time"
+                      date_start="date"
                       mode="month"
                       quick_add="False"
                       avatar_model="hr.employee">
-                <field name="person_id"/>
                 <field name="employee_id"/>
             </calendar>
         </field>
     </record>
 
     <!-- Action-->
-    <record id="action_hos_appointment_meetings" model="ir.actions.act_window">
-        <field name="name">Meetings</field>
-        <field name="res_model">hos.appointment</field>
+    <record id="action_appointment_meeting" model="ir.actions.act_window">
+        <field name="name">Meeting</field>
+        <field name="res_model">appointment.meeting</field>
         <field name="view_type">form</field>
         <field name="view_mode">calendar,tree,form</field>
-        <field name="domain">[('appointment_type', '=', 'meetings')]</field>
-        <field name="context">{'default_appointment_type': 'meetings'}</field>
-        <field name="view_id" ref="view_hos_appointment_meetings_calendar"/>
-    </record>
-
-    <record model="ir.actions.act_window.view" id="action_hos_appointment_meetings_calendar">
-        <field eval="1" name="sequence"/>
-        <field name="view_mode">calendar</field>
-        <field name="view_id" ref="view_hos_appointment_meetings_calendar"/>
-        <field name="act_window_id" ref="action_hos_appointment_meetings"/>
-    </record>
-
-    <record model="ir.actions.act_window.view" id="action_hos_appointment_meetings_tree">
-        <field eval="2" name="sequence"/>
-        <field name="view_mode">tree</field>
-        <field name="view_id" ref="view_hos_appointment_meetings_tree"/>
-        <field name="act_window_id" ref="action_hos_appointment_meetings"/>
-    </record>
-
-    <record model="ir.actions.act_window.view" id="action_hos_appointment_meetings_form">
-        <field eval="3" name="sequence"/>
-        <field name="view_mode">form</field>
-        <field name="view_id" ref="view_hos_appointment_meetings_form" />
-        <field name="act_window_id" ref="action_hos_appointment_meetings"/>
     </record>
 
 
