@@ -18,27 +18,47 @@ class Appointment(models.TransientModel):
     patient_id = fields.Many2one(comodel_name="hos.person", string="Person")
     appointment_ids = fields.One2many(comodel_name="hos.appointment.detail", inverse_name="appointment_id")
 
+    def _get_opt(self):
+        detail = []
+
+        # Out-Patient
+        opt_recs = self.env["appointment.opt"].search([("employee_id", "=", self.employee_id.id)])
+
+        for rec in opt_recs:
+            detail.append((0, 0, rec.copy_data()[0]))
+
+        return detail
+
+    def _get_meeting(self):
+        detail = []
+
+        # Meeting
+        meet_recs = self.env["appointment.opt"].search([("employee_id", "=", self.employee_id.id)])
+
+        for rec in meet_recs:
+            detail.append((0, 0, rec.copy_data()[0]))
+
+        return detail
+
+    def _get_ot(self):
+        detail = []
+
+        # Operation Theater
+        ot_recs = self.env["hos.operation"].search([("doctor_id", "=", self.employee_id.id)])
+        for rec in ot_recs:
+            detail.append((0, 0, {"date": rec.operation_date,
+                                  "employee_id": rec.doctor_id.id,
+                                  "patient_id": rec.patient_id.id}))
+
     @api.onchange("employee_id")
     def get_doctor_appointment(self):
         if self.employee_id:
             self.appointment_ids.unlink()
-            detail = []
 
-            # Out-Patient
-            recs = self.env["appointment.opt"].search([("employee_id", "=", self.employee_id.id)])
+            opt = self._get_opt()
+            meeting = self._get_meeting()
 
-            for rec in recs:
-                detail.append((0, 0, rec.copy_data()[0]))
-
-            # Meeting
-            recs = self.env["appointment.opt"].search([("employee_id", "=", self.employee_id.id)])
-
-            for rec in recs:
-                detail.append((0, 0, rec.copy_data()[0]))
-
-            self.appointment_ids = detail
-
-            # Operation Theater
+            self.appointment_ids = opt + meeting
 
 
 class AppointmentDetail(models.TransientModel):

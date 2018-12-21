@@ -52,19 +52,11 @@
     <menuitem id="hr_payroll_salary_rule" name="Salary Rule" action="action_salary_rule" parent="hr_payroll" sequence="50"/>
     <menuitem id="hr_payroll_salary_rule_slab" name="Salary Rule Slab" action="action_salary_rule_slab" parent="hr_payroll" sequence="60"/>
 
-    <!--Doctor: Appointment-->
-    <menuitem id="doctor_appointment" name="Appointment" parent="menu_hr" sequence="60"/>
-    <menuitem id="doctor_appointment_hos_appointment" name="Appointment" action="action_hos_appointment" parent="doctor_appointment" sequence="10"/>
-    <menuitem id="doctor_appointment_appointment_opt" name="OPT" action="action_appointment_opt" parent="doctor_appointment" sequence="20"/>
-    <!--<menuitem id="doctor_appointment_ot" name="Operation" action="action_hos_appointment_ot" parent="doctor_appointment" sequence="20"/>-->
-    <menuitem id="doctor_appointment_appointment_meeting" name="Meetings" action="action_appointment_meeting" parent="doctor_appointment" sequence="30"/>
+    <!--HR: Project -->
+    <menuitem id="hr_project" name="Payroll" parent="menu_hr" sequence="60"/>
+    <menuitem id="hr_project_diff_html" name="Diff 2 HTML" action="action_diff_html" parent="hr_project" sequence="10"/>
+    <menuitem id="hr_project_testing" name="Testing" action="action_test_module" parent="hr_project" sequence="20"/>
 
-    <!--Hospital: Operation-->
-    <menuitem id="hospital_operation" name="Operation" parent="menu_hr" sequence="40"/>
-    <menuitem id="hospital_operation_hos_operation_operation" name="Operation" action="action_hos_operation_operation" parent="hospital_operation" sequence="10"/>
-    <menuitem id="hospital_operation_operation_type" name="Operation List" action="action_operation_type" parent="hospital_operation" sequence="20"/>
-    <menuitem id="hospital_operation_hos_operation_ot_status" name="OT Status" action="action_hos_operation_ot_status" parent="hospital_operation" sequence="30"/>
-    <menuitem id="hospital_operation_operation_theater" name="Operation Theater" action="action_operation_theater" parent="hospital_operation" sequence="40"/>
 
 
 </odoo>

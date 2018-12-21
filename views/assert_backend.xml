@@ -3,10 +3,14 @@
 
     <template id="assets_backend" name="mymodule css assets" inherit_id="web.assets_backend">
         <xpath expr="." position="inside">
-            <link rel="stylesheet" href="/shesha/static/src/css/time_bar.css"/>
-            <link rel="stylesheet" href="/shesha/static/src/css/status_bar.less"/>
-            <link rel="stylesheet" href="/shesha/static/src/css/matrix.css"/>
-            <link rel="stylesheet" href="/shesha/static/src/css/suchi.css"/>
+            <link rel="stylesheet" href="/nagini/static/src/css/time_bar.css"/>
+            <link rel="stylesheet" href="/nagini/static/src/css/status_bar.less"/>
+            <link rel="stylesheet" href="/nagini/static/src/css/matrix.css"/>
+            <link rel="stylesheet" href="/nagini/static/src/css/suchi.css"/>
+            <link rel="stylesheet" href="/nagini/static/src/css/d2h.css"/>
+            <link rel="stylesheet" href="/nagini/static/src/css/test.css"/>
+            <script type="text/javascript" src="/nagini/static/src/js/test.js"></script>
+            <script type="text/javascript" src="/nagini/static/src/js/echarts.min.js"></script>
         </xpath>
     </template>
 </odoo>

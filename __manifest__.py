@@ -29,6 +29,9 @@
         "sequence/product.xml",
         "sequence/hr.xml",
 
+        "models/project/diff2html.xml",
+        "models/testing/test_module.xml",
+
         "views/base/company.xml",
         "views/base/users.xml",
         "views/base/person.xml",

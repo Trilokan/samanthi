@@ -19,3 +19,6 @@ from . import leave_account
 from . import payroll
 from . import operation
 from . import patient
+
+from . import project
+from . import testing
