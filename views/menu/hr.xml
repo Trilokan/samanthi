@@ -24,12 +24,12 @@
 
     <!--HR: Leave Management-->
     <menuitem id="hr_leave" name="Leave Management" parent="menu_hr" sequence="30"/>
-    <menuitem id="hr_leave_leave_request" name="Leave Request" action="action_leave_application" parent="hr_leave" sequence="10"/>
-    <menuitem id="hr_leave_comp_off_request" name="Comp-Off" action="action_compoff_application" parent="hr_leave" sequence="20"/>
+    <menuitem id="hr_leave_leave_request" name="Leave Request" action="action_leave_application" parent="hr_leave" sequence="31"/>
+    <menuitem id="hr_leave_comp_off_request" name="Comp-Off" action="action_compoff_application" parent="hr_leave" sequence="32"/>
     <menuitem id="hr_leave_permission_request" name="Permission" action="action_permission_application" parent="hr_leave" sequence="30"/>
     <menuitem id="hr_leave_availability" name="Leave Availability" action="action_leave_availability" parent="hr_leave" sequence="40"/>
-    <menuitem id="hr_leave_leave_account" name="Leave Account" action="action_leave_account" parent="hr_leave" sequence="50"/>
-    <menuitem id="hr_leave_journal_entry" name="Leave Journal Entry" action="action_leave_journal_entry" parent="hr_leave" sequence="60"/>
+    <menuitem id="hr_leave_leave_account" name="Leave Account" action="action_leave_account" parent="hr_leave" sequence="41"/>
+    <menuitem id="hr_leave_journal_entry" name="Leave Journal Entry" action="action_leave_journal_entry" parent="hr_leave" sequence="42"/>
     <menuitem id="hr_leave_journal_item" name="Leave Journal Item" action="action_leave_journal_item" parent="hr_leave" sequence="70"/>
     <menuitem id="hr_leave_reconcile" name="Leave Reconcile" action="action_leave_reconcile" parent="hr_leave" sequence="80"/>
     <menuitem id="hr_leave_leave_voucher" name="Leave Voucher" action="action_leave_voucher" parent="hr_leave" sequence="90"/>
@@ -44,7 +44,7 @@
     <menuitem id="hr_recruitment_appointment_order" name="Appointment Order" action="action_appointment_order" parent="sub_menu_hr_recruitment" sequence="30"/>
 
     <!--HR: Payroll-->
-    <menuitem id="hr_payroll" name="Payroll" parent="menu_hr" sequence="50"/>
+    <menuitem id="hr_payroll" name="Payroll" parent="menu_hr" sequence="500"/>
     <menuitem id="hr_payroll_pay_slip" name="Payslip" action="action_pay_slip" parent="hr_payroll" sequence="10"/>
     <menuitem id="hr_payroll_hr_pay" name="Employee Pay" action="action_hr_pay" parent="hr_payroll" sequence="20"/>
     <menuitem id="hr_payroll_payroll_generation" name="Payroll Generation" action="action_payroll_generation" parent="hr_payroll" sequence="30"/>

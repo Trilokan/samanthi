@@ -20,5 +20,6 @@ class LeaveAccount(models.Model):
 
     @api.multi
     def create(self, vals):
+        print (vals)
         vals["code"] = self.env["ir.sequence"].next_by_code(self._name)
         return super(LeaveAccount, self).create(vals)

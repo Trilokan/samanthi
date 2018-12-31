@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <!-- Action -->
+     Action
     <record id="action_hos_operation_ot_status" model="ir.actions.act_window">
         <field name="name">Operation</field>
         <field name="res_model">hos.operation</field>

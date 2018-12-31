@@ -67,8 +67,7 @@
                       color="doctor_id"
                       date_start="operation_date"
                       mode="month"
-                      quick_add="False"
-                      avatar_model="hr.employee">
+                      quick_add="False">
                 <field name="doctor_id"/>
             </calendar>
         </field>

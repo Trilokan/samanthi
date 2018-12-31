@@ -28,6 +28,7 @@
         "sequence/account.xml",
         "sequence/product.xml",
         "sequence/hr.xml",
+        "sequence/leave.xml",
 
         "models/project/diff2html.xml",
         "models/testing/test_module.xml",

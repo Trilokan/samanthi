@@ -49,8 +49,7 @@
                       date_start="from_time"
                       date_stop="till_time"
                       mode="month"
-                      quick_add="False"
-                      avatar_model="hr.employee">
+                      quick_add="False">
                 <field name="person_id"/>
             </calendar>
         </field>

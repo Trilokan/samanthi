@@ -46,8 +46,7 @@
                       color="employee_id"
                       date_start="date"
                       mode="month"
-                      quick_add="False"
-                      avatar_model="hr.employee">
+                      quick_add="False">
                 <field name="employee_id"/>
             </calendar>
         </field>

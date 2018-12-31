@@ -45,6 +45,9 @@
                         <field name="uom_id" attrs="{'readonly': [('progress', '!=', 'draft')]}"/>
                         <field name="hsn_code" attrs="{'readonly': [('progress', '!=', 'draft')]}"/>
                     </group>
+                    <moris>
+                        hi
+                    </moris>
                     <notebook>
                         <page string="Inventory">
                             <field name="warehouse_ids" readonly="1">
