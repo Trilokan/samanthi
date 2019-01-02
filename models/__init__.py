@@ -5,12 +5,6 @@ from . import general
 from . import base
 from . import account
 
-# Industry Management
-from . import product
-from . import stock
-from . import asserts
-from . import purchase
-
 # Employee Management
 from . import hr
 from . import time_management
@@ -21,16 +15,27 @@ from . import appointment
 from . import notes
 from . import recruitment
 
+# Industry Management
+from . import product
+from . import stock
+from . import asserts
+from . import purchase
+
 # Hospital Management
+from . import patient
 from . import hospital
 from . import doctor
 from . import operation
+
+# Patient Management
 from . import patient
+from . import treatment
 
 # Project Management
 from . import project
 from . import testing
 
 # School Management
-# from . import school
-# from . import academic
+from . import student
+from . import school
+from . import academic

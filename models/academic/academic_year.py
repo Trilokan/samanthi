@@ -10,5 +10,5 @@ class AcademicYear(models.Model):
 
     name = fields.Char(string="Academic Year", readonly=True)
     year = fields.Selection(selection=cal.get_list_year(), string="Year", required=True)
-    standard_ids = fields.One2many(comodel_name="academic.standard", inverse_name="year_id")
+
 
