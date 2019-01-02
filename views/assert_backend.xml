@@ -9,7 +9,7 @@
             <link rel="stylesheet" href="/nagini/static/src/css/suchi.css"/>
             <link rel="stylesheet" href="/nagini/static/src/css/d2h.css"/>
             <link rel="stylesheet" href="/nagini/static/src/css/test.css"/>
-            <link rel="stylesheet" href="/nagini/static/src/css/new_12.css"/>
+            <!--<link rel="stylesheet" href="/nagini/static/src/css/new_12.css"/>-->
             <script type="text/javascript" src="/nagini/static/src/js/test.js"></script>
             <script type="text/javascript" src="/nagini/static/src/js/echarts.min.js"></script>
         </xpath>

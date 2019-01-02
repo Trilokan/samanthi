@@ -30,11 +30,14 @@
         "sequence/hr.xml",
         "sequence/leave.xml",
 
+        "security/product.xml",
+        "security/ir.model.access.csv",
+
         "models/project/diff2html.xml",
         "models/testing/test_module.xml",
 
         "views/base/company.xml",
-        "views/base/users.xml",
+        # "views/base/users.xml",
         "views/base/person.xml",
         "views/base/patient.xml",
         "views/base/person_type.xml",

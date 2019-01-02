@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+,,,,,,,
+hos_product_group_product_admin,hos.product.group.product.admin,nagini.model_hos_product,group_product_admin,1,1,1,1
+product_group_group_product_admin,product.group.group.product.admin,nagini.model_product_group,group_product_admin,1,1,1,1
+product_sub_group_group_product_admin,product.sub.group.group.product.admin,nagini.model_product_sub_group,group_product_admin,1,1,1,1
