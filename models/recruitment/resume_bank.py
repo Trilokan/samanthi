@@ -13,7 +13,7 @@ CURRENT_INDIA = datetime.now().strftime("%d-%m-%Y %H:%M:%S")
 # Resume Bank
 class ResumeBank(models.Model):
     _name = "resume.bank"
-    _inherit = "hos.address"
+    _inherit = "lam.address"
 
     name = fields.Char(string="Name", required=True)
     date = fields.Date(string="Date", default=CURRENT_DATE)

@@ -12,7 +12,7 @@ CURRENT_INDIA = datetime.now().strftime("%d-%m-%Y %H:%M:%S")
 class LeaveAvailability(models.TransientModel):
     _name = "leave.availability"
 
-    person_id = fields.Many2one(comodel_name="hos.person", string="Employee")
+    person_id = fields.Many2one(comodel_name="lam.person", string="Employee")
     leave_detail = fields.One2many(comodel_name="leave.availability.detail", inverse_name="available_id")
 
     @api.onchange("person_id")

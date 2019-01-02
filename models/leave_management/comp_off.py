@@ -20,7 +20,7 @@ class CompOffApplication(models.Model):
     _inherit = "mail.thread"
 
     date = fields.Date(string="Date", default=CURRENT_DATE, required=True)
-    person_id = fields.Many2one(comodel_name="hos.person", string="Employee",
+    person_id = fields.Many2one(comodel_name="lam.person", string="Employee",
                                 default=lambda self: self.env.user.person_id.id,
                                 readonly=True)
     reason = fields.Text(string="Reason", required=True)

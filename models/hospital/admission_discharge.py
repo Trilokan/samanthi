@@ -23,7 +23,7 @@ class AdmissionDischarge(models.Model):
     writter = fields.Char(string="Writter", track_visibility="always")
 
     # Contact
-    patient_id = fields.Many2one(comodel_name="hos.person", string="Patient", required=True)
+    patient_id = fields.Many2one(comodel_name="lam.person", string="Patient", required=True)
     person_uid = fields.Char(string="Patient ID", related="patient_id.person_uid")
     image = fields.Binary(string="Image", related="patient_id.image")
     email = fields.Char(string="Email", related="patient_id.email")
@@ -43,7 +43,7 @@ class AdmissionDischarge(models.Model):
 
     # Admission Details
     admission_on = fields.Date(string="Admission Date", default=CURRENT_DATE)
-    admission_by = fields.Many2one(comodel_name="hos.person", string="Admit By")
+    admission_by = fields.Many2one(comodel_name="lam.person", string="Admit By")
     admission_reason = fields.Many2one(comodel_name="admission.reason", string="Reason")
     admission_status = fields.Selection(selection=ADMIT_DISC_TYPE, string="Patient Status")
     admission_progress = fields.Selection(selection=ADMISSION_INFO, string="Admission Progress", default="draft")
@@ -53,7 +53,7 @@ class AdmissionDischarge(models.Model):
 
     # Discharge Details
     discharge_on = fields.Date(string="Discharge Date")
-    discharge_by = fields.Many2one(comodel_name="hos.person", string="Discharge By")
+    discharge_by = fields.Many2one(comodel_name="lam.person", string="Discharge By")
     discharge_reason = fields.Many2one(comodel_name="admission.reason", string="Reason")
     discharge_status = fields.Selection(selection=ADMIT_DISC_TYPE, string="Patient Status")
     discharge_progress = fields.Selection(selection=DISCHARGE_INFO, string="Discharge Progress", default="draft")

@@ -138,7 +138,7 @@ class MonthAttendance(models.Model):
         body = ""
 
         for person in person_list:
-            person_id = self.env["hos.person"].search([("id", "=", person)])
+            person_id = self.env["lam.person"].search([("id", "=", person)])
             body = "{0}\n<tr><td>{1}</td>".format(body, person_id.name)
 
             for date in date_list:

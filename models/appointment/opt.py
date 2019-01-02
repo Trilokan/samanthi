@@ -14,8 +14,8 @@ class AppointmentOPT(models.Model):
     _inherit = "mail.thread"
 
     date = fields.Datetime(string="Date", default=CURRENT_TIME, required=True)
-    employee_id = fields.Many2one(comodel_name="hos.person", string="Doctor", required=True)
-    patient_id = fields.Many2one(comodel_name="hos.person", string="Patient", required=True)
+    employee_id = fields.Many2one(comodel_name="lam.person", string="Doctor", required=True)
+    patient_id = fields.Many2one(comodel_name="lam.person", string="Patient", required=True)
     reason = fields.Many2one(comodel_name="appointment.reason", string="Reason", required=True, domain=[("meeting", "=", False)])
     comment = fields.Text(string="Comment")
     writter = fields.Text(string="Writter", track_visibility='always')

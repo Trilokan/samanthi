@@ -4,7 +4,8 @@ from odoo import models, fields
 
 
 class Address(models.Model):
-    _name = "hos.address"
+    _name = "lam.address"
+    _description = "Address Master"
 
     door_no = fields.Char(string="Door No")
     building_name = fields.Char(string="Building Name")

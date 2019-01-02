@@ -16,9 +16,9 @@ RELATION_INFO = [('father', 'Father'),
 
 
 # Contacts
-class HospitalContact(models.Model):
-    _name = "hos.contact"
-    _inherit = "hos.address"
+class Contact(models.Model):
+    _name = "lam.contact"
+    _inherit = "lam.address"
 
     employee_id = fields.Many2one(comodel_name="hr.employee", string="Employee")
     patient_id = fields.Many2one(comodel_name="hos.patient", string="Patient")

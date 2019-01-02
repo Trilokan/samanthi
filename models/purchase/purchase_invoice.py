@@ -19,7 +19,7 @@ class PurchaseInvoice(models.Model):
 
     date = fields.Date(srring="Date", required=True, default=CURRENT_DATE)
     name = fields.Char(string="Name", readonly=True)
-    person_id = fields.Many2one(comodel_name="hos.person", string="Partner", required=True)
+    person_id = fields.Many2one(comodel_name="lam.person", string="Partner", required=True)
     company_id = fields.Many2one(comodel_name="res.company", string="Company", readdonly=True)
     indent_id = fields.Many2one(comodel_name="purchase.indent", string="Purchase Indent")
     quote_id = fields.Many2one(comodel_name="purchase.quote", string="Quotation")
@@ -142,7 +142,7 @@ class PurchaseInvoice(models.Model):
 class InvoiceDetail(models.Model):
     _name = "purchase.invoice.detail"
 
-    person_id = fields.Many2one(comodel_name="hos.person", string="Vendor", readonly=True)
+    person_id = fields.Many2one(comodel_name="lam.person", string="Vendor", readonly=True)
     product_id = fields.Many2one(comodel_name="hos.product", string="Description", required=True)
     description = fields.Text(string="Item Description", readonly=True)
     uom_id = fields.Many2one(comodel_name="product.uom", string="UOM", related="product_id.uom_id")

@@ -3,7 +3,7 @@
 from odoo import models, fields
 
 
-class HospitalCompany(models.Model):
+class Company(models.Model):
     _name = "res.company"
     _inherit = "res.company"
 

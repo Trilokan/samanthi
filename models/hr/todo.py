@@ -12,7 +12,7 @@ CURRENT_INDIA = datetime.now().strftime("%d-%m-%Y %H:%M:%S")
 class HospitalTodo(models.TransientModel):
     _name = "hos.todo"
 
-    person_id = fields.Many2one(comodel_name="hos.person", string="Employee")
+    person_id = fields.Many2one(comodel_name="lam.person", string="Employee")
     date = fields.Date(string="Date", default=CURRENT_DATE)
     description = fields.Text(string="Description")
     progress = fields.Selection(selection=PROGRESS_INFO, default="draft")

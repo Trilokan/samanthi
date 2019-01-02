@@ -22,7 +22,7 @@
 
     <!--Account: Base-->
     <menuitem id="account_base" name="Base" parent="menu_account" sequence="40"/>
-    <menuitem id="account_base_hos_person" name="Person" action="action_hos_person" parent="account_base" sequence="10"/>
+    <menuitem id="account_base_lam_person" name="Person" action="action_lam_person" parent="account_base" sequence="10"/>
     <menuitem id="account_base_hos_patient" name="Person" action="action_hos_patient" parent="account_base" sequence="20"/>
     <menuitem id="account_base_person_type" name="Person Type" action="action_person_type" parent="account_base" sequence="30"/>
 

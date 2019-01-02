@@ -14,7 +14,7 @@
 
     <!--Purchase: Identity-->
     <menuitem id="purchase_identity" name="Identity" parent="menu_purchase" sequence="20"/>
-    <menuitem id="purchase_identity_hos_person" name="Vendor" action="action_hos_person" parent="purchase_identity" sequence="20"/>
+    <menuitem id="purchase_identity_lam_person" name="Vendor" action="action_lam_person" parent="purchase_identity" sequence="20"/>
 
     <!--Purchase: Report-->
     <menuitem id="purchase_report" name="Report" parent="menu_purchase" sequence="20"/>

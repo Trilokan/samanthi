@@ -19,7 +19,7 @@ class PermissionApplication(models.Model):
 
     from_time = fields.Datetime(string="From", default=CURRENT_TIME, required=True)
     till_time = fields.Datetime(string="Till", default=CURRENT_TIME, required=True)
-    person_id = fields.Many2one(comodel_name="hos.person", string="Employee",
+    person_id = fields.Many2one(comodel_name="lam.person", string="Employee",
                                 default=lambda self: self.env.user.person_id.id,
                                 readonly=True)
     reason = fields.Text(string="Reason", required=True)

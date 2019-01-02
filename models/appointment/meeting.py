@@ -14,7 +14,7 @@ class AppointmentMeeting(models.Model):
     _inherit = "mail.thread"
 
     date = fields.Datetime(string="Date", default=CURRENT_TIME, required=True)
-    employee_id = fields.Many2one(comodel_name="hos.person", string="Employee", required=True)
+    employee_id = fields.Many2one(comodel_name="lam.person", string="Employee", required=True)
     reason = fields.Many2one(comodel_name="appointment.reason", string="Reason", required=True, domain=[("meeting", "=", True)])
     comment = fields.Text(string="Comment")
     writter = fields.Text(string="Writter", track_visibility='always')

@@ -4,8 +4,8 @@ from odoo import models, fields, api
 
 
 class HospitalPerson(models.Model):
-    _name = "hos.person"
-    _inherit = "hos.address"
+    _name = "lam.person"
+    _inherit = "lam.address"
 
     name = fields.Char(string="Name", required=True)
     person_uid = fields.Char(string="Person UID", readonly=True)
@@ -84,5 +84,5 @@ class PersonType(models.Model):
     _name = "person.type"
 
     name = fields.Char(string="Name", required=True)
-    person_ids = fields.Many2many(comodel_name="hos.person", string="Person")
+    person_ids = fields.Many2many(comodel_name="lam.person", string="Person")
 

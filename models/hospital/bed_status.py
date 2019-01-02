@@ -60,7 +60,7 @@ class BedStatus(models.TransientModel):
 class BedOccupied(models.TransientModel):
     _name = "bed.occupied"
 
-    person_id = fields.Many2one(comodel_name="hos.person", string="Patient")
+    person_id = fields.Many2one(comodel_name="lam.person", string="Patient")
     status_id = fields.Many2one(comodel_name="bed.status", string="Bed Status")
     bed_id = fields.Many2one(comodel_name="hos.bed", string="Bed")
 

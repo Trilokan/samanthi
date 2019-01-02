@@ -16,9 +16,9 @@ class Ambulance(models.Model):
 
     date = fields.Date(string="Date", default=CURRENT_DATE, required=True)
     name = fields.Char(string="Name", readonly=True)
-    patient_id = fields.Many2one(comodel_name="hos.person", string="Patient")
-    driver_id = fields.Many2one(comodel_name="hos.person", string="Driver")
-    employee_ids = fields.Many2many(comodel_name="hos.person", string="Staff")
+    patient_id = fields.Many2one(comodel_name="lam.person", string="Patient")
+    driver_id = fields.Many2one(comodel_name="lam.person", string="Driver")
+    employee_ids = fields.Many2many(comodel_name="lam.person", string="Staff")
     progress = fields.Selection(selection=PROGRESS_INFO, string="Progress", default="draft")
     travel_type = fields.Selection(selection=TRAVEL_TYPE, string="Travel Type", default="admission")
 

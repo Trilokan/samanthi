@@ -5,7 +5,7 @@ from odoo import models, fields
 
 # Language
 class Language(models.Model):
-    _name = "hos.language"
+    _name = "lam.language"
 
     name = fields.Char(string="Language", required=True)
 

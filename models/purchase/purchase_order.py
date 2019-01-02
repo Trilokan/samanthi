@@ -16,10 +16,10 @@ class PurchaseOrder(models.Model):
 
     name = fields.Char(string='Name', readonly=True)
     date = fields.Date(string="Date", default=CURRENT_DATE, readonly=True)
-    person_id = fields.Many2one(comodel_name="hos.person", string="Vendor", readonly=True)
+    person_id = fields.Many2one(comodel_name="lam.person", string="Vendor", readonly=True)
     quote_id = fields.Many2one(comodel_name="purchase.quote", string="Quotation", readonly=True)
     vendor_ref = fields.Char(string="Vendor Ref")
-    processed_by = fields.Many2one(comodel_name="hos.person", string="Processed By", readonly=True)
+    processed_by = fields.Many2one(comodel_name="lam.person", string="Processed By", readonly=True)
     processed_on = fields.Date(string='Processed On', readonly=True)
     order_detail = fields.One2many(comodel_name='purchase.order.detail', inverse_name='order_id')
     progress = fields.Selection(PROGRESS_INFO, default='draft', string='Progress')
@@ -120,7 +120,7 @@ class PurchaseOrder(models.Model):
 
     @api.multi
     def trigger_cancel(self):
-        person_id = self.env["hos.person"].search([("id", "=", self.env.user.person_id.id)])
+        person_id = self.env["lam.person"].search([("id", "=", self.env.user.person_id.id)])
         writter = "PO cancelled by {0}".format(person_id.name)
 
         self.write({"progress": "cancelled", "writter": writter})

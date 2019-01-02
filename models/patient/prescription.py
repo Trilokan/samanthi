@@ -18,7 +18,7 @@ class PatientPrescription(models.Model):
 
     date = fields.Datetime(string="Date", default=CURRENT_TIME, required=True)
     name = fields.Char(string="Name", readonly=True)
-    person_id = fields.Many2one(comodel_name="hos.person", string="Person")
+    person_id = fields.Many2one(comodel_name="lam.person", string="Person")
     total_days = fields.Float(string="Days")
     prescription_detail = fields.One2many(comodel_name="patient.prescription.detail", inverse_name="prescription_id")
     in_patient_id = fields.Many2one(comodel_name="in.patient", string="Treatment")

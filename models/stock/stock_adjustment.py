@@ -16,7 +16,7 @@ class StockAdjustment(models.Model):
 
     date = fields.Date(string="Date", required=True, default=CURRENT_DATE)
     name = fields.Char(string="Name", readonly=True)
-    adjusted_by = fields.Many2one(comodel_name="hos.person", string="Approve By", readonly=True)
+    adjusted_by = fields.Many2one(comodel_name="lam.person", string="Approve By", readonly=True)
     progress = fields.Selection(selection=PROGRESS_INFO, string="Progress", default="draft")
     adjust_type = fields.Selection(selection=ADJUST_TYPE, string="Adjust Type", default="increase", required=True)
     adjustment_detail = fields.One2many(comodel_name="stock.adjustment.detail", inverse_name="adjustment_id", string="Adjustment Detail")

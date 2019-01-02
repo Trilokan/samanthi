@@ -32,7 +32,7 @@ class AttendanceChange(models.Model):
                                 default="draft",
                                 track_visibility='always')
     change_type = fields.Selection(selection=CHANGE_TYPE, string="Change Type")
-    person_id = fields.Many2one(comodel_name="hos.person",
+    person_id = fields.Many2one(comodel_name="lam.person",
                                 string="Employee",
                                 required=True)
     shift_id = fields.Many2one(comodel_name="time.shift", string="Shift")

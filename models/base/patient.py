@@ -11,7 +11,7 @@ MARITAL_STATUS = [('single', 'Single'), ('married', 'Married'), ('divorced', 'Di
 
 class Patient(models.Model):
     _name = "hos.patient"
-    _inherit = "hos.address"
+    _inherit = "lam.address"
 
     date = fields.Date(string="Date",
                        default=datetime.now().strftime("%Y-%m-%d"),
@@ -40,11 +40,11 @@ class Patient(models.Model):
     passport = fields.Char(string="Passport")
     driving_license = fields.Char(string="Driving Licence No")
     caste = fields.Char(string="Caste")
-    religion_id = fields.Many2one(comodel_name="res.religion", string="Religion")
+    religion_id = fields.Many2one(comodel_name="lam.religion", string="Religion")
     physically_challenged = fields.Boolean(string="Physically Challenged")
     nationality_id = fields.Many2one(comodel_name="res.country")
-    language_known_ids = fields.Many2many(comodel_name="hos.language", string="Language Known")
-    family_member_ids = fields.One2many(comodel_name="hos.contact",
+    language_known_ids = fields.Many2many(comodel_name="lam.language", string="Language Known")
+    family_member_ids = fields.One2many(comodel_name="lam.contact",
                                         inverse_name="patient_id",
                                         string="Family Members")
 
@@ -56,7 +56,7 @@ class Patient(models.Model):
     #                                    string="Treatment Details")
     report = fields.Html(string="Report")
 
-    person_id = fields.Many2one(comodel_name="hos.person", string="Partner")
+    person_id = fields.Many2one(comodel_name="lam.person", string="Partner")
 
     attachment_ids = fields.Many2many(comodel_name="ir.attachment", string="Attachment")
 
@@ -90,7 +90,7 @@ class Patient(models.Model):
                 "type_ids": [(6, 0, [patient_type_id.id])],
                 "person_type": "patient"}
 
-        person_id = self.env["hos.person"].create(data)
+        person_id = self.env["lam.person"].create(data)
 
         return person_id.id
 

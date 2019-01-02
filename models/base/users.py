@@ -3,7 +3,7 @@
 from odoo import models, fields, api
 
 
-class HospitalUsers(models.Model):
+class Users(models.Model):
     _name = "res.users"
     _inherit = "res.users"
 
@@ -11,11 +11,11 @@ class HospitalUsers(models.Model):
     email = fields.Char(string="E-mail", readonly=True)
     contact_no = fields.Char(string="Contact No", readonly=True)
     alternate_contact = fields.Char(string="Alternate Contact", readonly=True)
-    person_id = fields.Many2one(comodel_name="hos.person", string="Person", required=True)
+    person_id = fields.Many2one(comodel_name="lam.person", string="Person", required=True)
 
     @api.model
     def create(self, vals):
-        person_id = self.env["hos.person"].search([("id", "=", vals["person_id"])])
+        person_id = self.env["lam.person"].search([("id", "=", vals["person_id"])])
 
         vals["name"] = person_id.name
         vals["email"] = person_id.email

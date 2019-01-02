@@ -16,7 +16,7 @@ class PatientShifting(models.Model):
     _inherit = "mail.thread"
 
     date = fields.Datetime(string="Date", default=CURRENT_TIME, required=True)
-    person_id = fields.Many2one(comodel_name="hos.person", string="Person")
+    person_id = fields.Many2one(comodel_name="lam.person", string="Person")
     source_id = fields.Many2one(comodel_name="hos.bed", string="Source", required=True)
     destination_id = fields.Many2one(comodel_name="hos.bed", string="Destination ", required=True)
     progress = fields.Selection(selection=PROGRESS_INFO, string="Progress", default="draft")

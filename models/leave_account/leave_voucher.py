@@ -16,7 +16,7 @@ class LeaveVoucher(models.Model):
     date = fields.Date(string="Date", required=True, default=CURRENT_DATE)
     name = fields.Char(string="Name", readonly=True)
     month_id = fields.Many2one(comodel_name="month.attendance", string="Month", required=True)
-    person_id = fields.Many2one(comodel_name="hos.person", string="Person", required=True)
+    person_id = fields.Many2one(comodel_name="lam.person", string="Person", required=True)
     voucher_detail = fields.One2many(comodel_name="leave.voucher.detail", inverse_name="voucher_id")
     voucher_dummy = fields.One2many(comodel_name="leave.voucher.dummy", inverse_name="voucher_id")
     leave_taken = fields.Float(string="Leave Taken", default=0, required=True)

@@ -16,7 +16,7 @@ class PatientTreatmentDetail(models.Model):
 
     date = fields.Date(string="Date", default=CURRENT_DATE, required=True)
     product_id = fields.Many2one(comodel_name="hos.product", string="Product", required=True)
-    person_id = fields.Many2one(comodel_name="hos.person", string="Person", required=True)
+    person_id = fields.Many2one(comodel_name="lam.person", string="Person", required=True)
     description = fields.Text(string="Description", requied=True)
     unit = fields.Float(string="Units")
     comment = fields.Text(string="Comment", requied=True)

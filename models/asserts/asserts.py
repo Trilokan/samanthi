@@ -27,7 +27,7 @@ class Assert(models.Model):
     warranty_date = fields.Date(string="Warranty Date")
 
     # Seller Details
-    vendor_id = fields.Many2one(comodel_name="hos.person", string="Vendor")
+    vendor_id = fields.Many2one(comodel_name="lam.person", string="Vendor")
     order_date = fields.Date(string="Order Date")
     order_id = fields.Many2one(comodel_name="purchase.order", string="Purchase Order")
     purchase_date = fields.Date(string="Date of Purchase")
@@ -36,7 +36,7 @@ class Assert(models.Model):
     # vendor_address = ""
 
     # Maintenance Details
-    maintenance_id = fields.Many2one(comodel_name="hos.person", string="Maintenance")
+    maintenance_id = fields.Many2one(comodel_name="lam.person", string="Maintenance")
     # service_contact = ""
     # service_address = ""
     maintenance_details = fields.One2many(comodel_name="asserts.maintenance",
@@ -49,7 +49,7 @@ class Assert(models.Model):
     # Accounting Details
     account_id = fields.Many2one(comodel_name="hos.account", string="Account")
     depreciation_percentage = fields.Float(string="Depreciation Percentage")
-    responsible_id = fields.Many2one(comodel_name="hos.person", string="Responsible Person")
+    responsible_id = fields.Many2one(comodel_name="lam.person", string="Responsible Person")
     is_working = fields.Boolean(string="Is Working")
     is_condem = fields.Boolean(string="Is Condemed")
     attachment = fields.Many2many(comodel_name="ir.attachment", string="Attachment")
@@ -81,7 +81,7 @@ class AssertMaintenance(models.Model):
 
     date = fields.Date(string="Date", default=CURRENT_DATE, required=True)
     asserts_id = fields.Many2one(comodel_name="hos.asserts", string="Assert")
-    person_id = fields.Many2one(comodel_name="hos.person", string="Maintenance", required=True)
+    person_id = fields.Many2one(comodel_name="lam.person", string="Maintenance", required=True)
     description = fields.Text(string="Description", required=True)
     attachment = fields.Many2many(comodel_name="ir.attachment", string="Attachment")
 
@@ -101,7 +101,7 @@ class AssertNotification(models.Model):
 
     date = fields.Date(string="Date", default=CURRENT_DATE, required=True)
     asserts_id = fields.Many2one(comodel_name="hos.asserts", string="Assert")
-    person_id = fields.Many2one(comodel_name="hos.person", string="Notify", required=True)
+    person_id = fields.Many2one(comodel_name="lam.person", string="Notify", required=True)
     description = fields.Text(string="Description", required=True)
 
     progress = fields.Selection(selection=PROGRESS_INFO, string="Progress", default="draft")

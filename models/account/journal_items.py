@@ -15,7 +15,7 @@ class JournalItems(models.Model):
     name = fields.Char(string="Name", readonly=True)
     description = fields.Text(string="Description")
     account_id = fields.Many2one(comodel_name="hos.account", string="Account", required=True)
-    person_id = fields.Many2one(comodel_name="hos.person", string="Person", required=True)
+    person_id = fields.Many2one(comodel_name="lam.person", string="Person", required=True)
     credit = fields.Float(string="Credit", default=0, required=True)
     debit = fields.Float(string="Debit", default=0, required=True)
     reconcile_id = fields.Many2one(comodel_name="hos.reconcile", string="Reconcile")

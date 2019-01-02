@@ -15,8 +15,8 @@ class DirectMaterialReceipt(models.Model):
 
     date = fields.Date(string="Date", required=True, default=CURRENT_DATE)
     name = fields.Char(string="Name", readonly=True)
-    person_id = fields.Many2one(comodel_name="hos.person", string="Person", required=True)
-    received_by = fields.Many2one(comodel_name="hos.person", string="Person", readonly=True)
+    person_id = fields.Many2one(comodel_name="lam.person", string="Person", required=True)
+    received_by = fields.Many2one(comodel_name="lam.person", string="Person", readonly=True)
     receipt_detail = fields.One2many(comodel_name="direct.material.receipt.detail",
                                      inverse_name="receipt_id", string="Receipt Detail")
     progress = fields.Selection(selection=PROGRESS_INFO, string="Progress", default="draft")

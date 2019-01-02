@@ -11,7 +11,7 @@
     <!--Hospital: Identity-->
     <menuitem id="hospital_identity" name="Identity" parent="menu_hospital" sequence="20"/>
     <menuitem id="hospital_identity_hos_patient" name="Patient" action="action_hos_patient" parent="hospital_identity" sequence="10"/>
-    <menuitem id="hospital_identity_hos_person" name="Vendor" action="action_hos_person" parent="hospital_identity" sequence="20"/>
+    <menuitem id="hospital_identity_lam_person" name="Vendor" action="action_lam_person" parent="hospital_identity" sequence="20"/>
 
     <!--Hospital: Hospital Management-->
     <menuitem id="hospital_hospital_management" name="Hospital Management" parent="menu_hospital" sequence="30"/>

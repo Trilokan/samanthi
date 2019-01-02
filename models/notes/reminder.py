@@ -12,7 +12,7 @@ class HospitalReminder(models.Model):
     _rec_name = "person_id"
 
     date = fields.Datetime(string="Date", default=CURRENT_TIME, required=True)
-    person_id = fields.Many2one(comodel_name="hos.person",
+    person_id = fields.Many2one(comodel_name="lam.person",
                                 string="Name",
                                 default=lambda self: self.env.user.person_id.id,
                                 required=True)

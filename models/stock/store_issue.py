@@ -17,7 +17,7 @@ class StoreIssue(models.Model):
     name = fields.Char(string="Name", readonly=True)
     department_id = fields.Many2one(comodel_name="hr.department", string="Department", required=True)
     request_id = fields.Many2one(comodel_name="store.request", string="Request", required=True)
-    issue_by = fields.Many2one(comodel_name="hos.person", string="Issue By", readonly=True)
+    issue_by = fields.Many2one(comodel_name="lam.person", string="Issue By", readonly=True)
     progress = fields.Selection(selection=PROGRESS_INFO, string="Progress", default="draft")
     issue_detail = fields.One2many(comodel_name="store.issue.detail", inverse_name="issue_id", string="Issue Detail")
     writter = fields.Char(string="Writter", track_visibility="always")

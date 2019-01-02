@@ -15,7 +15,7 @@ class AssertsCapitalisation(models.Model):
 
     date = fields.Date(string="Date", required=True, default=CURRENT_DATE)
     name = fields.Char(string="Name", readonly=True)
-    approved_by = fields.Many2one(comodel_name="hos.person", string="Approve By", readonly=True)
+    approved_by = fields.Many2one(comodel_name="lam.person", string="Approve By", readonly=True)
     department_id = fields.Many2one(comodel_name="hr.department", string="Department", required=True)
     order_id = fields.Many2one(comodel_name="purchase.order", string="Purchase Order")
     invoice_id = fields.Many2one(comodel_name="purchase.invoice", string="Purchase Invoice")

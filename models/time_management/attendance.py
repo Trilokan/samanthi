@@ -64,7 +64,7 @@ class TimeAttendanceDetail(models.Model):
     _name = "time.attendance.detail"
 
     shift_id = fields.Many2one(comodel_name="time.shift", string="Shift", readonly=True)
-    person_id = fields.Many2one(comodel_name="hos.person", string="Employee", readonly=True)
+    person_id = fields.Many2one(comodel_name="lam.person", string="Employee", readonly=True)
     attendance_id = fields.Many2one(comodel_name="time.attendance", string="Attendance", readonly=True)
     expected_from_time = fields.Datetime(string="Expected From Time", readonly=True)
     actual_from_time = fields.Datetime(string="Actual From Time", readonly=True)

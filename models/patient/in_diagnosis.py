@@ -15,7 +15,7 @@ class InPatientDiagnosis(models.Model):
     _inherit = "mail.thread"
 
     date = fields.Datetime(string="Date")
-    person_id = fields.Many2one(comodel_name="hos.person", string="Person")
+    person_id = fields.Many2one(comodel_name="lam.person", string="Person")
     diagnosis_id = fields.Many2one(comodel_name="patient.diagnosis", string="Diagnosis")
     in_patient_id = fields.Many2one(comodel_name="in.patient", string="Treatment")
     comment = fields.Text(string="Comment")

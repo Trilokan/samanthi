@@ -14,7 +14,7 @@ class LeaveVoucherDummy(models.Model):
 
     date = fields.Date(string="Date", readonly=True)
     name = fields.Char(string="Name", readonly=True)
-    person_id = fields.Many2one(comodel_name="hos.person", string="Person", required=True)
+    person_id = fields.Many2one(comodel_name="lam.person", string="Person", required=True)
     account_id = fields.Many2one(comodel_name="leave.account", string="Account", required=True)
     type_id = fields.Many2one(comodel_name="leave.type", string="Leave Type")
     description = fields.Text(string="Description")

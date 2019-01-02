@@ -15,7 +15,7 @@ class LeaveVoucherDetail(models.Model):
 
     date = fields.Date(string="Date")
     name = fields.Char(string="Name")
-    person_id = fields.Many2one(comodel_name="hos.person", string="Person")
+    person_id = fields.Many2one(comodel_name="lam.person", string="Person")
     account_id = fields.Many2one(comodel_name="leave.account", string="Account")
     type_id = fields.Many2one(comodel_name="leave.type", string="Leave Type")
     description = fields.Text(string="Description")

@@ -16,7 +16,7 @@ class CustomerPayment(models.Model):
 
     date = fields.Date(string="Date", default=CURRENT_DATE, required=True)
     name = fields.Char(string="Name", readonly=True)
-    person_id = fields.Many2one(comodel_name="hos.person", string="Person", required=True)
+    person_id = fields.Many2one(comodel_name="lam.person", string="Person", required=True)
     payment = fields.Float(strng="Payment", default=0, required=True)
     balance = fields.Float(strng="Balance", default=0, required=True)
     credit_ids = fields.One2many(comodel_name="customer.payment.line", inverse_name="credit_id", string="Credit")

@@ -2,9 +2,9 @@
 <odoo>
 
     <!-- Tree -->
-    <record id="view_hos_person_nurse_tree" model="ir.ui.view">
-        <field name="name">hos.person.nurse.tree</field>
-        <field name="model">hos.person</field>
+    <record id="view_lam_person_nurse_tree" model="ir.ui.view">
+        <field name="name">lam.person.nurse.tree</field>
+        <field name="model">lam.person</field>
         <field name="arch" type="xml">
             <tree string="Nurse">
                 <field name="name"/>
@@ -14,9 +14,9 @@
     </record>
 
     <!-- Form -->
-    <record id="view_hos_person_nurse_form" model="ir.ui.view">
-        <field name="name">hos.person.nurse.form</field>
-        <field name="model">hos.person</field>
+    <record id="view_lam_person_nurse_form" model="ir.ui.view">
+        <field name="name">lam.person.nurse.form</field>
+        <field name="model">lam.person</field>
         <field name="arch" type="xml">
             <form string="Nurse">
                 <sheet>
@@ -79,27 +79,27 @@
     </record>
 
     <!-- Action GRN-->
-    <record id="action_hos_person_nurse" model="ir.actions.act_window">
+    <record id="action_lam_person_nurse" model="ir.actions.act_window">
         <field name="name">Nurse</field>
-        <field name="res_model">hos.person</field>
+        <field name="res_model">lam.person</field>
         <field name="view_type">form</field>
         <field name="view_mode">tree,form</field>
         <field name="domain">[('type_ids.name', '=', 'Nurse')]</field>
-        <field name="view_id" ref="view_hos_person_nurse_tree"/>
+        <field name="view_id" ref="view_lam_person_nurse_tree"/>
     </record>
 
-    <record model="ir.actions.act_window.view" id="action_hos_person_nurse_form">
+    <record model="ir.actions.act_window.view" id="action_lam_person_nurse_form">
         <field eval="2" name="sequence"/>
         <field name="view_mode">form</field>
-        <field name="view_id" ref="view_hos_person_nurse_form" />
-        <field name="act_window_id" ref="action_hos_person_nurse"/>
+        <field name="view_id" ref="view_lam_person_nurse_form" />
+        <field name="act_window_id" ref="action_lam_person_nurse"/>
     </record>
 
-    <record model="ir.actions.act_window.view" id="action_hos_person_nurse_tree">
+    <record model="ir.actions.act_window.view" id="action_lam_person_nurse_tree">
         <field eval="1" name="sequence"/>
         <field name="view_mode">tree</field>
-        <field name="view_id" ref="view_hos_person_nurse_tree"/>
-        <field name="act_window_id" ref="action_hos_person_nurse"/>
+        <field name="view_id" ref="view_lam_person_nurse_tree"/>
+        <field name="act_window_id" ref="action_lam_person_nurse"/>
     </record>
 
 

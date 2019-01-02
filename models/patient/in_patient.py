@@ -12,7 +12,7 @@ class InPatientTreatment(models.Model):
     _name = "in.patient"
 
     date = fields.Datetime(string="Date", required=True)
-    patient_id = fields.Many2one(comodel_name="hos.person", string="Patient")
+    patient_id = fields.Many2one(comodel_name="lam.person", string="Patient")
     patient_uid = fields.Char(string="", related="")
     age = fields.Char(string="", related="")
     mobile = fields.Char(string="", related="")

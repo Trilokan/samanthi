@@ -16,7 +16,7 @@ class DoctorAvailability(models.Model):
     _inherit = "mail.thread"
     _rec_name = "person_id"
 
-    person_id = fields.Many2one(comodel_name="hos.person", string="Doctor", required=True)
+    person_id = fields.Many2one(comodel_name="lam.person", string="Doctor", required=True)
     from_time = fields.Datetime(string="From Time", default=CURRENT_TIME, required=True)
     till_time = fields.Datetime(string="Till Time", default=CURRENT_TIME, required=True)
     progress = fields.Selection(selection=PROGRESS_INFO, string="Progress", default="draft")

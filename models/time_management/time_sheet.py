@@ -17,7 +17,7 @@ class TimeSheet(models.Model):
     _inherit = "mail.thread"
 
     date = fields.Datetime(string="Date")
-    person_id = fields.Many2one(comodel_name="hos.person", string="Employee")
+    person_id = fields.Many2one(comodel_name="lam.person", string="Employee")
     progress = fields.Selection(PROGRESS_INFO, string='Progress')
     process = fields.Selection(PROCESS_INFO, string='Process', default="manual", readonly=True)
     writter = fields.Text(string="Writter", track_visibility="always")

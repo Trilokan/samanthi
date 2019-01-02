@@ -14,7 +14,7 @@ class OperationTheater(models.Model):
     breadth = fields.Float(string="Breadth")
     area = fields.Float(string="Area")
     equipment_ids = fields.Many2many(comodel_name="hos.asserts", sytring="Equipments")
-    incharge_id = fields.Many2one(comodel_name="hos.person", string="In-Charge")
+    incharge_id = fields.Many2one(comodel_name="lam.person", string="In-Charge")
     total_operation = fields.Integer(string="Total Operation", compute="_get_total_operation")
     in_progress_operation = fields.Integer(string="In Progress", compute="_get_in_progress_operation")
     attachment_ids = fields.Many2many(comodel_name="ir.attachment", string="Attachment")

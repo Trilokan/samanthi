@@ -21,3 +21,15 @@ def purchase_calculation(unit_price, quantity, discount, tax, tax_state):
             "discount_amount": discount_amount,
             "tax_amount": tax_amount,
             "total_amount": price}
+
+
+def get_list_year():
+    year_list = []
+    START_YEAR = 2016
+    END_YEAR = 2022
+
+    for year in range(2016, 2022):
+        year_list.append(year)
+
+    return year_list
+

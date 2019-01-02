@@ -10,7 +10,7 @@ class DutyTimings(models.Model):
     _inherit = "mail.thread"
     _rec_name = "person_id"
 
-    person_id = fields.Many2one(comodel_name="hos.person", string="Employee", required=True)
+    person_id = fields.Many2one(comodel_name="lam.person", string="Employee", required=True)
 
     monday_fn_from_time = fields.Float(string="Monday FN From Time")
     monday_fn_till_time = fields.Float(string="Monday FN Till Time")

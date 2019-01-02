@@ -10,13 +10,13 @@ MARITAL_STATUS = [('single', 'Single'), ('married', 'Married'), ('divorced', 'Di
 
 class Employee(models.Model):
     _name = "hr.employee"
-    _inherit = ["hos.address"]
+    _inherit = ["lam.address"]
 
     name = fields.Char(string="Name", required=True)
     employee_uid = fields.Char(string="Employee ID", readonly=True)
     image = fields.Binary(string="Image")
     user_id = fields.Many2one(comodel_name="res.users", string="User")
-    person_id = fields.Many2one(comodel_name="hos.person", string="Partner")
+    person_id = fields.Many2one(comodel_name="lam.person", string="Partner")
 
     # Contact
     email = fields.Char(string="Email")
@@ -53,15 +53,15 @@ class Employee(models.Model):
     marital_status = fields.Selection(selection=MARITAL_STATUS, string="Marital Status")
     gender = fields.Selection(selection=GENDER, string="Gender")
     caste = fields.Char(string="Caste")
-    religion_id = fields.Many2one(comodel_name="res.religion", string="Religion")
+    religion_id = fields.Many2one(comodel_name="lam.religion", string="Religion")
     physically_challenged = fields.Boolean(string="Physically Challenged")
     nationality_id = fields.Many2one(comodel_name="res.country")
-    mother_tongue_id = fields.Many2one(comodel_name="hos.language", string="Mother Tongue")
-    language_known_ids = fields.Many2many(comodel_name="hos.language", string="Language Known")
+    mother_tongue_id = fields.Many2one(comodel_name="lam.language", string="Mother Tongue")
+    language_known_ids = fields.Many2many(comodel_name="lam.language", string="Language Known")
     personnel_mobile = fields.Char(string="Personnel Mobile")
     personnel_email = fields.Char(string="Personnel Email")
     permanent_address = fields.Text(string="Permanent Address")
-    family_member_ids = fields.One2many(comodel_name="hos.contact",
+    family_member_ids = fields.One2many(comodel_name="lam.contact",
                                         inverse_name="employee_id",
                                         string="Family Members")
 
@@ -93,7 +93,7 @@ class Employee(models.Model):
                 "type_ids": [(6, 0, [category_type_id.id, employee_type_id.id])],
                 "person_type": employee_category_id.name.lower()}
 
-        person_id = self.env["hos.person"].create(data)
+        person_id = self.env["lam.person"].create(data)
 
         return person_id.id
 

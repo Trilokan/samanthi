@@ -18,8 +18,8 @@ class StoreRequest(models.Model):
     department_id = fields.Many2one(comodel_name="hr.department", string="Department", required=True)
     progress = fields.Selection(selection=PROGRESS_INFO, string="Progress", default="draft")
     request_detail = fields.One2many(comodel_name="store.request.detail", inverse_name="request_id", string="Request Detail")
-    requested_by = fields.Many2one(comodel_name="hos.person", string="Requested By", reaonly=True)
-    approved_by = fields.Many2one(comodel_name="hos.person", string="Approved By", reaonly=True)
+    requested_by = fields.Many2one(comodel_name="lam.person", string="Requested By", reaonly=True)
+    approved_by = fields.Many2one(comodel_name="lam.person", string="Approved By", reaonly=True)
     writter = fields.Char(string="Writter", track_visibility="always")
 
     @api.multi
