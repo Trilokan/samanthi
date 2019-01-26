@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Tree -->
+    <record id="view_register_payment_tree" model="ir.ui.view">
+        <field name="name">register.payment.tree</field>
+        <field name="model">register.payment</field>
+        <field name="arch" type="xml">
+            <tree string="Register Payment">
+                <field name="date"/>
+                <field name="name"/>
+                <field name="person_id"/>
+                <field name="journal_type_id"/>
+                <field name="invoice_id"/>
+                <field name="amount"/>
+                <field name="progress"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form -->
+    <record id="view_register_payment_form" model="ir.ui.view">
+        <field name="name">register.payment.form</field>
+        <field name="model">register.payment</field>
+        <field name="arch" type="xml">
+            <form string="Register Payment">
+                <sheet>
+                    <div id="s_header">
+                        <h1>Register Payment</h1>
+                    </div>
+                    <group>
+                        <field name="date"/>
+                        <field name="name"/>
+                        <field name="person_id"/>
+                        <field name="journal_type_id"/>
+                        <field name="invoice_id"/>
+                        <field name="amount"/>
+                        <field name="progress"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_register_payment" model="ir.actions.act_window">
+        <field name="name">Register Payment</field>
+        <field name="res_model">register.payment</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+</odoo>

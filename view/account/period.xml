@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Tree -->
+    <record id="view_qin_period_tree" model="ir.ui.view">
+        <field name="name">qin.period.tree</field>
+        <field name="model">qin.period</field>
+        <field name="arch" type="xml">
+            <tree string="Period">
+                <field name="name"/>
+                <field name="financial_year"/>
+                <field name="progress"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form -->
+    <record id="view_qin_period_form" model="ir.ui.view">
+        <field name="name">qin.period.form</field>
+        <field name="model">qin.period</field>
+        <field name="arch" type="xml">
+            <form string="Period">
+                <sheet>
+                    <div id="s_header">
+                        <h1>Period</h1>
+                    </div>
+                    <group>
+                        <field name="name"/>
+                        <field name="financial_year"/>
+                        <field name="progress"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_qin_period" model="ir.actions.act_window">
+        <field name="name">Period</field>
+        <field name="res_model">qin.period</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+</odoo>
