@@ -10,6 +10,8 @@ class QinPeriod(models.Model):
     _name = "qin.period"
 
     name = fields.Selection(selection=cal.get_months(), string="Month", required=True)
+    start_date = fields.Date(string="Start Date", readonly=True)
+    end_date = fields.Date(string="End Date", readonly=True)
     financial_year = fields.Char(string="Financial Year", compute="_cal_financial_year")
     progress = fields.Selection(selection=PROGRESS, string="Progress", default="draft")
 
@@ -22,3 +24,4 @@ class QinPeriod(models.Model):
                 rec.financial_year = ""
 
         return True
+

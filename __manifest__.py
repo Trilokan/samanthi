@@ -22,6 +22,22 @@
     """,
     "depends": ["base", "mail"],
     "data": [
+        "sequence/account.xml",
+        "view/account/account.xml",
+        "view/account/journal_type.xml",
+
+        # Product
+        "view/product/product.xml",
+        "view/product/product_group.xml",
+        "view/product/sub_group.xml",
+        "view/product/uom.xml",
+        "view/product/tax.xml",
+        "view/product/category.xml",
+
+        # Stock
+        "view/stock/location.xml",
+        "view/stock/warehouse.xml",
+        "view/stock/move.xml",
 
     ],
     "demo": [

@@ -9,3 +9,5 @@ from . import hr
 from . import time_management
 from . import leave_management
 from . import patient
+from . import product
+from . import stock

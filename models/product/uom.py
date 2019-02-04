@@ -5,7 +5,7 @@ from odoo import models, fields
 
 class ProductUOM(models.Model):
     _name = "product.uom"
-    _rec_name = "code"
+    _rec_name = "uom_uid"
 
     name = fields.Char(string="Name", required=True)
     uom_uid = fields.Char(string="Code", required=True)

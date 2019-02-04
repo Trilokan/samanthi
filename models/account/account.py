@@ -8,7 +8,21 @@ class QinAccount(models.Model):
 
     name = fields.Char(string="Name", required=True)
     account_uid = fields.Char(string="Code", readonly=True)
-    person_id = fields.Many2one(comodel_name="qin.person", string="Person")
+    is_reconcile = fields.Boolean(string="Allow Reconcile")
+    credit = fields.Float(string="Credit", compute="_get_credit")
+    debit = fields.Float(string="Debit", compute="_get_debit")
+
+    def _get_credit(self):
+        for rec in self:
+            rec.credit = 0
+
+        return True
+
+    def _get_debit(self):
+        for rec in self:
+            rec.debit = 0
+
+        return True
 
     @api.model
     def create(self, vals):

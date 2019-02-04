@@ -8,6 +8,7 @@ class ProductGroup(models.Model):
 
     name = fields.Char(string="Name", required=True)
     group_uid = fields.Char(string="Code", required=True)
+    sub_group_ids = fields.One2many(comodel_name="product.sub.group", inverse_name="product_group_id")
 
     _sql_constraints = [("group_uid", "unique(group_uid)", "Product Group Code must be unique")]
 

@@ -5,7 +5,7 @@ from . import account
 from . import journal_type
 from . import journal
 from . import journal_item
-from . import reconcile_payment
-from . import reconcile_payment_item
+from . import payment_reconcile
+from . import payment_reconcile_item
 from . import register_payment
 from . import reconciliation

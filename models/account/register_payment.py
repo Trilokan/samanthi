@@ -20,4 +20,7 @@ class RegisterPayment(models.Model):
     amount = fields.Float(string="Amount")
     progress = fields.Selection(selection=PROGRESS, string="Progress", default="draft")
 
-    # journal_ids = fields.One2many(comodel_name="journal.item", inverse_name="j")
+    @api.model
+    def create(self, vals):
+        vals["name"] = self.env["ir.sequence"].next_by_code(self._name)
+        return super(RegisterPayment, self).create(vals)

@@ -6,7 +6,7 @@ PROGRESS_INFO = [("draft", "Draft"), ("confirmed", "Confirmed")]
 
 
 class Product(models.Model):
-    _name = "hos.product"
+    _name = "qin.product"
 
     name = fields.Char(string="Name", required=True)
     product_uid = fields.Char(string="Code", readonly=True)
@@ -17,8 +17,6 @@ class Product(models.Model):
     hsn_code = fields.Char(string="HSN Code", required=True)
     progress = fields.Selection(selection=PROGRESS_INFO, string="Progress", default="draft")
     description = fields.Text(string="Description")
-    payable = fields.Many2one(comodel_name="hos.account", string="Accounts Payable")
-    receivable = fields.Many2one(comodel_name="hos.account", string="Accounts Receivable")
     warehouse_ids = fields.One2many(comodel_name="stock.warehouse",
                                     string="Warehouse",
                                     compute="_get_warehouse_ids")

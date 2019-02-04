@@ -9,7 +9,9 @@
             <tree string="Account">
                 <field name="name"/>
                 <field name="account_uid"/>
-                <field name="person_id"/>
+                <field name="is_reconcile"/>
+                <field name="credit"/>
+                <field name="debit"/>
             </tree>
         </field>
     </record>
@@ -27,7 +29,9 @@
                     <group>
                         <field name="name"/>
                         <field name="account_uid"/>
-                        <field name="person_id"/>
+                        <field name="is_reconcile"/>
+                        <field name="credit"/>
+                        <field name="debit"/>
                     </group>
                 </sheet>
             </form>
