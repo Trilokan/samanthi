@@ -1,6 +1,0 @@
-Step 1: Get un-reconciled credit and debit data from journal items
-Step 2: Get partly-reconciled credit and debit data from journal items
-step 3: For the payment reconciliation to be made
-step 4: For the credit/ debit reconciliation to be made
-
-

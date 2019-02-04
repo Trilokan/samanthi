@@ -12,6 +12,3 @@ class HRExperience(models.Model):
     position = fields.Char(string="Position", required=True)
     total_years = fields.Float(string="Total Years", required=True)
     relieving_reason = fields.Text(string="Relieving Reason", required=True)
-    company_id = fields.Many2one(comodel_name="res.company", string="Company",
-                                 default=lambda self: self.env.user.company_id.id,
-                                 readonly=True)

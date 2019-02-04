@@ -16,10 +16,10 @@ class StockAdjustment(models.Model):
 
     date = fields.Date(string="Date", required=True, default=CURRENT_DATE)
     name = fields.Char(string="Name", readonly=True)
-    adjusted_by = fields.Many2one(comodel_name="lam.person", string="Approve By", readonly=True)
+    adjusted_by = fields.Many2one(comodel_name="qin.person", string="Approve By", readonly=True)
     progress = fields.Selection(selection=PROGRESS_INFO, string="Progress", default="draft")
     adjust_type = fields.Selection(selection=ADJUST_TYPE, string="Adjust Type", default="increase", required=True)
-    adjustment_detail = fields.One2many(comodel_name="stock.adjustment.detail", inverse_name="adjustment_id", string="Adjustment Detail")
+    adjustment_detail = fields.One2many(comodel_name="stock.adjustment.detail", inverse_name="adjustment_id")
     writter = fields.Char(string="Writter", track_visibility="always")
 
     @api.multi
@@ -49,7 +49,8 @@ class StockAdjustment(models.Model):
                       "reference": rec.name,
                       "product_id": rec.product_id.id,
                       "description": rec.description,
-                      "quantity": rec.quantity,
+                      "quantity": rec.adjust_quantity,
+                      "unit_price": rec.unit_price,
                       "progress": "moved"}
 
             self.env["hos.move"].create(result)
@@ -57,14 +58,14 @@ class StockAdjustment(models.Model):
     @api.multi
     def trigger_approve(self):
         adjusted_by = self.env.user.person_id.id
-        recs = self.env["stock.adjustment.detail"].search([("adjustment_id", "=", self.id), ("quantity", ">", 0)])
+        recs = self.env["stock.adjustment.detail"].search([("adjustment_id", "=", self.id), ("adjust_quantity", ">", 0)])
 
         if not recs:
             raise exceptions.ValidationError("Error! No Products found")
 
         self.generate_move(recs)
 
-        writter = "Stock issued by {0} on {1}".format(self.env.user.name, CURRENT_INDIA)
+        writter = "Stock adjustment by {0} on {1}".format(self.env.user.name, CURRENT_INDIA)
         self.write({"progress": "approved", "writter": writter, "adjusted_by": adjusted_by})
 
     @api.model
@@ -77,10 +78,10 @@ class StockAdjustmentDetail(models.Model):
     _name = "stock.adjustment.detail"
 
     name = fields.Char(string="Name", readonly=True)
-    product_id = fields.Many2one(comodel_name="hos.product", string="Item", required=True)
+    product_id = fields.Many2one(comodel_name="qin.product", string="Item", required=True)
     description = fields.Text(string="Item Description")
     uom_id = fields.Many2one(comodel_name="product.uom", string="UOM", related="product_id.uom_id")
-    quantity = fields.Float(string="Quantity", default=0, required=True)
+    adjust_quantity = fields.Float(string="Adjust Quantity", default=0, required=True)
     unit_price = fields.Float(string="Unit Price", default=0, required=True)
     comment = fields.Text(string="Comment")
     adjustment_id = fields.Many2one(comodel_name="stock.adjustment", string="Stock Adjustment")

@@ -6,7 +6,7 @@ from odoo import models, fields, api
 class StockWarehouse(models.Model):
     _name = "stock.warehouse"
 
-    product_id = fields.Many2one(comodel_name="hos.product", string="Product", readonly=True)
+    product_id = fields.Many2one(comodel_name="qin.product", string="Product", readonly=True)
     location_id = fields.Many2one(comodel_name="stock.location", string="Location", readonly=True)
     quantity = fields.Float(string="Quantity", compute="_get_stock")
 

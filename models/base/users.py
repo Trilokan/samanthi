@@ -3,24 +3,9 @@
 from odoo import models, fields, api
 
 
-class Users(models.Model):
+class QinUsers(models.Model):
     _name = "res.users"
     _inherit = "res.users"
 
-    name = fields.Char(string="Name", required=True)
-    email = fields.Char(string="E-mail", readonly=True)
-    contact_no = fields.Char(string="Contact No", readonly=True)
-    alternate_contact = fields.Char(string="Alternate Contact", readonly=True)
-    person_id = fields.Many2one(comodel_name="lam.person", string="Person", required=True)
+    person_id = fields.Many2one(comodel_name="qin.person", string="Name")
 
-    @api.model
-    def create(self, vals):
-        person_id = self.env["lam.person"].search([("id", "=", vals["person_id"])])
-
-        vals["name"] = person_id.name
-        vals["email"] = person_id.email
-        vals["mobile"] = person_id.mobile
-
-        person_id.write({"is_user": True})
-
-        return super(HospitalUsers, self).create(vals)

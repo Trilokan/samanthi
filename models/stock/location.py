@@ -7,11 +7,11 @@ class StockLocation(models.Model):
     _name = "stock.location"
 
     name = fields.Char(string="Name", required=True)
-    code = fields.Char(string="Code", compute="_get_code")
+    location_uid = fields.Char(string="Code", compute="_get_code")
     location_left = fields.Integer(string="Location Left", required=True)
     location_right = fields.Integer(string="Location Right", required=True)
 
-    _sql_constraints = [("code", "unique(code)", "Stock Location must be unique")]
+    _sql_constraints = [("location_uid", "unique(location_uid)", "Stock Location must be unique")]
 
     def _get_code(self):
         for record in self:
@@ -20,4 +20,3 @@ class StockLocation(models.Model):
 
             recs = recs.sorted(key=lambda r: r.location_left)
             record.code = "/".join(str(x.name) for x in recs)
-

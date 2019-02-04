@@ -16,8 +16,8 @@ class PurchaseIndent(models.Model):
     date = fields.Date(string="Date", required=True, default=CURRENT_DATE)
     name = fields.Char(string="Name", readonly=True)
     department_id = fields.Many2one(comodel_name="hr.department", string="Department", required=True)
-    requested_by = fields.Many2one(comodel_name="lam.person", string="Request By", readonly=True)
-    approved_by = fields.Many2one(comodel_name="lam.person", string="Approve By", readonly=True)
+    requested_by = fields.Many2one(comodel_name="qin.person", string="Request By", readonly=True)
+    approved_by = fields.Many2one(comodel_name="qin.person", string="Approve By", readonly=True)
     progress = fields.Selection(selection=PROGRESS_INFO, string="Progress", default="draft")
     indent_detail = fields.One2many(comodel_name="purchase.indent.detail", inverse_name="indent_id")
     writter = fields.Char(string="Writter", track_visibility="always")
@@ -32,40 +32,12 @@ class PurchaseIndent(models.Model):
         writter = "Purchase Indent cancel by {0} on {1}".format(self.env.user.name, CURRENT_INDIA)
         self.write({"progress": "cancel", "writter": writter})
 
-    def get_last_5_invoice_transaction(self, product_id):
-        history = []
-        recs = self.env["purchase.invoice.detail"].search([("product_id", "=", product_id)])
-
-        for rec in recs:
-            if len(history) < 5:
-                data = rec.copy_data()[0]
-                history.append((0, 0, data))
-
-        return history
-
-    @api.multi
-    def generate_quote(self, recs):
-        quote_detail = []
-        for rec in recs:
-            quote_detail.append((0, 0, {"product_id": rec.product_id.id,
-                                        "description": rec.description,
-                                        "quantity": rec.quantity,
-                                        "purchase_history": self.get_last_5_invoice_transaction(rec.product_id.id)}))
-
-        if quote_detail:
-            quote = {"indent_id": self.id,
-                     "quote_detail": quote_detail}
-
-            self.env["purchase.quote"].create(quote)
-
     @api.multi
     def trigger_approve(self):
         recs = self.env["purchase.indent.detail"].search([("indent_id", "=", self.id), ("quantity", ">", 0)])
 
         if not recs:
             raise exceptions.ValidationError("Error! No Products found")
-
-        self.generate_quote(recs)
 
         writter = "Purchase Indent Approved by {0} on {1}".format(self.env.user.name, CURRENT_INDIA)
         self.write({"progress": "approved", "writter": writter})
@@ -80,11 +52,11 @@ class PurchaseIndentDetail(models.Model):
     _name = "purchase.indent.detail"
 
     name = fields.Char(string="Name", readonly=True)
-    product_id = fields.Many2one(comodel_name="hos.product", string="Product", required=True)
+    product_id = fields.Many2one(comodel_name="qin.product", string="Product", required=True)
     description = fields.Text(string="Item Description")
     uom_id = fields.Many2one(comodel_name="product.uom", string="UOM", related="product_id.uom_id")
     requested_quantity = fields.Float(string="Request Quantity", default=0, required=True)
-    quantity = fields.Float(string="Approved Quantity", default=0, required=True)
+    quantity = fields.Float(string="Quantity", default=0, required=True)
     indent_id = fields.Many2one(comodel_name="purchase.indent", string="Purchase Indent")
     progress = fields.Selection(selection=PROGRESS_INFO, string="Progress", related="indent_id.progress")
 

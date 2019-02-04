@@ -3,33 +3,31 @@
 from odoo import models, fields, api
 
 
-class Reconciliation(models.Model):
-    _name = "hos.reconcile"
+class QinReconciliation(models.Model):
+    _name = "qin.reconciliation"
 
-    name = fields.Char(string="Name")
+    name = fields.Char(string="Name", readonly=True)
+    reconcile_ids = fields.One2many(comodel_name="journal.item", inverse_name="reconcile_id")
+    part_reconcile_ids = fields.One2many(comodel_name="journal.item", inverse_name="part_reconcile_id")
 
-    partial_reconcile_ids = fields.One2many(comodel_name="journal.items",
-                                            inverse_name="reconcile_part_id",
-                                            string="Partial Reconciliation")
+    def get_balance(self, transaction):
+        recs = self.part_reconcile_ids
 
-    reconcile_ids = fields.One2many(comodel_name="journal.items",
-                                    inverse_name="reconcile_id",
-                                    string="Full Reconciliation")
+        credit = 0
+        debit = 0
+        balance = 0
+        for rec in recs:
+            credit = credit + rec.credit
+            debit = debit + rec.debit
 
-    def swap_reconciliation_id(self, rec):
-        rec.reconcile_id = rec.reconcile_part_id.id
-        rec.reconcile_part_id = False
+        if transaction == "CREDIT":
+            balance = credit - debit
 
-    def check_reconciliation(self, rec_id):
-        partial_ids = self.env["journal.items"].search([("reconcile_part_id", "=", rec_id)])
+        elif transaction == "DEBIT":
+            balance = debit - credit
 
-        credit = sum(partial_ids.mapped('credit'))
-        debit = sum(partial_ids.mapped('debit'))
+        if balance > 0:
+            return balance
+        else:
+            return 0
 
-        if credit == debit:
-            map(self.swap_reconciliation_id, partial_ids)
-
-    @api.model
-    def create(self, vals):
-        vals["name"] = self.env["ir.sequence"].next_by_code(self._name)
-        return super(Reconciliation, self).create(vals)

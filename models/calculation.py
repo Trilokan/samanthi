@@ -1,37 +1,39 @@
-# -*- coding: utf-8 -*-
+import datetime
+
+year_start = 2018
+year_end = 2022
 
 
-def purchase_calculation(unit_price, quantity, discount, tax, tax_state):
-    price = unit_price * quantity
+def get_years():
+    """ Used in Accounts for getting Periods"""
 
-    discount_amount = price * float(discount)/100
-    discounted_amount = price - discount_amount
+    data_list = []
+    for year in range(year_start, year_end):
+        data = "{0}".format(year)
+        data_list.append((data, data))
 
-    tax_amount = discounted_amount * float(tax)/100
-
-    cgst = sgst = igst = 0
-    if tax_state == 'inter_state':
-        igst = tax_amount
-    elif tax_state == 'outer_state':
-        cgst = sgst = tax_amount / 2
-
-    return {"cgst": cgst,
-            "sgst": sgst,
-            "igst": igst,
-            "discount_amount": discount_amount,
-            "tax_amount": tax_amount,
-            "total_amount": price}
+    return data_list
 
 
-def get_list_year():
-    """ Get Year list as the char """
-    year_list = []
+def get_financial_years():
+    """ Used in Accounts for getting Periods"""
 
-    START_YEAR = 2016
-    END_YEAR = 2022
+    data_list = []
+    for year in range(year_start, year_end):
+        data = "{0} - {1}".format(year, year + 1)
+        data_list.append((data, data))
 
-    for year in range(2016, 2022):
-        year_list.append(str(year))
+    return data_list
 
-    return year_list
 
+def get_months():
+    """ Used in Accounts for getting Periods"""
+
+    data_list = []
+    for year in range(year_start, year_end):
+        for period in range(1, 12+1):
+            month = datetime.date(year, period, 1).strftime('%B')
+            data = "{0} {1}".format(month, year)
+            data_list.append((data, data))
+
+    return data_list

@@ -18,10 +18,6 @@ class Shift(models.Model):
     from_minutes = fields.Integer(string="From Minutes")
     till_hours = fields.Integer(string="Till Hours")
     till_minutes = fields.Integer(string="Till Minutes")
-    company_id = fields.Many2one(comodel_name="res.company",
-                                 string="Company",
-                                 default=lambda self: self.env.user.company_id.id,
-                                 readonly=True)
 
     _sql_constraints = [("name", "unique(name)", "Shift must be unique")]
 

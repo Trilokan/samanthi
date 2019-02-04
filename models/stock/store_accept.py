@@ -17,7 +17,7 @@ class StoreAccept(models.Model):
     name = fields.Char(string="Name", readonly=True)
     department_id = fields.Many2one(comodel_name="hr.department", string="Department", required=True)
     return_id = fields.Many2one(comodel_name="store.return", string="Return", required=True)
-    accept_by = fields.Many2one(comodel_name="lam.person", string="Accept By", readonly=True)
+    accept_by = fields.Many2one(comodel_name="qin.person", string="Accept By", readonly=True)
     progress = fields.Selection(selection=PROGRESS_INFO, string="Progress", default="draft")
     accept_detail = fields.One2many(comodel_name="store.accept.detail", inverse_name="accept_id", string="Accept Detail")
     writter = fields.Char(string="Writter", track_visibility="always")
@@ -39,39 +39,20 @@ class StoreAccept(models.Model):
                       "reference": rec.name,
                       "product_id": rec.product_id.id,
                       "description": rec.description,
-                      "quantity": rec.quantity,
+                      "quantity": rec.accept_quantity,
                       "progress": "moved"}
 
             self.env["hos.move"].create(result)
 
-    def generate_remaining(self):
-        accept_detail = []
-        recs = self.accept_detail
-        for rec in recs:
-            accepted_quantity = rec.accepted_quantity + rec.quantity
-            if rec.returned_quantity > accepted_quantity:
-                accept_detail.append((0, 0, {"product_id": rec.product_id.id,
-                                             "description": rec.description,
-                                             "returned_quantity": rec.returned_quantity,
-                                             "accepted_quantity": accepted_quantity}))
-
-        if accept_detail:
-            accept = {"return_id": self.return_id.id,
-                      "department_id": self.department_id.id,
-                      "accept_detail": accept_detail}
-
-            self.env["store.accept"].create(accept)
-
     @api.multi
     def trigger_accept(self):
         accept_by = self.env.user.person_id.id
-        recs = self.env["store.accept.detail"].search([("accept_id", "=", self.id), ("quantity", ">", 0)])
+        recs = self.env["store.accept.detail"].search([("accept_id", "=", self.id), ("accept_quantity", ">", 0)])
 
         if not recs:
             raise exceptions.ValidationError("Error! No Products found")
 
         self.generate_move(recs)
-        self.generate_remaining()
 
         writter = "Stock accepted by {0} on {1}".format(self.env.user.name, CURRENT_INDIA)
         self.write({"progress": "accepted", "writter": writter, "accept_by": accept_by})
@@ -81,19 +62,19 @@ class StoreAcceptDetail(models.Model):
     _name = "store.accept.detail"
 
     name = fields.Char(string="Name", readonly=True)
-    product_id = fields.Many2one(comodel_name="hos.product", string="Product", required=True)
+    reference = fields.Char(string="Reference", readonly=True)
+    product_id = fields.Many2one(comodel_name="qin.product", string="Product", required=True)
     description = fields.Text(string="Description")
     uom_id = fields.Many2one(comodel_name="product.uom", string="UOM", related="product_id.uom_id")
     returned_quantity = fields.Float(string="Return Quantity", default=0, required=True)
-    accepted_quantity = fields.Float(string="Issued Quantity", default=0, required=True)
-    quantity = fields.Float(string="Accepting Quantity", default=0, required=True)
+    accept_quantity = fields.Float(string="Accepting Quantity", default=0, required=True)
     accept_id = fields.Many2one(comodel_name="store.accept", string="Store Accept")
     progress = fields.Selection(selection=PROGRESS_INFO, string="Progress", related="accept_id.progress")
 
     @api.constrains("quantity")
     def check_issue_quantity(self):
-        if self.quantity > (self.returned_quantity - self.accepted_quantity):
-            raise exceptions.ValidationError("Error! Issue quantity more than requested")
+        if self.accept_quantity > self.returned_quantity:
+            raise exceptions.ValidationError("Error! Accepted quantity more than return quantity")
 
     @api.model
     def create(self, vals):

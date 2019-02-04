@@ -17,9 +17,9 @@ class StoreRequest(models.Model):
     name = fields.Char(string="Name", readonly=True)
     department_id = fields.Many2one(comodel_name="hr.department", string="Department", required=True)
     progress = fields.Selection(selection=PROGRESS_INFO, string="Progress", default="draft")
-    request_detail = fields.One2many(comodel_name="store.request.detail", inverse_name="request_id", string="Request Detail")
-    requested_by = fields.Many2one(comodel_name="lam.person", string="Requested By", reaonly=True)
-    approved_by = fields.Many2one(comodel_name="lam.person", string="Approved By", reaonly=True)
+    request_detail = fields.One2many(comodel_name="store.request.detail", inverse_name="request_id")
+    requested_by = fields.Many2one(comodel_name="qin.person", string="Requested By", readonly=True)
+    approved_by = fields.Many2one(comodel_name="qin.person", string="Approved By", readonly=True)
     writter = fields.Char(string="Writter", track_visibility="always")
 
     @api.multi
@@ -37,9 +37,10 @@ class StoreRequest(models.Model):
     def generate_issue(self, recs):
         issue_detail = []
         for rec in recs:
-            issue_detail.append((0, 0, {"product_id": rec.product_id.id,
+            issue_detail.append((0, 0, {"reference": rec.name,
+                                        "product_id": rec.product_id.id,
                                         "description": rec.description,
-                                        "requested_quantity": rec.quantity}))
+                                        "requested_quantity": rec.approved_quantity}))
 
         if issue_detail:
             issue = {"request_id": self.id,
@@ -51,7 +52,7 @@ class StoreRequest(models.Model):
     @api.multi
     def trigger_approve(self):
         approved_by = self.env.user.person_id.id
-        recs = self.env["store.request.detail"].search([("request_id", "=", self.id), ("quantity", ">", 0)])
+        recs = self.env["store.request.detail"].search([("request_id", "=", self.id), ("approved_quantity", ">", 0)])
 
         if not recs:
             raise exceptions.ValidationError("Error! No Products found")
@@ -71,21 +72,20 @@ class StoreRequestDetail(models.Model):
     _name = "store.request.detail"
 
     name = fields.Char(string="Name", readonly=True)
-    product_id = fields.Many2one(comodel_name="hos.product", string="Item", required=True)
+    product_id = fields.Many2one(comodel_name="qin.product", string="Item", required=True)
     description = fields.Text(string="Item Description")
     uom_id = fields.Many2one(comodel_name="product.uom", string="UOM", related="product_id.uom_id")
     requested_quantity = fields.Float(string="Request Quantity", default=0, required=True)
-    quantity = fields.Float(string="Approved Quantity", default=0, required=True)
+    approved_quantity = fields.Float(string="Approved Quantity", default=0, required=True)
     request_id = fields.Many2one(comodel_name="store.request", string="Store Request")
     progress = fields.Selection(selection=PROGRESS_INFO, string="Progress", related="request_id.progress")
 
-    @api.constrains("quantity")
+    @api.constrains("approved_quantity")
     def check_requested_quantity(self):
-        if self.quantity > self.requested_quantity:
+        if self.approved_quantity > self.requested_quantity:
             raise exceptions.ValidationError("Error! Approved quantity more than requested")
 
     @api.model
     def create(self, vals):
         vals["name"] = self.env["ir.sequence"].next_by_code(self._name)
         return super(StoreRequestDetail, self).create(vals)
-

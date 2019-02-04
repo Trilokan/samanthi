@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Tree -->
+    <record id="view_qin_journal_tree" model="ir.ui.view">
+        <field name="name">qin.journal.tree</field>
+        <field name="model">qin.journal</field>
+        <field name="arch" type="xml">
+            <tree string="Journal Entry">
+                <field name="date"/>
+                <field name="name"/>
+                <field name="period_id"/>
+                <field name="journal_type_id"/>
+                <field name="reference"/>
+                <field name="progress"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form -->
+    <record id="view_qin_journal_form" model="ir.ui.view">
+        <field name="name">qin.journal.form</field>
+        <field name="model">qin.journal</field>
+        <field name="arch" type="xml">
+            <form string="Journal Entry">
+                <sheet>
+                    <div id="s_header">
+                        <h1>Journal Entry</h1>
+                    </div>
+                    <group>
+                        <field name="date"/>
+                        <field name="name"/>
+                        <field name="period_id"/>
+                        <field name="journal_type_id"/>
+                        <field name="reference"/>
+                        <field name="progress"/>
+                    </group>
+                    <field name="item_ids"/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_qin_journal" model="ir.actions.act_window">
+        <field name="name">Journal Entry</field>
+        <field name="res_model">qin.journal</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+</odoo>

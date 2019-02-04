@@ -3,16 +3,23 @@
 
     <data noupdate="1">
 
-        <!-- Account : Reconciliation -->
-        <record id="hos_reconcile_sequence" model="ir.sequence">
-            <field name="name">Account Reconcile</field>
-            <field name="code">hos.reconcile</field>
-            <field name="prefix">A/</field>
+        <!-- Account : qin.account -->
+        <record id="qin_account_sequence" model="ir.sequence">
+            <field name="name">Qin Account</field>
+            <field name="code">qin.account</field>
             <field name="padding">6</field>
             <field name="number_next">1</field>
             <field name="number_increment">1</field>
         </record>
 
+        <!-- Account : journal.type -->
+        <record id="journal_type_sequence" model="ir.sequence">
+            <field name="name">Journal Type</field>
+            <field name="code">journal.type</field>
+            <field name="padding">3</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+        </record>
 
     </data>
 

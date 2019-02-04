@@ -16,8 +16,8 @@ class StoreReturn(models.Model):
     date = fields.Date(string="Date", required=True, default=CURRENT_DATE)
     name = fields.Char(string="Name", readonly=True)
     department_id = fields.Many2one(comodel_name="hr.department", string="Department", required=True)
-    returned_by = fields.Many2one(comodel_name="lam.person", string="Returned By", readonly=True)
-    approved_by = fields.Many2one(comodel_name="lam.person", string="Approved By", readonly=True)
+    returned_by = fields.Many2one(comodel_name="qin.person", string="Returned By", readonly=True)
+    approved_by = fields.Many2one(comodel_name="qin.person", string="Approved By", readonly=True)
     progress = fields.Selection(selection=PROGRESS_INFO, string="Progress", default="draft")
     return_detail = fields.One2many(comodel_name="store.return.detail", inverse_name="return_id", string="Return Detail")
     writter = fields.Char(string="Writter", track_visibility="always")
@@ -37,9 +37,10 @@ class StoreReturn(models.Model):
     def generate_accept(self, recs):
         accept_detail = []
         for rec in recs:
-            accept_detail.append((0, 0, {"product_id": rec.product_id.id,
+            accept_detail.append((0, 0, {"reference": rec.name,
+                                         "product_id": rec.product_id.id,
                                          "description": rec.description,
-                                         "returned_quantity": rec.quantity}))
+                                         "returned_quantity": rec.approved_quantity}))
 
         if accept_detail:
             accept = {"return_id": self.id,
@@ -51,7 +52,7 @@ class StoreReturn(models.Model):
     @api.multi
     def trigger_approve(self):
         approved_by = self.env.user.person_id.id
-        recs = self.env["store.return.detail"].search([("return_id", "=", self.id), ("quantity", ">", 0)])
+        recs = self.env["store.return.detail"].search([("return_id", "=", self.id), ("approved_quantity", ">", 0)])
 
         if not recs:
             raise exceptions.ValidationError("Error! No Products found")
@@ -71,17 +72,20 @@ class StoreReturnDetail(models.Model):
     _name = "store.return.detail"
 
     name = fields.Char(string="Name", readonly=True)
-    product_id = fields.Many2one(comodel_name="hos.product", string="Item", required=True)
+    product_id = fields.Many2one(comodel_name="qin.product", string="Item", required=True)
     description = fields.Text(string="Item Description")
     uom_id = fields.Many2one(comodel_name="product.uom", string="UOM", related="product_id.uom_id")
     returned_quantity = fields.Float(string="Return Quantity", default=0, required=True)
-    quantity = fields.Float(string="Quantity", default=0, required=True)
+    approved_quantity = fields.Float(string="Approved Quantity", default=0, required=True)
     return_id = fields.Many2one(comodel_name="store.return", string="Store Return")
     progress = fields.Selection(selection=PROGRESS_INFO, string="Progress", related="return_id.progress")
+
+    @api.constrains("quantity")
+    def check_requested_quantity(self):
+        if self.approved_quantity > self.returned_quantity:
+            raise exceptions.ValidationError("Error! Approved quantity more than return quantity")
 
     @api.model
     def create(self, vals):
         vals["name"] = self.env["ir.sequence"].next_by_code(self._name)
         return super(StoreReturnDetail, self).create(vals)
-
-

@@ -1,0 +1,27 @@
+Side Menu
+
+Account Management:
+    Accounting
+        Account
+        Journal Entries
+        Journal Items
+        Reconciliation
+
+    Payment
+        Payment Register
+        Payment Reconcile
+
+    Configuration
+        Period
+        Journal Type
+
+    Report
+        Chart Of Accounts
+        General Ledger
+        Profit or Loss
+        Bank Statement
+
+
+
+
+
