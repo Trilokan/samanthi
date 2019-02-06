@@ -14,10 +14,11 @@ class Shift(models.Model):
     name = fields.Char(string="Shift", required=True)
     total_hours = fields.Float(string="Total Hours", readonly=True)
     end_day = fields.Selection(selection=END_INFO, string="Ends On", default="current_day")
-    from_hours = fields.Integer(string="From Hours")
-    from_minutes = fields.Integer(string="From Minutes")
-    till_hours = fields.Integer(string="Till Hours")
-    till_minutes = fields.Integer(string="Till Minutes")
+    from_hours = fields.Integer(string="From Hours", required=True, default=0)
+    from_minutes = fields.Integer(string="From Minutes", required=True, default=0)
+    till_hours = fields.Integer(string="Till Hours", required=True, default=0)
+    till_minutes = fields.Integer(string="Till Minutes", required=True, default=0)
+    grace_time = fields.Integer(string="Grace Time (Min)", required=True, default=0)
 
     _sql_constraints = [("name", "unique(name)", "Shift must be unique")]
 

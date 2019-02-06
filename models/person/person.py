@@ -42,6 +42,9 @@ class QinPerson(models.Model):
     payable_id = fields.Many2one(comodel_name="qin.account", string="Accounts Payable")
     receivable_id = fields.Many2one(comodel_name="qin.account", string="Accounts Receivable")
 
+    # Filter
+    is_employee = fields.Boolean(string="Is Employee")
+
     @api.model
     def create(self, vals):
         if "person_uid" not in vals:

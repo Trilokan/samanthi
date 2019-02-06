@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Tree -->
+    <record id="view_leave_reconcile_tree" model="ir.ui.view">
+        <field name="name">leave.reconcile.tree</field>
+        <field name="model">leave.reconcile</field>
+        <field name="arch" type="xml">
+            <tree string="Leave Reconcile">
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form -->
+    <record id="view_leave_reconcile_form" model="ir.ui.view">
+        <field name="name">leave.reconcile.form</field>
+        <field name="model">leave.reconcile</field>
+        <field name="arch" type="xml">
+            <form string="Leave Reconcile">
+                <sheet>
+                    <div id="s_header">
+                        <h1>Leave Reconcile</h1>
+                    </div>
+                    <group col="4">
+                        <field name="name"/>
+                        <field name="reconcile_ids"/>
+                        <field name="part_reconcile_ids"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_leave_reconcile" model="ir.actions.act_window">
+        <field name="name">Leave Reconcile</field>
+        <field name="res_model">leave.reconcile</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+</odoo>

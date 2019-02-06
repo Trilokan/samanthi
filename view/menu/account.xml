@@ -3,10 +3,10 @@
 
     <!--Account: Account-->
     <menuitem id="account_account" name="Account" parent="menu_account" sequence="10"/>
-    <menuitem id="account_account_qin_account" name="Account" action="action_hos_account" parent="account_account" sequence="10"/>
-    <menuitem id="account_account_qin_journal" name="Journal Entries" action="action_journal_entries" parent="account_account" sequence="20"/>
-    <menuitem id="account_account_qin_journal_items" name="Journal Items" action="action_journal_items" parent="account_account" sequence="30"/>
-    <menuitem id="account_account_hos_reconcile" name="Reconcile" action="action_hos_reconcile" parent="account_account" sequence="40"/>
+    <menuitem id="account_account_qin_account" name="Account" action="action_qin_account" parent="account_account" sequence="10"/>
+    <!--<menuitem id="account_account_qin_journal" name="Journal Entries" action="action_journal_entries" parent="account_account" sequence="20"/>-->
+    <!--<menuitem id="account_account_qin_journal_items" name="Journal Items" action="action_journal_items" parent="account_account" sequence="30"/>-->
+    <!--<menuitem id="account_account_hos_reconcile" name="Reconcile" action="action_hos_reconcile" parent="account_account" sequence="40"/>-->
 
     <!--&lt;!&ndash;Account: Payment&ndash;&gt;-->
     <!--<menuitem id="account_payment" name="Payment" parent="menu_account" sequence="20"/>-->
@@ -14,11 +14,10 @@
     <!--&lt;!&ndash;<menuitem id="account_payment_vendor_payment" name="Vendor Payment" parent="account_payment" sequence="20"/>&ndash;&gt;-->
     <!--&lt;!&ndash;<menuitem id="account_payment_cash_flow" name="Cash Flow" parent="account_payment" sequence="30"/>&ndash;&gt;-->
 
-    <!--&lt;!&ndash;Account: Configuration&ndash;&gt;-->
-    <!--<menuitem id="account_configuration" name="Configuration" parent="menu_account" sequence="30"/>-->
-    <!--<menuitem id="account_configuration_year_year" name="Year" action="action_year_year" parent="account_configuration" sequence="10"/>-->
-    <!--<menuitem id="account_configuration_period_period" name="Period" action="action_period_period" parent="account_configuration" sequence="20"/>-->
-    <!--<menuitem id="account_configuration_hos_journal" name="Journals" action="action_hos_journal" parent="account_configuration" sequence="30"/>-->
+    <!--Account: Configuration-->
+    <menuitem id="account_configuration" name="Configuration" parent="menu_account" sequence="30"/>
+    <menuitem id="account_configuration_qin_period" name="Period" action="action_qin_period" parent="account_configuration" sequence="10"/>
+    <!--<menuitem id="account_configuration_qin_journal" name="Journals" action="action_qin_journal" parent="account_configuration" sequence="20"/>-->
 
     <!--&lt;!&ndash;Account: Report&ndash;&gt;-->
     <!--&lt;!&ndash;<menuitem id="account_report" name="Report" parent="menu_account" sequence="30"/>&ndash;&gt;-->

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!--Human Resources-->
+    <menuitem id="hr_hr" name="Human Resources" parent="menu_hr" sequence="10"/>
+    <menuitem id="hr_hr_hr_employee" name="Employee" action="action_hr_employee" parent="hr_hr" sequence="10"/>
+    <menuitem id="hr_hr_hr_department" name="Department" action="action_hr_department" parent="hr_hr" sequence="20"/>
+    <menuitem id="hr_hr_hr_designation" name="Designation" action="action_hr_designation" parent="hr_hr" sequence="30"/>
+    <menuitem id="hr_hr_hr_category" name="Employee Category" action="action_hr_category" parent="hr_hr" sequence="40"/>
+    <menuitem id="hr_hr_hr_qualification" name="Qualification" action="action_hr_qualification" parent="hr_hr" sequence="50"/>
+    <menuitem id="hr_hr_hr_experience" name="Experience" action="action_hr_experience" parent="hr_hr" sequence="60"/>
+    <menuitem id="hr_hr_qin_address" name="Address" action="action_qin_address_employee" parent="hr_hr" sequence="70"/>
+    <menuitem id="hr_hr_hr_identity" name="Identities" action="action_hr_identity" parent="hr_hr" sequence="80"/>
+
+    <!--Leave Management-->
+    <menuitem id="hr_leave" name="Leave Management" parent="menu_hr" sequence="30"/>
+    <menuitem id="hr_leave_leave_application" name="Leave Application" action="action_leave_application" parent="hr_leave" sequence="10"/>
+    <menuitem id="hr_leave_comp_off_application" name="Comp-Off" action="action_comp_off_application" parent="hr_leave" sequence="20"/>
+    <menuitem id="hr_leave_permission_application" name="Permission" action="action_permission_application" parent="hr_leave" sequence="30"/>
+    <menuitem id="hr_leave_on_duty_application" name="On-Duty" action="action_on_duty_application" parent="hr_leave" sequence="40"/>
+    <menuitem id="hr_leave_leave_level" name="Leave Level" action="action_leave_level" parent="hr_leave" sequence="50"/>
+    <menuitem id="hr_leave_leave_type" name="Leave Type" action="action_leave_level" parent="hr_leave" sequence="60"/>
+    <menuitem id="hr_leave_leave_configuration" name="Leave Configuration" action="action_leave_configuration" parent="hr_leave" sequence="70"/>
+    <menuitem id="hr_leave_leave_voucher" name="Leave Voucher" action="action_leave_voucher" parent="hr_leave" sequence="80"/>
+    <menuitem id="hr_leave_leave_journal" name="Leave Journal" action="action_leave_journal" parent="hr_leave" sequence="90"/>
+    <menuitem id="hr_leave_leave_reconcile" name="Leave Reconcile" action="action_leave_reconcile" parent="hr_leave" sequence="100"/>
+
+    <!--Time Management-->
+    <menuitem id="hr_time" name="Time Management" parent="menu_hr" sequence="20"/>
+    <menuitem id="hr_time_time_shift" name="Shift" action="action_time_shift" parent="hr_time" sequence="10"/>
+    <menuitem id="hr_time_week_schedule" name="Week Schedule" action="action_week_schedule" parent="hr_time" sequence="20"/>
+    <menuitem id="hr_time_month_attendance" name="Monthly Attendance" action="action_month_attendance" parent="hr_time" sequence="30"/>
+    <menuitem id="hr_time_daily_attendance" name="Daily Attendance" action="action_daily_attendance" parent="hr_time" sequence="40"/>
+    <menuitem id="hr_time_employee_attendance" name="Employee Attendance" action="action_employee_attendance" parent="hr_time" sequence="50"/>
+    <menuitem id="hr_time_add_employee" name="Add Employee to Shift" action="action_attendance_change_add_employee_to_shift" parent="hr_time" sequence="60"/>
+    <menuitem id="hr_time_shift_change" name="Shift Change" action="action_attendance_change_shift_change" parent="hr_time" sequence="70"/>
+    <menuitem id="hr_time_holiday_change" name="Holiday Change" action="action_attendance_change_holiday_change" parent="hr_time" sequence="80"/>
+    <menuitem id="hr_time_time_configuration" name="Time Configuration" action="action_time_configuration" parent="hr_time" sequence="90"/>
+    <!--<menuitem id="hr_time_holiday_change" name="Holiday Change" action="action_attendance_change_holiday_change" parent="hr_time" sequence="80"/>-->
+    <!--<menuitem id="hr_time_holiday_change" name="Holiday Change" action="action_attendance_change_holiday_change" parent="hr_time" sequence="80"/>-->
+
+    <!--Payroll-->
+    <!--Recruitment-->
+    <!--Employee Action-->
+
+</odoo>

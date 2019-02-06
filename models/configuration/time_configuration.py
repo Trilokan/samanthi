@@ -11,6 +11,5 @@ class TimeConfiguration(models.Model):
 
     half_day = fields.Float(string="Half Day", default=0, required=True)
     full_day = fields.Float(string="Full Day", default=0, required=True)
-    grace_time = fields.Float(string="Grace Time", default=0, required=True)
     company_id = fields.Many2one(comodel_name="res.company", string="Company",
                                  default=lambda self: self.env.user.company_id.id, readonly=True)

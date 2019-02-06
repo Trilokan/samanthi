@@ -6,7 +6,7 @@
         <field name="name">hr.experience.tree</field>
         <field name="model">hr.experience</field>
         <field name="arch" type="xml">
-            <tree string="Experience">
+            <tree string="Experience" create="false" delete="false">
                 <field name="employee_id"/>
                 <field name="name"/>
                 <field name="position"/>
@@ -21,7 +21,7 @@
         <field name="name">hr.experience.form</field>
         <field name="model">hr.experience</field>
         <field name="arch" type="xml">
-            <form string="Experience">
+            <form string="Experience" create="false" delete="false">
                 <sheet>
                     <div id="s_header">
                         <h1>Experience</h1>

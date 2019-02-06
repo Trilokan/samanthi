@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!--Product-->
+    <menuitem id="inventory_product" name="Product" parent="menu_inventory" sequence="10"/>
+    <menuitem id="inventory_product_qin_product" name="Product" action="action_qin_product" parent="inventory_product" sequence="10"/>
+    <menuitem id="inventory_product_product_group" name="Group" action="action_product_group" parent="inventory_product" sequence="20"/>
+    <menuitem id="inventory_product_product_sub_group" name="Sub-Group" action="action_product_sub_group" parent="inventory_product" sequence="30"/>
+    <menuitem id="inventory_product_product_uom" name="UOM" action="action_product_uom" parent="inventory_product" sequence="40"/>
+    <menuitem id="inventory_product_product_tax" name="Tax" action="action_product_tax" parent="inventory_product" sequence="50"/>
+    <menuitem id="inventory_product_product_category" name="Category" action="action_product_category" parent="inventory_product" sequence="60"/>
+    <menuitem id="inventory_product_product_configuration" name="Configuration" action="action_product_configuration" parent="inventory_product" sequence="70"/>
+
+    <!--Stock-->
+    <menuitem id="inventory_stock" name="Stock" parent="menu_inventory" sequence="20"/>
+    <menuitem id="inventory_stock_stock_location" name="Location" action="action_stock_location" parent="inventory_stock" sequence="10"/>
+    <menuitem id="inventory_stock_stock_warehouse" name="Warehouse" action="action_stock_warehouse" parent="inventory_stock" sequence="20"/>
+    <menuitem id="inventory_stock_store_request" name="Store Request" action="action_store_request" parent="inventory_stock" sequence="30"/>
+    <menuitem id="inventory_stock_store_issue" name="Store Issue" action="action_store_issue" parent="inventory_stock" sequence="40"/>
+    <menuitem id="inventory_stock_store_return" name="Store Return" action="action_store_return" parent="inventory_stock" sequence="50"/>
+    <menuitem id="inventory_stock_store_accept" name="Store Accept" action="action_store_accept" parent="inventory_stock" sequence="60"/>
+    <menuitem id="inventory_stock_stock_adjustment" name="Stock Adjustment" action="action_stock_adjustment" parent="inventory_stock" sequence="70"/>
+    <!--<menuitem id="inventory_stock_hos_move" name="Stock Move" action="action_hos_move" parent="inventory_stock" sequence="80"/>-->
+    <!--<menuitem id="inventory_stock_material_receipt_received" name="Material Receipt" action="action_material_receipt_received" parent="inventory_stock" sequence="80"/>-->
+    <!--<menuitem id="inventory_stock_direct_material_receipt" name="Direct Material Receipt" action="action_direct_material_receipt" parent="inventory_stock" sequence="90"/>-->
+    <!--<menuitem id="inventory_stock_hos_move" name="Stock Move" action="action_hos_move" parent="inventory_stock" sequence="100"/>-->
+    <!--<menuitem id="inventory_stock_hos_batch" name="Batch Stock" action="action_hos_batch" parent="inventory_stock" sequence="100"/>-->
+
+    <!--&lt;!&ndash;Assert&ndash;&gt;-->
+    <!--<menuitem id="inventory_asserts" name="Asserts" parent="menu_inventory" sequence="30"/>-->
+    <!--<menuitem id="inventory_asserts_assert_capitalisation" name="Asserts Capitalisation" action="action_asserts_capitalisation" parent="inventory_asserts" sequence="10"/>-->
+    <!--<menuitem id="inventory_asserts_hos_asserts" name="Asserts" action="action_hos_asserts" parent="inventory_asserts" sequence="20"/>-->
+    <!--<menuitem id="inventory_asserts_asserts_service" name="Maintenance" action="action_asserts_maintenance" parent="inventory_asserts" sequence="30"/>-->
+    <!--<menuitem id="inventory_asserts_asserts_reminder" name="Notification" action="action_asserts_reminder" parent="inventory_asserts" sequence="40"/>-->
+
+
+</odoo>

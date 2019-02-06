@@ -2,6 +2,8 @@
 
 from odoo import models, fields, api
 from .. import calculation as cal
+from datetime import datetime, timedelta
+from dateutil.relativedelta import relativedelta
 
 PROGRESS = [("draft", "Draft"), ("open", "Open"), ("closed", "Closed")]
 
@@ -20,8 +22,18 @@ class QinPeriod(models.Model):
     @api.multi
     def _cal_financial_year(self):
         for rec in self:
-            if self.name:
-                rec.financial_year = ""
+            if rec.name:
+                month = rec.name.split(" ")
+                rec.financial_year = month[1]
 
         return True
+
+    @api.model
+    def create(self, vals):
+        start = datetime.strptime(vals["name"], "%B %Y")
+        end = start + relativedelta(months=1) - timedelta(days=1)
+        vals["start_date"] = start.strftime("%Y-%m-%d")
+        vals["end_date"] = end.strftime("%Y-%m-%d")
+
+        return super(QinPeriod, self).create(vals)
 

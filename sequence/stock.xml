@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data noupdate="1">
+
+        <!-- Stock : qin.product -->
+        <record id="qin_product_sequence" model="ir.sequence">
+            <field name="name">Product</field>
+            <field name="code">qin.product</field>
+            <field name="padding">4</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+        </record>
+
+        <!-- Stock : store.request -->
+        <record id="store_request_sequence" model="ir.sequence">
+            <field name="name">Store Request</field>
+            <field name="code">store.request</field>
+            <field name="prefix">SR</field>
+            <field name="padding">4</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+        </record>
+
+        <!-- Stock : store.issue -->
+        <record id="store_issue_sequence" model="ir.sequence">
+            <field name="name">Store Issue</field>
+            <field name="code">store.issue</field>
+            <field name="prefix">Si</field>
+            <field name="padding">4</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+        </record>
+
+        <!-- Stock : store.return -->
+        <record id="store_return_sequence" model="ir.sequence">
+            <field name="name">Store Return</field>
+            <field name="code">store.return</field>
+            <field name="prefix">SRN</field>
+            <field name="padding">4</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+        </record>
+
+        <!-- Stock : store.accept -->
+        <record id="store_accept_sequence" model="ir.sequence">
+            <field name="name">Store Accept</field>
+            <field name="code">store.accept</field>
+            <field name="prefix">SA</field>
+            <field name="padding">4</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+        </record>
+
+    </data>
+
+</odoo>

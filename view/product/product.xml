@@ -9,9 +9,6 @@
             <tree string="Product">
                 <field name="name"/>
                 <field name="product_uid"/>
-                <field name="category_id"/>
-                <field name="uom_id"/>
-                <field name="hsn_code"/>
             </tree>
         </field>
     </record>
@@ -26,17 +23,57 @@
                     <div id="s_header">
                         <h1>Product</h1>
                     </div>
+                    <!--<div class="oe_button_box" name="button_box">-->
+                        <!--<button type="object"-->
+                            <!--name="action_view_assert"-->
+                            <!--class="oe_stat_button"-->
+                            <!--icon="fa-truck">-->
+                            <!--<field name="assert_count" widget="statinfo" string="Assert"/>-->
+                        <!--</button>-->
+                    <!--</div>-->
+                    <div id="p_header">
+                        <field name="progress" widget="statusbar" style="float: right;padding: 20px;"/>
+                    </div>
+                    <h2><field name="product_uid" readonly="1"/></h2>
                     <group col="4">
-                        <field name="name"/>
-                        <field name="product_uid"/>
-                        <field name="product_group_id"/>
-                        <field name="sub_group_id"/>
-                        <field name="category_id"/>
-                        <field name="uom_id"/>
-                        <field name="hsn_code"/>
-                        <field name="description"/>
+                        <field name="name" attrs="{'readonly': [('progress', '!=', 'draft')]}"/>
+                        <field name="category_id" attrs="{'readonly': [('progress', '!=', 'draft')]}"/>
+                        <field name="product_group_id" attrs="{'readonly': [('progress', '!=', 'draft')]}"/>
+                        <field name="sub_group_id"
+                               domain="[('product_group_id', '=', product_group_id)]"
+                               attrs="{'readonly': [('progress', '!=', 'draft')]}"/>
+                        <field name="uom_id" attrs="{'readonly': [('progress', '!=', 'draft')]}"/>
+                        <field name="hsn_code" attrs="{'readonly': [('progress', '!=', 'draft')]}"/>
                     </group>
-                    <field name="warehouse_ids"/>
+                    <moris>
+                        hi
+                    </moris>
+                    <notebook>
+                        <page string="Inventory">
+                            <field name="warehouse_ids" readonly="1">
+                                <tree>
+                                    <field name="location_id"/>
+                                    <field name="quantity"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Description">
+                            <group>
+                                <field name="description" attrs="{'readonly': [('progress', '!=', 'draft')]}"/>
+                            </group>
+                        </page>
+
+                        <page string="Accounting">
+                            <group col="4">
+                                <field name="payable" attrs="{'readonly': [('progress', '!=', 'draft')]}"/>
+                                <field name="receivable" attrs="{'readonly': [('progress', '!=', 'draft')]}"/>
+                            </group>
+                        </page>
+                    </notebook>
+                    <footer>
+                        <button name="trigger_confirm" string="Confirm" type="object"
+                                attrs="{'invisible': [('progress', '!=', 'draft')]}"/>
+                    </footer>
                 </sheet>
             </form>
         </field>

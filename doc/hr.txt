@@ -1,0 +1,55 @@
+Human Resources
+    Employee-
+    Department-
+    Designation-
+    Category-
+    Qualification-
+    Experience-
+    Address-
+    Identities-
+
+Time Management
+    Shift
+    Shift Schedule
+    Monthly Attendance
+    Daily Attendance
+    Time Configuration
+    Report
+
+Leave Management
+    Leave Application
+    Comp-Off
+    Permission
+    On-Duty
+    Leave Level-
+    Leave Type-
+    Leave Configuration-
+    Leave Voucher
+    Leave Balance
+    Report
+
+Payroll Management
+    Payslip
+    Payroll Generation
+    Employee Pay
+    Update Pay
+    Salary Structure
+    Salary Rule
+    Salary Rule Slab
+
+Recruitment
+    Vacancy Position
+    Resume Bank
+    Appointment Order
+    Hiring
+    Resignation
+
+Employee Actions
+    Promotion
+    Department Change
+    Disciplinary Actions
+    Suspension
+    Complaints
+
+
+

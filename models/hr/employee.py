@@ -45,6 +45,7 @@ class Employee(models.Model):
     passport = fields.Char(string="Passport")
     epf_no = fields.Char(string="EPF No")
     epf_nominee = fields.Char(string="EPF Nominee")
+    identity_ids = fields.One2many(comodel_name="hr.identity", inverse_name="employee_id")
 
     # HR Details
     doj = fields.Date(string="Date of Joining", required=True)
@@ -77,3 +78,15 @@ class Employee(models.Model):
 
     # Attachment
     attachment_ids = fields.Many2many(comodel_name="ir.attachment", string="Attachment")
+
+    @api.model
+    def create(self, vals):
+        data = {}
+        data["person_uid"] = self.env["ir.sequence"].next_by_code(self._name)
+        data["is_employee"] = True
+        data["name"] = vals["name"]
+
+        person_id = self.env["qin.person"].create(data)
+        vals["person_id"] = person_id.id
+        vals["employee_uid"] = data["person_uid"]
+        return super(Employee, self).create(vals)

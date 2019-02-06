@@ -12,8 +12,8 @@ CURRENT_TIME = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 CURRENT_TIME_INDIA = datetime.now().strftime("%d-%m-%Y %H:%M:%S")
 
 
-class LeaveOnDuty(models.Model):
-    _name = "leave.on.duty"
+class OnDutyApplication(models.Model):
+    _name = "on.duty.application"
 
     from_date = fields.Date(string="From Date", default=CURRENT_DATE, required=True)
     till_date = fields.Date(string="Till Date", default=CURRENT_DATE, required=True)

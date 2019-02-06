@@ -21,6 +21,10 @@ class Product(models.Model):
                                     string="Warehouse",
                                     compute="_get_warehouse_ids")
 
+    # Accounting
+    payable = fields.Many2one(comodel_name="qin.account", string="Payable")
+    receivable = fields.Many2one(comodel_name="qin.account", string="Receivable")
+
     _sql_constraints = [("product_uid", "unique(product_uid)", "Product Code must be unique")]
 
     @api.one

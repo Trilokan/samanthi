@@ -6,7 +6,7 @@
         <field name="name">hr.qualification.tree</field>
         <field name="model">hr.qualification</field>
         <field name="arch" type="xml">
-            <tree string="Qualification">
+            <tree string="Qualification" create="false" delete="false">
                 <field name="employee_id"/>
                 <field name="name"/>
                 <field name="institution"/>
@@ -22,7 +22,7 @@
         <field name="name">hr.qualification.form</field>
         <field name="model">hr.qualification</field>
         <field name="arch" type="xml">
-            <form string="Qualification">
+            <form string="Qualification" create="false" delete="false">
                 <sheet>
                     <div id="s_header">
                         <h1>Qualification</h1>

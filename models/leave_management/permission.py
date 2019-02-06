@@ -12,8 +12,8 @@ CURRENT_TIME = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 CURRENT_TIME_INDIA = datetime.now().strftime("%d-%m-%Y %H:%M:%S")
 
 
-class LeavePermission(models.Model):
-    _name = "leave.permission"
+class PermissionApplication(models.Model):
+    _name = "permission.application"
 
     date = fields.Date(string="Date", default=CURRENT_TIME, required=True)
     from_time = fields.Float(string="From Time", default=0.0, required=True)

@@ -9,6 +9,8 @@
             <tree string="Period">
                 <field name="name"/>
                 <field name="financial_year"/>
+                <field name="start_date"/>
+                <field name="end_date"/>
                 <field name="progress"/>
             </tree>
         </field>
@@ -27,6 +29,8 @@
                     <group>
                         <field name="name"/>
                         <field name="financial_year"/>
+                        <field name="start_date"/>
+                        <field name="end_date"/>
                         <field name="progress"/>
                     </group>
                 </sheet>
