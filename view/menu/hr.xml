@@ -21,9 +21,6 @@
     <menuitem id="hr_leave_leave_level" name="Leave Level" action="action_leave_level" parent="hr_leave" sequence="50"/>
     <menuitem id="hr_leave_leave_type" name="Leave Type" action="action_leave_level" parent="hr_leave" sequence="60"/>
     <menuitem id="hr_leave_leave_configuration" name="Leave Configuration" action="action_leave_configuration" parent="hr_leave" sequence="70"/>
-    <menuitem id="hr_leave_leave_voucher" name="Leave Voucher" action="action_leave_voucher" parent="hr_leave" sequence="80"/>
-    <menuitem id="hr_leave_leave_journal" name="Leave Journal" action="action_leave_journal" parent="hr_leave" sequence="90"/>
-    <menuitem id="hr_leave_leave_reconcile" name="Leave Reconcile" action="action_leave_reconcile" parent="hr_leave" sequence="100"/>
 
     <!--Time Management-->
     <menuitem id="hr_time" name="Time Management" parent="menu_hr" sequence="20"/>
@@ -35,9 +32,10 @@
     <menuitem id="hr_time_add_employee" name="Add Employee to Shift" action="action_attendance_change_add_employee_to_shift" parent="hr_time" sequence="60"/>
     <menuitem id="hr_time_shift_change" name="Shift Change" action="action_attendance_change_shift_change" parent="hr_time" sequence="70"/>
     <menuitem id="hr_time_holiday_change" name="Holiday Change" action="action_attendance_change_holiday_change" parent="hr_time" sequence="80"/>
-    <menuitem id="hr_time_time_configuration" name="Time Configuration" action="action_time_configuration" parent="hr_time" sequence="90"/>
-    <!--<menuitem id="hr_time_holiday_change" name="Holiday Change" action="action_attendance_change_holiday_change" parent="hr_time" sequence="80"/>-->
-    <!--<menuitem id="hr_time_holiday_change" name="Holiday Change" action="action_attendance_change_holiday_change" parent="hr_time" sequence="80"/>-->
+    <menuitem id="hr_time_work_detail" name="Work Detail" action="action_work_detail" parent="hr_time" sequence="90"/>
+    <menuitem id="hr_time_time_configuration" name="Time Configuration" action="action_time_configuration" parent="hr_time" sequence="100"/>
+    <menuitem id="hr_time_time_sheet" name="Time Sheet" action="action_time_sheet" parent="hr_time" sequence="110"/>
+    <menuitem id="hr_time_time_sheet_application" name="Time Sheet Application" action="action_time_sheet_application" parent="hr_time" sequence="120"/>
 
     <!--Payroll-->
     <!--Recruitment-->

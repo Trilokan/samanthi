@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Tree -->
+    <record id="view_work_detail_tree" model="ir.ui.view">
+        <field name="name">work.detail.tree</field>
+        <field name="model">work.detail</field>
+        <field name="arch" type="xml">
+            <tree string="Work Detail">
+                <field name="name"/>
+                <field name="person_id"/>
+                <field name="month_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form -->
+    <record id="view_work_detail_form" model="ir.ui.view">
+        <field name="name">work.detail.form</field>
+        <field name="model">work.detail</field>
+        <field name="arch" type="xml">
+            <form string="Work Detail">
+                <sheet>
+                    <div id="s_header">
+                        <h1>Work Detail</h1>
+                    </div>
+                    <group col="4">
+                        <field name="name"/>
+                        <field name="person_id"/>
+                        <field name="month_id"/>
+                        <field name="total_days"/>
+                        <field name="schedule_days"/>
+                        <field name="holidays"/>
+                        <field name="holidays_present"/>
+                        <field name="leave_taken"/>
+                        <field name="permission_hours"/>
+                        <field name="on_duty_hours"/>
+                        <field name="lop_days"/>
+                    </group>
+                    <button name="update_leave_taken" string="Reconcile Leave" type="object"/>
+                    <field name="leave_ids">
+                        <tree editable="bottom">
+                            <field name="sequence"/>
+                            <field name="type_id"/>
+                            <field name="opening"/>
+                            <field name="credit"/>
+                            <field name="reconcile"/>
+                            <field name="closing"/>
+                        </tree>
+                    </field>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_work_detail" model="ir.actions.act_window">
+        <field name="name">Work Detail</field>
+        <field name="res_model">work.detail</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+</odoo>

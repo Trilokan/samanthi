@@ -7,8 +7,9 @@ TIME_DELAY_HRS = -5
 TIME_DELAY_MIN = -30
 
 PROGRESS_INFO = [('draft', 'Draft'), ('changed', 'Changed')]
+ADD_INFO = [('draft', 'Draft'), ('added', 'Added')]
 DAY_PROGRESS = [('holiday', 'Holiday'), ('working_day', 'Working Day')]
-CHANGE_TYPE = [("holiday_change", "Holiday Chnage"),
+CHANGE_TYPE = [("holiday_change", "Holiday Change"),
                ("shift_change", "Shift Change"),
                ("add_employee", "Add Employee")]
 CURRENT_DATE = datetime.now().strftime("%Y-%m-%d")
@@ -20,6 +21,7 @@ CURRENT_INDIA = datetime.now().strftime("%d-%m-%Y %H:%M:%S")
 class AttendanceChange(models.Model):
     _name = "attendance.change"
     _inherit = "mail.thread"
+    _rec_name = "person_id"
 
     date = fields.Date(string="Date", default=CURRENT_DATE, required=True)
     reason = fields.Text(string="Reason", required=True)
@@ -31,10 +33,11 @@ class AttendanceChange(models.Model):
     person_id = fields.Many2one(comodel_name="qin.person", string="Employee", required=True)
     shift_id = fields.Many2one(comodel_name="time.shift", string="Shift")
     day_progress = fields.Selection(DAY_PROGRESS, string="Day Status")
+    add_progress = fields.Selection(ADD_INFO, string="Progress", default="draft")
 
     def employee_check(self):
-        attendance = self.env["time.attendance.detail"].search([("person_id", "=", self.person_id.id),
-                                                                ("attendance_id.date", "=", self.date)])
+        attendance = self.env["employee.attendance"].search([("person_id", "=", self.person_id.id),
+                                                             ("attendance_id.date", "=", self.date)])
 
         if attendance:
             return attendance
@@ -42,7 +45,7 @@ class AttendanceChange(models.Model):
             raise exceptions.ValidationError("Error! Employee Not Available please check")
 
     def date_check(self):
-        date_rec = self.env["time.attendance"].search([("date", "=", self.date)])
+        date_rec = self.env["daily.attendance"].search([("date", "=", self.date)])
 
         if not date_rec:
             raise exceptions.ValidationError("Attendance Sheet is not yet generated")
@@ -79,7 +82,7 @@ class AttendanceChange(models.Model):
         self.date_check()
         self.check_duplicate()
 
-        attendance = self.env["time.attendance"].search([("date", "=", self.date)])
+        attendance = self.env["daily.attendance"].search([("date", "=", self.date)])
         current_date_obj = datetime.strptime(self.date, "%Y-%m-%d")
 
         timings = self.env["model.date"].get_expected_time(current_date_obj,
@@ -94,11 +97,12 @@ class AttendanceChange(models.Model):
                 "expected_from_time": timings["from_time"],
                 "expected_till_time": timings["till_time"]}
 
-        self.env["time.attendance.detail"].create(data)
+        self.env["employee.attendance"].create(data)
+        self.write({"add_progress": "added"})
 
     def check_duplicate(self):
-        attendance = self.env["time.attendance"].search([("date", "=", self.date)])
-        attendance_detail = self.env["time.attendance.detail"].search([("person_id", "=", self.person_id.id),
+        attendance = self.env["daily.attendance"].search([("date", "=", self.date)])
+        attendance_detail = self.env["employee.attendance"].search([("person_id", "=", self.person_id.id),
                                                                        ("attendance_id", "=", attendance.id)])
 
         if attendance_detail:

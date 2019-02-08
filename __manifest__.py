@@ -77,6 +77,9 @@
         "view/time_management/add_employee.xml",
         "view/time_management/holiday_change.xml",
         "view/time_management/shift_change.xml",
+        "view/time_management/time_sheet.xml",
+        "view/time_management/time_sheet_application.xml",
+        "view/time_management/work_detail.xml",
         "view/configuration/time_configuration.xml",
 
         # Leave Management
@@ -86,9 +89,6 @@
         "view/leave_management/on_duty.xml",
         "view/leave_management/leave_level.xml",
         "view/leave_management/leave_type.xml",
-        "view/leave_management/leave_voucher.xml",
-        "view/leave_management/leave_journal.xml",
-        "view/leave_management/leave_reconcile.xml",
         "view/configuration/leave_configuration.xml",
         # Payroll
         # Recruitment

@@ -21,6 +21,8 @@ class EmployeeAttendance(models.Model):
     expected_till_time = fields.Datetime(string="Expected Till Time", readonly=True)
     actual_till_time = fields.Datetime(string="Actual Till Time", readonly=True)
     expected_hours = fields.Float(string="Expected Hours", default=0, readonly=True)
+    permission_hours = fields.Float(string="Permission Hours", default=0, readonly=True)
+    on_duty_hours = fields.Float(string="On-Duty Hours", default=0, readonly=True)
     actual_hours = fields.Float(string="Actual Hours", default=0, readonly=True)
     day_progress = fields.Selection(DAY_PROGRESS, string='Day Status', readonly=True)
     availability_progress = fields.Selection(AVAIL_PROGRESS, string='Availability Status')

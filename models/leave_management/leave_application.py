@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from odoo import models, fields
+from odoo import models, fields, api, exceptions
 from datetime import datetime
 
 PROGRESS_INFO = [('draft', 'Draft'),
@@ -21,3 +21,41 @@ class LeaveApplication(models.Model):
     reason = fields.Text(string="Reason")
     total_days = fields.Float(string="Total Days", default=0.0, required=True)
     progress = fields.Selection(selection=PROGRESS_INFO, string="Progress", default="draft")
+    writter = fields.Text(string="Writter", track_visibility="always")
+
+    def check_month(self):
+        attendance = self.env["employee.attendance"].search([("attendance_id.date", "=", self.from_date)])
+
+        if attendance:
+            if attendance.attendance_id.month_id.progress == "closed":
+                raise exceptions.ValidationError("Error! Month is already closed")
+
+    @api.multi
+    def trigger_confirmed(self):
+        self.check_month()
+        writter = "Leave application confirmed by {0} on {1}".format(self.env.user.name, CURRENT_TIME_INDIA)
+        data = {"progress": "confirmed", "writter": writter}
+
+        self.write(data)
+
+    @api.multi
+    def trigger_cancelled(self):
+        self.check_month()
+        writter = "Leave application cancelled by {0} on {1}".format(self.env.user.name, CURRENT_TIME_INDIA)
+        data = {"progress": "cancelled", "writter": writter}
+
+        self.write(data)
+
+    @api.multi
+    def trigger_approved(self):
+        self.check_month()
+        writter = "Leave application approved by {0} on {1}".format(self.env.user.name, CURRENT_TIME_INDIA)
+        data = {"progress": "approved", "writter": writter}
+
+        self.write(data)
+
+    @api.model
+    def create(self, vals):
+        self.check_month()
+        vals["writter"] = "Leave application created by {0} on {1}".format(self.env.user.name, CURRENT_TIME_INDIA)
+        return super(LeaveApplication, self).create(vals)

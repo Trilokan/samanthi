@@ -9,11 +9,14 @@ Human Resources
     Identities-
 
 Time Management
-    Shift
-    Shift Schedule
+    Shift-
+    Week Schedule-
     Monthly Attendance
     Daily Attendance
-    Time Configuration
+    Time Configuration-
+    Shift Change-
+    Add Employee to Shift-
+    Holiday Change-
     Report
 
 Leave Management
