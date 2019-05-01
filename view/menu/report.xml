@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!--Reporting-->
+    <menuitem id="sugar_report" name="VVSugars" parent="menu_report" sequence="10"/>
+    <!--<menuitem id="sugar_report_report_tool_dashboard" name="Dashboard" action="action_report_tool_dashboard" parent="sugar_report" sequence="10"/>-->
+    <menuitem id="sugar_report_report_tool_sale" name="Sales Analysis" action="action_report_tool_sale" parent="sugar_report" sequence="20"/>
+    <!--<menuitem id="sugar_report_report_tool_customer" name="Customer Analysis" action="action_report_tool_customer" parent="sugar_report" sequence="30"/>-->
+    <!--<menuitem id="sugar_report_report_tool_comparision" name="Comparision" action="action_report_tool_dashboard" parent="report_report" sequence="10"/>-->
+
+</odoo>

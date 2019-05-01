@@ -11,3 +11,4 @@ from . import leave_management
 from . import patient
 from . import product
 from . import stock
+from . import report

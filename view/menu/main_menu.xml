@@ -12,6 +12,7 @@
     <menuitem id="menu_purchase" name="Purchase" sequence="80"/>
     <menuitem id="menu_pharmacy" name="Pharmacy" sequence="90"/>
     <menuitem id="menu_account" name="Account" sequence="100"/>
+    <menuitem id="menu_report" name="Reporting" sequence="200"/>
 
 
 </odoo>
